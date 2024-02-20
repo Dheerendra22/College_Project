@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ededf7"
-    tools:context=".MainActivity">
+    tools:context=".Login">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -100,7 +100,7 @@
                     <EditText
                         android:id="@+id/editTextYourFirstName"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
@@ -124,7 +124,7 @@
                     <EditText
                         android:id="@+id/editTextYourRollNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
@@ -147,7 +147,7 @@
                     <EditText
                         android:id="@+id/editTextEnterEnrollmentNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
@@ -179,7 +179,7 @@
                     <EditText
                         android:id="@+id/editTexYourLastName"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
@@ -203,7 +203,7 @@
                     <EditText
                         android:id="@+id/editTextYourEnrollNumber"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
@@ -227,7 +227,7 @@
                     <EditText
                         android:id="@+id/editTextYourLastName"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_36sdp"
+                        android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VIMS</string>
+    <string name="vims">VIMS</string>
+    <string name="todo">TODO</string>
 </resources>

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class NewActivity extends AppCompatActivity {
+public class Student_Register extends AppCompatActivity {
 
     Button button2;
 
@@ -31,7 +31,7 @@ public class NewActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(NewActivity.this, "Selected Department: "+ item, Toast.LENGTH_SHORT).show();}
+                Toast.makeText(Student_Register.this, "Selected Department: "+ item, Toast.LENGTH_SHORT).show();}
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }});
@@ -53,7 +53,7 @@ public class NewActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item2 = parent.getItemAtPosition(position).toString();
-                Toast.makeText(NewActivity.this, "Selected Year: "+ item2, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Student_Register.this, "Selected Year: "+ item2, Toast.LENGTH_SHORT).show();
 
             }
 

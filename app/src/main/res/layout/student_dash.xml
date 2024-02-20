@@ -131,20 +131,19 @@
             <EditText
                 android:id="@+id/editTextText"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
-                android:ems="10"
-                android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_height="48dp"
                 android:layout_marginStart="@dimen/_24sdp"
-                android:elevation="3dp"
-                android:hint="Search for..."
-                android:padding="@dimen/_7sdp"
-                android:drawableEnd="@drawable/search_icon"
-                android:textStyle="bold|italic"
-                android:textColor="#8d8d8d"
+                android:layout_marginEnd="@dimen/_24sdp"
                 android:layout_marginBottom="@dimen/_24sdp"
-                android:inputType="text"
                 android:background="@drawable/search_edit_background"
-                 />
+                android:drawableEnd="@drawable/search_icon"
+                android:elevation="3dp"
+                android:ems="10"
+                android:hint="Search for..."
+                android:inputType="text"
+                android:padding="@dimen/_7sdp"
+                android:textColor="#8d8d8d"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/textView10"

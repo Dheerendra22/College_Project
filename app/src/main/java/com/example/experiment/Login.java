@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
 
     Button button;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Activity2(){
-        Intent intent = new Intent(this, NewActivity.class );
+        Intent intent = new Intent(this, Student_Register.class );
         startActivity(intent);
 
     }
