@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812718468801",
+    "project_id": "vims-main",
+    "storage_bucket": "vims-main.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812718468801:android:da63b3d84b51eda3faae40",
+        "android_client_info": {
+          "package_name": "com.College.Vindhya_Group_Of_Institutions"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0rWaKKLBwKTs8H8n0TpfcSlMt6MKocE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

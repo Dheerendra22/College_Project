@@ -8,6 +8,7 @@
     tools:context=".Splash"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/splash_bg"
     tools:ignore="UseCompoundDrawables">
 
     <ImageView
