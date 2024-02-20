@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.experiment"
+    namespace = "com.College.Vindhya_Group_Of_Institutions"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.experiment"
+        applicationId = "com.College.Vindhya_Group_Of_Institutions"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

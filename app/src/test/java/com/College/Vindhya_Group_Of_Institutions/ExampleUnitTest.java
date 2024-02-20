@@ -1,4 +1,4 @@
-package com.example.experiment;
+package com.College.Vindhya_Group_Of_Institutions;
 
 import org.junit.Test;
 

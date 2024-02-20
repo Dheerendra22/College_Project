@@ -1,4 +1,4 @@
-package com.example.experiment;
+package com.College.Vindhya_Group_Of_Institutions;
 
 import androidx.appcompat.app.AppCompatActivity;
 

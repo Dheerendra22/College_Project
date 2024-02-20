@@ -69,10 +69,10 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Register"
+                android:text="Register Student"
                 android:textAlignment="center"
                 android:textColor="#581f5f"
-                android:textSize="@dimen/_34ssp"
+                android:textSize="@dimen/_30ssp"
                 android:textStyle="bold" />
 
             <LinearLayout
