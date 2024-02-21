@@ -60,14 +60,17 @@ public class Login extends AppCompatActivity {
                 String mPassword = password.getText().toString().trim();
 
                 if (TextUtils.isEmpty(mEmail)) {
+                    progressDialog.dismiss();
                     email.setError("Email is required!");
                     return;
                 }
                 if (TextUtils.isEmpty(mPassword)) {
+                    progressDialog.dismiss();
                     password.setError("Please enter Password");
                     return;
                 }
                 if (mPassword.length() < 6) {
+                    progressDialog.dismiss();
                     password.setError("Password must be 6 letters or more! ");
                     return;
                 }
@@ -77,7 +80,6 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
                         Toast.makeText(Login.this, "Logged in Successfully. ", Toast.LENGTH_SHORT).show();
-
 
                         startActivity(new Intent(getApplicationContext(), Admin_Dashboard.class));
                         finish();

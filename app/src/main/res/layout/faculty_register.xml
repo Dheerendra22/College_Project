@@ -5,9 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ededf7"
+    android:visibility="visible"
     tools:context=".Login">
 
+    <ProgressBar
+        android:id="@+id/pgBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView3" />
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,7 +29,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
 
                 <ImageView
@@ -78,8 +90,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -99,7 +111,7 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTextYourFirstName"
+                        android:id="@+id/edtFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
@@ -133,7 +145,7 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTexYourLastName"
+                        android:id="@+id/edtLastName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
@@ -164,19 +176,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Phone"
-
                     android:textColor="#581f5f"
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextEnterEnrollmentNumber"
+                    android:id="@+id/edtPhone"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Your Phone Number"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:padding="@dimen/_7sdp"
                     android:textAlignment="center"
                     android:textColor="#717171"
@@ -192,14 +203,14 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextTextpersonName"
+                    android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Enter Your Email"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:padding="@dimen/_7sdp"
                     android:textAlignment="center"
                     android:textColor="#717171"
@@ -224,7 +235,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextEnterYourPassword"
+                    android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
@@ -257,7 +268,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextTextPassword"
+                    android:id="@+id/edtConPassword"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
@@ -286,9 +297,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Depatment"
                     android:textColor="#581f5f"
-                    android:textSize="@dimen/_14ssp"
-                    android:text="Depatment" />
+                    android:textSize="@dimen/_14ssp" />
 
 
             </LinearLayout>
@@ -312,6 +323,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -325,9 +337,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Role"
                     android:textColor="#581f5f"
-                    android:textSize="@dimen/_14ssp"
-                    android:text="Role" />
+                    android:textSize="@dimen/_14ssp" />
 
 
             </LinearLayout>
@@ -353,7 +365,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/buttonSignUp"
+                android:id="@+id/btnRegister"
                 style="@android:style/Widget.Button"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"
@@ -365,8 +377,6 @@
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold" />
-
-
 
 
         </LinearLayout>

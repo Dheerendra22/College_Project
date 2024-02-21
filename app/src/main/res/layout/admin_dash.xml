@@ -123,7 +123,7 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/imagefaculity"
+                        android:id="@+id/imgFaculty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
@@ -134,7 +134,7 @@
                         android:id="@+id/textAddfaculity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Add faculity"
+                        android:text="Add Faculty"
                         android:textAlignment="center"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"
