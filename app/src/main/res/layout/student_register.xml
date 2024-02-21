@@ -78,6 +78,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -98,7 +99,7 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTextYourFirstName"
+                        android:id="@+id/edtFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
@@ -122,7 +123,7 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTextYourRollNumber"
+                        android:id="@+id/edtRoll"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
@@ -145,14 +146,14 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTextEnterEnrollmentNumber"
+                        android:id="@+id/edtPhone"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
                         android:hint="Your Phone Number"
-                        android:inputType="number"
+                        android:inputType="phone"
                         android:padding="@dimen/_7sdp"
                         android:textAlignment="center"
                         android:textColor="#717171"
@@ -177,7 +178,7 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTexYourLastName"
+                        android:id="@+id/edtLastName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
@@ -201,7 +202,7 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTextYourEnrollNumber"
+                        android:id="@+id/edtEnroll"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
@@ -225,7 +226,7 @@
                         android:textSize="@dimen/_14ssp" />
 
                     <EditText
-                        android:id="@+id/editTextYourLastName"
+                        android:id="@+id/edtFatherName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_marginTop="@dimen/_7sdp"
@@ -260,14 +261,14 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextTextpersonName"
+                    android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Enter Your Email"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:padding="@dimen/_7sdp"
                     android:textAlignment="center"
                     android:textColor="#717171"
@@ -292,7 +293,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextEnterYourPassword"
+                    android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
@@ -325,7 +326,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextTextPassword"
+                    android:id="@+id/edtConPassword"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_7sdp"
@@ -382,11 +383,12 @@
 
                 <Spinner
                     android:id="@+id/Department"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:layout_marginBottom="@dimen/_7sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    android:layout_weight="1"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <Spinner
                     android:id="@+id/Year"
@@ -394,11 +396,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:layout_marginBottom="@dimen/_7sdp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/buttonSignUp"
+                android:id="@+id/btnRegister"
                 style="@android:style/Widget.Button"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"
@@ -409,10 +412,7 @@
                 android:text="Register"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_13ssp"
-                 android:textStyle="bold" />
-
-
-
+                android:textStyle="bold" />
 
 
         </LinearLayout>

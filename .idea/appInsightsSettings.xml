@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.College.Vindhya_Group_Of_Institutions" />
+                  <option name="mobileSdkAppId" value="1:812718468801:android:da63b3d84b51eda3faae40" />
+                  <option name="projectId" value="vims-main" />
+                  <option name="projectNumber" value="812718468801" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -92,7 +92,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextTextpersonName"
+                    android:id="@+id/edtUser"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_8sdp"
@@ -124,7 +124,7 @@
                     android:textSize="@dimen/_14ssp" />
 
                 <EditText
-                    android:id="@+id/editTextTextPassword"
+                    android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_8sdp"
@@ -142,7 +142,7 @@
 
 
             <Button
-                android:id="@+id/button_login"
+                android:id="@+id/btnLogin"
                 style="@android:style/Widget.Button"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"
