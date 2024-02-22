@@ -53,9 +53,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/banner_background"
                 android:layout_height="@dimen/_132sdp"
-                android:layout_margin="@dimen/_24sdp">
+                android:layout_margin="@dimen/_24sdp"
+                android:background="@drawable/banner_background">
 
                 <ImageView
                     android:id="@+id/imageView4"
@@ -84,9 +84,9 @@
                     android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:text="BCA"
-                    android:textStyle="bold"
                     android:textColor="#ffffff"
                     android:textSize="@dimen/_22ssp"
+                    android:textStyle="bold"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -149,17 +149,17 @@
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_24sdp"
                 android:text="What do you need?"
                 android:textColor="#000000"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12ssp"/>
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_233sdp"
-                android:background="@drawable/banner_background"
                 android:layout_margin="@dimen/_19sdp"
+                android:background="@drawable/banner_background"
                 android:orientation="horizontal">
 
 
@@ -183,11 +183,11 @@
                         android:id="@+id/textAttendence"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#ffffff"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_13ssp"
+                        android:text="Attendence"
                         android:textAlignment="center"
-                        android:text="Attendence" />
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/imageView7"
@@ -200,11 +200,11 @@
                         android:id="@+id/textNotice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#ffffff"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_13ssp"
+                        android:text="Notice"
                         android:textAlignment="center"
-                        android:text="Notice" />
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
@@ -227,11 +227,11 @@
                         android:id="@+id/textTimeTable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#ffffff"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_13ssp"
+                        android:text="Time Table"
                         android:textAlignment="center"
-                        android:text="Time Table" />
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/imageView9"
@@ -245,11 +245,11 @@
                         android:id="@+id/textView12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#ffffff"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_13ssp"
+                        android:text="Syllabus"
                         android:textAlignment="center"
-                        android:text="Syllabus" />
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_13ssp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
