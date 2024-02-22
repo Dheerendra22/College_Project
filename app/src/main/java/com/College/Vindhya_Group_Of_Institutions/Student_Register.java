@@ -201,8 +201,9 @@ public class Student_Register extends AppCompatActivity {
     }
 
     private void showToastAndDismiss(String message, ProgressDialog progressDialog) {
-        showToast(message);
         progressDialog.dismiss();
+        showToast(message);
+
     }
 
     private void showErrorAndDismiss(String errorMessage, ProgressDialog progressDialog) {
