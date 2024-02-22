@@ -34,7 +34,7 @@ public class Faculty_Register extends AppCompatActivity {
     private Button register;
     private FirebaseAuth fAuth;
     private FirebaseFirestore fireStore;
-    private ProgressDialog progressDialog;
+    private Progress_Dialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class Faculty_Register extends AppCompatActivity {
         password = findViewById(R.id.edtPassword);
         con_password = findViewById(R.id.edtConPassword);
         phone = findViewById(R.id.edtPhone);
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new Progress_Dialog(this);
         progressDialog.setMessage("Registering...");
         progressDialog.setCancelable(false);
     }
@@ -113,7 +113,7 @@ public class Faculty_Register extends AppCompatActivity {
         if (validateInputs(mFirstName, mLastName, mEmail, mPassword, conPassword, mPhone)) {
             fAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    saveUserDataToFirestore(mEmail, mFirstName, mLastName, mDepartment, mPhone, mPassword, role);
+                    saveUserDataToFireStore(mEmail, mFirstName, mLastName, mDepartment, mPhone, mPassword, role);
                 } else {
                     handleRegistrationFailure(task.toString());
                 }
@@ -165,7 +165,7 @@ public class Faculty_Register extends AppCompatActivity {
     }
 
 
-    private void saveUserDataToFirestore(String userEmail, String userFirstName, String userLastName, String userDepartment,
+    private void saveUserDataToFireStore(String userEmail, String userFirstName, String userLastName, String userDepartment,
                                          String userPhone, String userPassword, String userRole) {
         DocumentReference dataRef = fireStore.collection("Faculty").document(userEmail);
         Map<String, Object> user = new HashMap<>();

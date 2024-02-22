@@ -1,6 +1,5 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Window;
@@ -43,8 +42,9 @@ public class Student_Register extends AppCompatActivity {
         setSpinnerData();
 
         register.setOnClickListener(v -> {
-            ProgressDialog progressDialog = createProgressDialog();
+            Progress_Dialog progressDialog = createCustomProgressDialog();
             progressDialog.show();
+
 
             if (validateUserInput(progressDialog)) {
                 registerUser(progressDialog);
@@ -98,14 +98,14 @@ public class Student_Register extends AppCompatActivity {
         spinnerYear.setAdapter(yearAdapter);
     }
 
-    private ProgressDialog createProgressDialog() {
-        ProgressDialog progressDialog = new ProgressDialog(this);
+    private Progress_Dialog createCustomProgressDialog() {
+        Progress_Dialog progressDialog = new Progress_Dialog(this);
         progressDialog.setMessage("Registering...");
-        progressDialog.setCancelable(false);
         return progressDialog;
     }
 
-    private boolean validateUserInput(ProgressDialog progressDialog) {
+
+    private boolean validateUserInput(Progress_Dialog progressDialog) {
         String mFirstName = getTextFromField(firstName);
         String mLastName = getTextFromField(lastName);
         String mEmail = getTextFromField(email);
@@ -160,7 +160,7 @@ public class Student_Register extends AppCompatActivity {
         return Pattern.matches(phoneRegex, phoneNumber);
     }
 
-    private void registerUser(ProgressDialog progressDialog) {
+    private void registerUser(Progress_Dialog progressDialog) {
         String mFirstName = getTextFromField(firstName);
         String mLastName = getTextFromField(lastName);
         String mEmail = getTextFromField(email);
@@ -200,13 +200,13 @@ public class Student_Register extends AppCompatActivity {
         return field.getText().toString().trim();
     }
 
-    private void showToastAndDismiss(String message, ProgressDialog progressDialog) {
+    private void showToastAndDismiss(String message, Progress_Dialog progressDialog) {
         progressDialog.dismiss();
         showToast(message);
 
     }
 
-    private void showErrorAndDismiss(String errorMessage, ProgressDialog progressDialog) {
+    private void showErrorAndDismiss(String errorMessage, Progress_Dialog progressDialog) {
         showToast(errorMessage);
         progressDialog.dismiss();
     }
