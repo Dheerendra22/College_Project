@@ -1,24 +1,18 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,21 +21,44 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Student_Register extends AppCompatActivity {
 
-    EditText firstName, lastName, email, password, con_password, phone, rollNumber, enrollNumber, fatherName;
-    Spinner spinnerDepart, spinnerYear;
-    Button register;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fireStore;
+    private EditText firstName, lastName, email, password, con_password, phone, rollNumber, enrollNumber, fatherName;
+    private Spinner spinnerDepart, spinnerYear;
+    private Button register;
+    private FirebaseAuth fAuth;
+    private FirebaseFirestore fireStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestFullScreen();
         setContentView(R.layout.student_register);
 
+        initializeViews();
+        initializeFirebase();
+        setSpinnerData();
+
+        register.setOnClickListener(v -> {
+            ProgressDialog progressDialog = createProgressDialog();
+            progressDialog.show();
+
+            if (validateUserInput(progressDialog)) {
+                registerUser(progressDialog);
+            }
+        });
+    }
+
+    private void requestFullScreen() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private void initializeViews() {
         spinnerDepart = findViewById(R.id.Department);
         spinnerYear = findViewById(R.id.Year);
         register = findViewById(R.id.btnRegister);
@@ -54,153 +71,176 @@ public class Student_Register extends AppCompatActivity {
         rollNumber = findViewById(R.id.edtRoll);
         enrollNumber = findViewById(R.id.edtEnroll);
         fatherName = findViewById(R.id.edtFatherName);
+    }
 
-        // Initialize Firebase
+    private void initializeFirebase() {
         fAuth = FirebaseAuth.getInstance();
         fireStore = FirebaseFirestore.getInstance();
+    }
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("BCA");
-        arrayList.add("BCOM");
-        arrayList.add("BSC");
+    private void setSpinnerData() {
+        ArrayList<String> departments = new ArrayList<>();
+        departments.add("BCA");
+        departments.add("BCOM");
+        departments.add("BSC");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, arrayList);
-        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        spinnerDepart.setAdapter(adapter);
+        ArrayAdapter<String> departmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, departments);
+        departmentAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerDepart.setAdapter(departmentAdapter);
 
-        ArrayList<String> arrayList2 = new ArrayList<>();
-        arrayList2.add("1st_Year");
-        arrayList2.add("2nd_Year");
-        arrayList2.add("3rd_Year");
+        ArrayList<String> years = new ArrayList<>();
+        years.add("1st_Year");
+        years.add("2nd_Year");
+        years.add("3rd_Year");
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, arrayList2);
-        adapter2.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-        spinnerYear.setAdapter(adapter2);
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
+        yearAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinnerYear.setAdapter(yearAdapter);
+    }
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private ProgressDialog createProgressDialog() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Registering...");
+        progressDialog.setCancelable(false);
+        return progressDialog;
+    }
 
-                ProgressDialog progressDialog = new ProgressDialog(Student_Register.this);
-                progressDialog.setMessage("Registering...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+    private boolean validateUserInput(ProgressDialog progressDialog) {
+        String mFirstName = getTextFromField(firstName);
+        String mLastName = getTextFromField(lastName);
+        String mEmail = getTextFromField(email);
+        String mPassword = getTextFromField(password);
+        String conPassword = getTextFromField(con_password);
+        String mPhone = getTextFromField(phone);
+        String mRollNumber = getTextFromField(rollNumber);
+        String mEnrollment = getTextFromField(enrollNumber);
 
-                String mFirstName = firstName.getText().toString().trim();
-                String mLastName = lastName.getText().toString();
-                String mEmail = email.getText().toString().trim();
-                String mPassword = password.getText().toString().trim();
-                String conPassword = con_password.getText().toString().trim();
-                String mYear = spinnerYear.getSelectedItem().toString();
-                String mDepartment = spinnerDepart.getSelectedItem().toString();
-                String mPhone = phone.getText().toString().trim();
-                String mEnrollment = enrollNumber.getText().toString().trim();
-                String mRollNumber = rollNumber.getText().toString().trim();
-                String mFather = fatherName.getText().toString();
-                String countryCode = "91";
+        if (TextUtils.isEmpty(mFirstName) || TextUtils.isEmpty(mLastName) || TextUtils.isEmpty(mEmail) ||
+                TextUtils.isEmpty(mPassword) || TextUtils.isEmpty(conPassword) || TextUtils.isEmpty(mPhone) ||
+                TextUtils.isEmpty(mRollNumber) || TextUtils.isEmpty(mEnrollment)) {
+            showErrorAndDismiss("All fields are required!", progressDialog);
+            return false;
+        }
 
-                if (TextUtils.isEmpty(mFirstName) || TextUtils.isEmpty(mLastName) || TextUtils.isEmpty(mEmail) || TextUtils.isEmpty(mPassword) ||
-                        TextUtils.isEmpty(conPassword) || TextUtils.isEmpty(mPhone)) {
-                    progressDialog.dismiss();
-                    Toast.makeText(Student_Register.this, "All fields are required!", Toast.LENGTH_SHORT).show();
-                    return;
+        if (mPassword.length() < 6) {
+            showErrorAndDismiss("Password must be 6 letters or more!", progressDialog);
+            showError(password, "Password must be 6 letters or more!");
+            return false;
+        }
+
+        if (!mPassword.equals(conPassword)) {
+            showErrorAndDismiss("Password does not match!", progressDialog);
+            showError(con_password, "Password does not match!");
+            return false;
+        }
+
+        if (!isValidIndianPhoneNumber(mPhone)) {
+            showErrorAndDismiss("Enter a valid 10-digit Indian phone number!", progressDialog);
+            showError(phone, "Enter a valid 10-digit Indian phone number!");
+            return false;
+        }
+
+        if (mRollNumber.length() != 10) {
+            showErrorAndDismiss("Enter Correct RollNumber!", progressDialog);
+            showError(rollNumber, "Enter Correct RollNumber!");
+            return false;
+        }
+
+        if (mEnrollment.length() != 12) {
+            showErrorAndDismiss("Enter Correct EnrollmentNumber!", progressDialog);
+            showError(enrollNumber, "Enter Correct EnrollmentNumber!");
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidIndianPhoneNumber(String phoneNumber) {
+        String phoneRegex = "^[6789]\\d{9}$";
+        return Pattern.matches(phoneRegex, phoneNumber);
+    }
+
+    private void registerUser(ProgressDialog progressDialog) {
+        String mFirstName = getTextFromField(firstName);
+        String mLastName = getTextFromField(lastName);
+        String mEmail = getTextFromField(email);
+        String mPassword = getTextFromField(password);
+        String mYear = spinnerYear.getSelectedItem().toString();
+        String mDepartment = spinnerDepart.getSelectedItem().toString();
+        String mPhone = getTextFromField(phone);
+        String mRollNumber = getTextFromField(rollNumber);
+        String mEnrollment = getTextFromField(enrollNumber);
+        String mFather = getTextFromField(fatherName);
+
+        fAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(task -> {
+            DocumentReference dataRef = fireStore.collection("Students").document(mEmail);
+            Map<String, Object> user = new HashMap<>();
+            user.put("FirstName", mFirstName);
+            user.put("LastName", mLastName);
+            user.put("Department", mDepartment);
+            user.put("Year", mYear);
+            user.put("Phone", mPhone);
+            user.put("RollNumber", mRollNumber);
+            user.put("EnrollmentNumber", mEnrollment);
+            user.put("FatherName", mFather);
+            user.put("Password", mPassword);
+            user.put("Role", "Student");
+
+            dataRef.set(user).addOnCompleteListener(task1 -> {
+                showToastAndDismiss("User Profile Created Successfully.", progressDialog);
+                clearTextFields();
+            }).addOnFailureListener(e -> {
+                showToastAndDismiss("Error! " + e.getMessage(), progressDialog);
+                handleRegistrationFailure(mEmail);
+            });
+        }).addOnFailureListener(e -> showToastAndDismiss("Error! " + e.getMessage(), progressDialog));
+    }
+
+    private String getTextFromField(EditText field) {
+        return field.getText().toString().trim();
+    }
+
+    private void showToastAndDismiss(String message, ProgressDialog progressDialog) {
+        showToast(message);
+        progressDialog.dismiss();
+    }
+
+    private void showErrorAndDismiss(String errorMessage, ProgressDialog progressDialog) {
+        showToast(errorMessage);
+        progressDialog.dismiss();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(Student_Register.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showError(EditText field, String errorMessage) {
+        field.setError(errorMessage);
+        field.requestFocus();
+    }
+
+    private void clearTextFields() {
+        firstName.setText("");
+        lastName.setText("");
+        email.setText("");
+        password.setText("");
+        con_password.setText("");
+        phone.setText("");
+        rollNumber.setText("");
+        enrollNumber.setText("");
+        fatherName.setText("");
+    }
+
+    private void handleRegistrationFailure(String email) {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            currentUser.delete().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    showToast("User deleted successfully.");
+                } else {
+                    showToast("Failed to delete user.");
                 }
-
-                if (mPassword.length() < 6) {
-                    progressDialog.dismiss();
-                    password.setError("Password must be 6 letters or more!");
-                    password.requestFocus();
-                    return;
-                }
-
-                if (!mPassword.equals(conPassword)) {
-                    progressDialog.dismiss();
-                    con_password.setError("Password does not match!");
-                    password.requestFocus();
-                    return;
-                }
-
-                if (mPhone.length() != 10) {
-                    progressDialog.dismiss();
-                    // The phone number is not valid, show an error message
-                    phone.setError("Enter a valid phone number for India!");
-                    phone.requestFocus();
-                    return;
-                }
-                if (mRollNumber.length() != 10) {
-                    progressDialog.dismiss();
-                    rollNumber.setError("Enter Correct RollNumber!");
-                    rollNumber.requestFocus();
-                    return;
-                }
-                if (mEnrollment.length() != 12) {
-                    progressDialog.dismiss();
-                    rollNumber.setError("Enter Correct EnrollmentNumber!");
-                    rollNumber.requestFocus();
-                    return;
-                }
-
-                fAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(task -> {
-                    DocumentReference dataRef = fireStore.collection("Students").document(mEmail);
-                    Map<String, Object> user1 = new HashMap<>();
-                    user1.put("FirstName", mFirstName);
-                    user1.put("LastName", mLastName);
-                    user1.put("Department", mDepartment);
-                    user1.put("Year", mYear);
-                    user1.put("Phone", mPhone);
-                    user1.put("RollNumber", mRollNumber);
-                    user1.put("EnrollmentNumber", mEnrollment);
-                    user1.put("FatherName", mFather);
-                    user1.put("Role","Student");
-
-                    dataRef.set(user1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(Student_Register.this, "User Profile Created Successfully.", Toast.LENGTH_SHORT).show();
-
-                            progressDialog.dismiss();
-
-                            firstName.setText("");
-                            lastName.setText("");
-                            email.setText("");
-                            password.setText("");
-                            con_password.setText("");
-                            phone.setText("");
-                            rollNumber.setText("");
-                            enrollNumber.setText("");
-                            fatherName.setText("");
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                            Toast.makeText(Student_Register.this, "Error! " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
-
-                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                            if (currentUser != null) {
-                                currentUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(Student_Register.this, "User deleted successfully.", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(Student_Register.this, "Failed to delete user.", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    });
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                        Toast.makeText(Student_Register.this, "Error! " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                });
-            }
-        });
+            });
+        }
     }
 }
