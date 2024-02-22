@@ -79,17 +79,20 @@ public class Login extends AppCompatActivity {
     }
 
     private void checkUserRole(String userEmail) {
-        DocumentReference userRef = fireStore.collection("Students").document(userEmail);
+        DocumentReference userRef = fireStore.collection("Faculty").document(userEmail);
         userRef.get()
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document != null && document.exists()) {
                             String role = document.getString("Role");
+                            saveToSharedPreferences("Role", role);
                             handleUserRole(role);
                         } else {
                             dismissProgressDialog();
-                            Toast.makeText(Login.this, "Please Try Again Later! ", Toast.LENGTH_SHORT).show();
+                            saveToSharedPreferences("Role", "Student");
+                            redirectToDashboard();
+                            Toast.makeText(Login.this, "Logged in Successfully. ", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         dismissProgressDialog();
