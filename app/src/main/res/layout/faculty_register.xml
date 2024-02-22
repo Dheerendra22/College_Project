@@ -368,7 +368,9 @@
                 android:text="Register"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_13ssp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </LinearLayout>

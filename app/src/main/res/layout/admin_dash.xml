@@ -7,6 +7,11 @@
     android:background="@drawable/menu_background">
 
 
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -81,23 +86,30 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/_600sdp"
             android:background="@drawable/botom_background"
             android:orientation="vertical">
 
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_565sdp"
                 android:layout_margin="@dimen/_19sdp"
                 android:background="@drawable/banner_background"
                 android:orientation="horizontal">
 
 
+
+
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_36sdp"
                     android:layout_marginTop="@dimen/_12sdp"
@@ -105,10 +117,12 @@
                     android:orientation="vertical">
 
 
+
                     <ImageView
                         android:id="@+id/imgStudent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
                         android:src="@drawable/student" />
 
 
@@ -124,8 +138,9 @@
 
                     <ImageView
                         android:id="@+id/imgFaculty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/faculity" />
 
@@ -140,11 +155,34 @@
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
+
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/imageViewsubjectalot"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/subjectalot" />
+
+
+                    <TextView
+                        android:id="@+id/textSubjectAlot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Subject Alot"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
                         android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_gravity="center"
                         android:src="@drawable/attendend" />
 
 
@@ -160,8 +198,9 @@
 
                     <ImageView
                         android:id="@+id/imageView7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/notice" />
 
@@ -174,13 +213,16 @@
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
+
+
+
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_44sdp"
+                    android:layout_marginStart="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_7sdp"
                     android:orientation="vertical">
@@ -188,8 +230,9 @@
 
                     <ImageView
                         android:id="@+id/imageupdatestudent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
                         android:src="@drawable/updatestudent" />
 
                     <TextView
@@ -205,8 +248,9 @@
 
                     <ImageView
                         android:id="@+id/imageupdatefacul"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/updatefacul" />
 
@@ -220,10 +264,30 @@
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
+
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/subjectupdt"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        android:src="@drawable/subjectupdt" />
+
+                    <TextView
+                        android:id="@+id/textEditSubject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Edit Subject"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/callendar" />
 
@@ -239,8 +303,9 @@
 
                     <ImageView
                         android:id="@+id/imageView9"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/syllabus" />
 
@@ -258,6 +323,7 @@
 
                 </LinearLayout>
 
+
             </LinearLayout>
 
 
@@ -265,5 +331,5 @@
 
 
     </LinearLayout>
-
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
