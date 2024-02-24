@@ -41,7 +41,7 @@
                 android:id="@+id/imgProfile"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp"
-                android:background="#96D5DD"
+                android:src="@drawable/baseline_user"
                 android:contentDescription="TODO"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
