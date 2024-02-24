@@ -99,7 +99,7 @@
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Enter Your Username"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:padding="@dimen/_8sdp"
                     android:textAlignment="center"
                     android:textColor="#717171"

@@ -7,49 +7,50 @@
     android:background="@drawable/menu_background">
 
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="179dp"
             android:background="@drawable/menu_background"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_37sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginBottom="@dimen/_37sdp"
-                android:src="@drawable/profile"
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:background="#96D5DD"
+                android:contentDescription="TODO"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintHorizontal_bias="0.895"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.293"
+                tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/txtGreet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Good Morning"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/_20ssp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintEnd_toStartOf="@+id/imageView3"
-                app:layout_constraintHorizontal_bias="0.338"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.235"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.718" />
+                app:layout_constraintVertical_bias="0.409" />
 
             <TextView
                 android:id="@+id/textprofilename"
@@ -60,56 +61,48 @@
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                app:layout_constraintHorizontal_bias="0.437"
-                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.221"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.906"
+                app:layout_constraintVertical_bias="0.664"
                 tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Principal"
+                android:text="Role"
                 android:textColor="#fedd06"
-                android:textSize="@dimen/_20ssp"
+                android:textSize="@dimen/_15ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.145"
+                app:layout_constraintHorizontal_bias="0.816"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.765"
+                app:layout_constraintVertical_bias="0.895"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_600sdp"
+            android:layout_height="match_parent"
             android:background="@drawable/botom_background"
             android:orientation="vertical">
 
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_565sdp"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/_19sdp"
                 android:background="@drawable/banner_background"
                 android:orientation="horizontal">
 
 
-
-
-
                 <LinearLayout
-                    android:layout_width="@dimen/_90sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/_36sdp"
                     android:layout_marginTop="@dimen/_12sdp"
@@ -117,12 +110,10 @@
                     android:orientation="vertical">
 
 
-
                     <ImageView
                         android:id="@+id/imgStudent"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/student" />
 
 
@@ -138,9 +129,8 @@
 
                     <ImageView
                         android:id="@+id/imgFaculty"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/faculity" />
 
@@ -155,35 +145,13 @@
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
-
-                    <ImageView
-                        android:id="@+id/imageViewsubjectalot"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_marginTop="@dimen/_24sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/subjectalot" />
-
-
-                    <TextView
-                        android:id="@+id/textSubjectAlot"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Subject Alot"
-                        android:textAlignment="center"
-                        android:textColor="#ffffff"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" />
-
-
-
                     <ImageView
                         android:id="@+id/imageView6"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/attendend" />
+                        android:src="@drawable/attendend"
+                        android:contentDescription="TODO" />
 
 
                     <TextView
@@ -198,9 +166,8 @@
 
                     <ImageView
                         android:id="@+id/imageView7"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/notice" />
 
@@ -213,16 +180,13 @@
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
-
-
-
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:layout_width="@dimen/_90sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_44sdp"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_7sdp"
                     android:orientation="vertical">
@@ -230,9 +194,8 @@
 
                     <ImageView
                         android:id="@+id/imageupdatestudent"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/updatestudent" />
 
                     <TextView
@@ -248,9 +211,8 @@
 
                     <ImageView
                         android:id="@+id/imageupdatefacul"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/updatefacul" />
 
@@ -264,30 +226,10 @@
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
 
-
-                    <ImageView
-                        android:id="@+id/subjectupdt"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_24sdp"
-                        android:src="@drawable/subjectupdt" />
-
-                    <TextView
-                        android:id="@+id/textEditSubject"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Edit Subject"
-                        android:textAlignment="center"
-                        android:textColor="#ffffff"
-                        android:textSize="@dimen/_14ssp"
-                        android:textStyle="bold" />
-
                     <ImageView
                         android:id="@+id/imageView8"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/callendar" />
 
@@ -303,9 +245,8 @@
 
                     <ImageView
                         android:id="@+id/imageView9"
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_70sdp"
-                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
                         android:src="@drawable/syllabus" />
 
@@ -323,7 +264,6 @@
 
                 </LinearLayout>
 
-
             </LinearLayout>
 
 
@@ -331,5 +271,5 @@
 
 
     </LinearLayout>
-    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

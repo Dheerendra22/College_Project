@@ -1,9 +1,6 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,27 +11,19 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
 
-public class Admin_Dashboard extends AppCompatActivity {
-
-    ImageView addStudent,addFaculty,profile;
+public class Student_Dash extends AppCompatActivity {
     TextView greet;
+    ImageView profile;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.student_dash);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.admin_dash);
-        addStudent = findViewById(R.id.imgStudent);
-        addFaculty = findViewById(R.id.imgFaculty);
         profile = findViewById(R.id.imgProfile);
-        greet = findViewById(R.id.txtGreet);
 
+        greet = findViewById(R.id.txtGreet);
         //set Greeting
         greet.setText(getGreeting());
 
@@ -44,19 +33,13 @@ public class Admin_Dashboard extends AppCompatActivity {
             userId = fAuth.getCurrentUser().getUid();
         }
 
-
         if(userId!=null)
             profileImageHandler = new Profile_Image_Handler(this, userId);
 
-
         loadProfileImage();
-
 
         profile.setOnClickListener(v -> profileImageHandler.openGallery());
 
-        addStudent.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Student_Register.class)));
-
-        addFaculty.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Faculty_Register.class)));
 
     }
 
@@ -76,5 +59,4 @@ public class Admin_Dashboard extends AppCompatActivity {
             return "Good Evening";
         }
     }
-
 }
