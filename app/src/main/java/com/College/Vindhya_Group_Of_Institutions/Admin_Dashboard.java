@@ -2,7 +2,6 @@ package com.College.Vindhya_Group_Of_Institutions;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -55,12 +54,7 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         loadProfileImage();
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-            }
-        });
+        logout.setOnClickListener(v -> logout());
 
 
         profile.setOnClickListener(v -> profileImageHandler.openGallery());

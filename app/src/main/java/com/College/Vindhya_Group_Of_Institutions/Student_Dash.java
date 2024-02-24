@@ -1,5 +1,6 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Calendar;
 
 public class Student_Dash extends AppCompatActivity {
-    TextView greet;
+    TextView greet,logout;
     ImageView profile;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
@@ -24,6 +25,7 @@ public class Student_Dash extends AppCompatActivity {
         profile = findViewById(R.id.imgProfile);
 
         greet = findViewById(R.id.txtGreet);
+        logout = findViewById(R.id.logout);
         //set Greeting
         greet.setText(getGreeting());
 
@@ -40,7 +42,16 @@ public class Student_Dash extends AppCompatActivity {
 
         profile.setOnClickListener(v -> profileImageHandler.openGallery());
 
+        logout.setOnClickListener(v -> logout());
 
+
+
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
     }
 
     private void loadProfileImage() {
