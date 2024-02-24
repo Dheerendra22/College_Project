@@ -42,13 +42,9 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
         holder.fNAme.setText(dataList.get(position).getFirstName());
         holder.lName.setText(dataList.get(position).getLastName());
-        holder.email.setText(dataList.get(position).getEmail());
         holder.department.setText(dataList.get(position).getDepartment());
         holder.year.setText(dataList.get(position).getYear());
-
         loadProfileImage(holder.profile,dataList.get(position).getUserId());
-
-
 
 
     }
@@ -70,7 +66,6 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
             lName = itemView.findViewById(R.id.txtLastName);
             department = itemView.findViewById(R.id.txtDepartment);
             year = itemView.findViewById(R.id.txtYear);
-            email = itemView.findViewById(R.id.txtEmail);
             profile = itemView.findViewById(R.id.imgProfile);
 
         }
