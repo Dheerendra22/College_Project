@@ -2,30 +2,47 @@ package com.College.Vindhya_Group_Of_Institutions;
 
 public class Data_Model {
 
-String FirstName,LastName,Department,Year,Email,Phone,Father,Password,userId;
+String FirstName,LastName,Department,Year,Email,Phone,FatherName,Password,UserId,EnrollmentNumber,RollNumber;
 
     public Data_Model() {
     }
 
-    public Data_Model(String firstName, String lastName, String department, String year, String email, String phone, String father, String password,String userId) {
+    public Data_Model(String firstName, String lastName, String department, String year, String email, String phone, String father, String password, String userId, String enrollmentNumber, String rollNumber) {
         FirstName = firstName;
         LastName = lastName;
         Department = department;
         Year = year;
         Email = email;
         Phone = phone;
-        Father = father;
+        FatherName = father;
         Password = password;
-        this.userId = userId;
+        UserId = userId;
+        EnrollmentNumber = enrollmentNumber;
+        RollNumber = rollNumber;
+    }
 
+    public String getEnrollmentNumber() {
+        return EnrollmentNumber;
+    }
+
+    public void setEnrollmentNumber(String enrollmentNumber) {
+        EnrollmentNumber = enrollmentNumber;
+    }
+
+    public String getRollNumber() {
+        return RollNumber;
+    }
+
+    public void setRollNumber(String rollNumber) {
+        RollNumber = rollNumber;
     }
 
     public String getUserId() {
-        return userId;
+        return UserId;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        userId = userId;
     }
 
     public String getFirstName() {
@@ -76,12 +93,12 @@ String FirstName,LastName,Department,Year,Email,Phone,Father,Password,userId;
         Phone = phone;
     }
 
-    public String getFather() {
-        return Father;
+    public String getFatherName() {
+        return FatherName;
     }
 
-    public void setFather(String father) {
-        Father = father;
+    public void setFatherName(String father) {
+        FatherName = father;
     }
 
     public String getPassword() {

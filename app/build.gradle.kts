@@ -54,6 +54,8 @@ dependencies {
 
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation ("com.orhanobut:dialogplus:1.11@aar")
+
 
 
 

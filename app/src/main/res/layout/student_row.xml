@@ -72,7 +72,7 @@
             app:layout_constraintVertical_bias="0.369" />
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/imgEdit"
             android:layout_width="34dp"
             android:layout_height="34dp"
             android:src="@drawable/baseline_edit_square"
@@ -110,7 +110,7 @@
             app:layout_constraintVertical_bias="0.63" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgDelete"
             android:layout_width="37dp"
             android:layout_height="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
