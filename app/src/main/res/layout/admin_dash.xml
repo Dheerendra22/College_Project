@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/menu_background">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="179dp"
+            android:layout_height="@dimen/_140sdp"
             android:background="@drawable/menu_background"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -104,14 +106,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/_600sdp"
             android:background="@drawable/botom_background"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_580sdp"
                 android:layout_margin="@dimen/_19sdp"
                 android:background="@drawable/banner_background"
                 android:orientation="horizontal">
@@ -156,6 +158,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Add Faculty"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+
+                    <ImageView
+                        android:id="@+id/subjectalot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        android:src="@drawable/subjectalot" />
+
+
+                    <TextView
+                        android:id="@+id/textSubjectAlot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Subject Alot "
                         android:textAlignment="center"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"
@@ -243,6 +264,26 @@
                         android:textStyle="bold" />
 
                     <ImageView
+                        android:id="@+id/imageViewsubjectupdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_24sdp"
+                        android:src="@drawable/subjectupdt" />
+
+                    <TextView
+                        android:id="@+id/textEditSubject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Edit Subject"
+                        android:textAlignment="center"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+
+
+
+                    <ImageView
                         android:id="@+id/imageView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -258,6 +299,10 @@
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="bold" />
+
+
+
+
 
                     <ImageView
                         android:id="@+id/imageView9"
@@ -288,4 +333,5 @@
 
     </LinearLayout>
 
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
