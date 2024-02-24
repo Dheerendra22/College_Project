@@ -171,6 +171,7 @@ public class Faculty_Register extends AppCompatActivity {
         user.put("Role", userRole);
         user.put("Email",userEmail);
         user.put("UserId",userId);
+        user.put("Collection","Faculty");
 
         dataRef.set(user).addOnCompleteListener(task -> {
             progressDialog.dismiss();

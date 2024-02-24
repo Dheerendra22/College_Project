@@ -2,23 +2,41 @@ package com.College.Vindhya_Group_Of_Institutions;
 
 public class Data_Model {
 
-String FirstName,LastName,Department,Year,Email,Phone,FatherName,Password,UserId,EnrollmentNumber,RollNumber;
+String FirstName,LastName,Department,Year,Email,Phone,FatherName,Password,UserId,EnrollmentNumber,RollNumber,Collection,Role;
 
     public Data_Model() {
     }
 
-    public Data_Model(String firstName, String lastName, String department, String year, String email, String phone, String father, String password, String userId, String enrollmentNumber, String rollNumber) {
+    public Data_Model(String firstName, String lastName, String department, String year, String email, String phone, String fatherName, String password, String userId, String enrollmentNumber, String rollNumber, String collection, String role) {
         FirstName = firstName;
         LastName = lastName;
         Department = department;
         Year = year;
         Email = email;
         Phone = phone;
-        FatherName = father;
+        FatherName = fatherName;
         Password = password;
         UserId = userId;
         EnrollmentNumber = enrollmentNumber;
         RollNumber = rollNumber;
+        Collection = collection;
+        Role = role;
+    }
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String role) {
+        Role = role;
+    }
+
+    public String getCollection() {
+        return Collection;
+    }
+
+    public void setCollection(String collection) {
+        Collection = collection;
     }
 
     public String getEnrollmentNumber() {

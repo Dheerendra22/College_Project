@@ -114,6 +114,28 @@
                             android:textAlignment="center"
                             android:textColor="#717171"
                             android:textSize="@dimen/_12ssp" />
+                        <TextView
+                            android:id="@+id/txtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_24sdp"
+                            android:text="Email"
+                            android:textColor="#581f5f"
+                            android:textSize="@dimen/_14ssp" />
+                        <EditText
+                            android:id="@+id/edtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:autofillHints=""
+                            android:background="@drawable/edittext_background"
+                            android:ems="10"
+                            android:hint="Your Email Address"
+                            android:inputType="textEmailAddress"
+                            android:padding="@dimen/_7sdp"
+                            android:textAlignment="center"
+                            android:textColor="#717171"
+                            android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -196,6 +218,30 @@
                             android:padding="@dimen/_7sdp"
                             android:textAlignment="center"
 
+                            android:textColor="#717171"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <TextView
+                            android:id="@+id/txtPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_24sdp"
+                            android:text="Password"
+                            android:textColor="#581f5f"
+                            android:textSize="@dimen/_14ssp" />
+
+                        <EditText
+                            android:id="@+id/edtPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:autofillHints=""
+                            android:background="@drawable/edittext_background"
+                            android:ems="10"
+                            android:hint="Your Last Name"
+                            android:inputType="textPassword"
+                            android:padding="@dimen/_7sdp"
+                            android:textAlignment="center"
                             android:textColor="#717171"
                             android:textSize="@dimen/_12ssp" />
                     </LinearLayout>

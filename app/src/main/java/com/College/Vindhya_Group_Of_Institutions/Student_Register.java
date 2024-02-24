@@ -190,6 +190,7 @@ public class Student_Register extends AppCompatActivity {
             user.put("Role", "Student");
             user.put("Email",mEmail);
             user.put("UserId",userId);
+            user.put("Collection","Students");
 
             dataRef.set(user).addOnCompleteListener(task1 -> {
                 showToastAndDismiss("User Profile Created Successfully.", progressDialog);
