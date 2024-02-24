@@ -16,45 +16,52 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
+        <activity
+            android:name=".Student_Adapter"
+            android:exported="false" />
 
+        <activity
+            android:name=".Data_Model"
+            android:exported="false" />
+        <activity
+            android:name=".Filter_Student"
+            android:exported="false" />
+        <activity
+            android:name=".Update_Faculty"
+            android:exported="false" />
+        <activity
+            android:name=".Update_Student"
+            android:exported="false" />
         <activity
             android:name=".Profile_Image_Handler"
-            android:exported="false"/>
-
-
+            android:exported="false" />
         <activity
             android:name=".Student_Dash"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Progress_Dialog"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Faculty_Register"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Admin_Dashboard"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Splash"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Student_Register"
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

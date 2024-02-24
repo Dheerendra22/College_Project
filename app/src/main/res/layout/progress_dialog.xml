@@ -7,8 +7,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
         android:elevation="@dimen/_10sdp"
         android:radius="@dimen/_30sdp"
         android:background="#DDF0F3"
@@ -19,7 +19,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="16dp">
 
             <ProgressBar
@@ -37,9 +37,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/customProgressBar"
-                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-1dp"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:text="Registering..."
                 android:textColor="@android:color/black"
                 android:textStyle="bold"

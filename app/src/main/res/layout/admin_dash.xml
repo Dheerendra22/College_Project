@@ -21,6 +21,22 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:textColor="#fedd06"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.165"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.143"
+                tools:ignore="MissingConstraints" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="@dimen/_80sdp"
@@ -193,7 +209,7 @@
 
 
                     <ImageView
-                        android:id="@+id/imageupdatestudent"
+                        android:id="@+id/imgUpdateStudent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/updatestudent" />
@@ -210,7 +226,7 @@
 
 
                     <ImageView
-                        android:id="@+id/imageupdatefacul"
+                        android:id="@+id/imgUpdateFaculty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"

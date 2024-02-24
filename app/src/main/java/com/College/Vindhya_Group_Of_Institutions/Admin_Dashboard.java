@@ -2,6 +2,7 @@ package com.College.Vindhya_Group_Of_Institutions;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -16,8 +17,8 @@ import java.util.Calendar;
 
 public class Admin_Dashboard extends AppCompatActivity {
 
-    ImageView addStudent,addFaculty,profile;
-    TextView greet;
+    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty;
+    TextView greet,logout;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
 
@@ -34,6 +35,9 @@ public class Admin_Dashboard extends AppCompatActivity {
         addFaculty = findViewById(R.id.imgFaculty);
         profile = findViewById(R.id.imgProfile);
         greet = findViewById(R.id.txtGreet);
+        updateStudent = findViewById(R.id.imgUpdateStudent);
+        updateFaculty = findViewById(R.id.imgUpdateFaculty);
+        logout = findViewById(R.id.logout);
 
         //set Greeting
         greet.setText(getGreeting());
@@ -51,6 +55,13 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         loadProfileImage();
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+
 
         profile.setOnClickListener(v -> profileImageHandler.openGallery());
 
@@ -58,7 +69,18 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         addFaculty.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Faculty_Register.class)));
 
+        updateStudent.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Filter_Student.class)));
+
+        updateFaculty.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Update_Faculty.class)));
+
     }
+
+    private void logout() {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), Login.class));
+            finish();
+        }
+
 
     private void loadProfileImage() {
         profileImageHandler.loadProfileImage(profile);
