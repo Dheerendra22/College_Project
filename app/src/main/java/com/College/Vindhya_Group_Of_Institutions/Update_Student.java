@@ -1,15 +1,13 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +16,7 @@ public class Update_Student extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Data_Model> dataList;
     FirebaseFirestore db;
+    Student_Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +30,31 @@ public class Update_Student extends AppCompatActivity {
         dataList = new ArrayList<>();
 
         db = FirebaseFirestore.getInstance();
-        db.collection("Students").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                for(DocumentSnapshot d:list){
-                    Data_Model obj = d.toObject(Data_Model.class);
-                    dataList.add(obj);
-                }
+        adapter = new Student_Adapter(dataList);
+        recyclerView.setAdapter(adapter);
 
-            }
-        });
+        // Retrieve values from the intent
+        String departmentValue = getIntent().getStringExtra("Department");
+        String yearValue = getIntent().getStringExtra("Year");
+
+
+        db.collection("Students")
+                .whereEqualTo("Department",departmentValue )
+                .whereEqualTo("Year", yearValue)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    int startPosition = dataList.size();
+
+                    for (DocumentSnapshot d : list) {
+                        Data_Model obj = d.toObject(Data_Model.class);
+                        dataList.add(obj);
+                    }
+
+                    adapter.notifyItemRangeInserted(startPosition, list.size());
+                });
+
 
 
 

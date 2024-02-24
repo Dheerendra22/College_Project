@@ -1,9 +1,7 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -12,13 +10,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Faculty_Register extends AppCompatActivity {
     private Spinner spinnerDepart, spinnerRole;
@@ -35,6 +30,7 @@ public class Faculty_Register extends AppCompatActivity {
     private FirebaseAuth fAuth;
     private FirebaseFirestore fireStore;
     private Progress_Dialog progressDialog;
+    String userId ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,12 +42,9 @@ public class Faculty_Register extends AppCompatActivity {
         initializeFirebase();
         setSpinnerData();
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressDialog.show();
-                registerUser();
-            }
+        register.setOnClickListener(v -> {
+            progressDialog.show();
+            registerUser();
         });
     }
 
@@ -113,6 +106,7 @@ public class Faculty_Register extends AppCompatActivity {
         if (validateInputs(mFirstName, mLastName, mEmail, mPassword, conPassword, mPhone)) {
             fAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+                    userId = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
                     saveUserDataToFireStore(mEmail, mFirstName, mLastName, mDepartment, mPhone, mPassword, role);
                 } else {
                     handleRegistrationFailure(task.toString());
@@ -175,35 +169,28 @@ public class Faculty_Register extends AppCompatActivity {
         user.put("Phone", userPhone);
         user.put("Password", userPassword);
         user.put("Role", userRole);
+        user.put("Email",userEmail);
+        user.put("UserId",userId);
 
-        dataRef.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                progressDialog.dismiss();
-                showToast("User Profile Created Successfully.");
-                clearTextFields();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                showToast("Error! " + e.getMessage());
-                handleRegistrationFailure(userEmail);
-            }
+        dataRef.set(user).addOnCompleteListener(task -> {
+            progressDialog.dismiss();
+            showToast("User Profile Created Successfully.");
+            clearTextFields();
+        }).addOnFailureListener(e -> {
+            progressDialog.dismiss();
+            showToast("Error! " + e.getMessage());
+            handleRegistrationFailure(userEmail);
         });
     }
 
     private void handleRegistrationFailure(String userEmail) {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            currentUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (task.isSuccessful()) {
-                        showToast("User deleted successfully.");
-                    } else {
-                        showToast("Failed to delete user.");
-                    }
+            currentUser.delete().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    showToast("User deleted successfully.");
+                } else {
+                    showToast("Failed to delete user.");
                 }
             });
         }

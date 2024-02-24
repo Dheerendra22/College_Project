@@ -2,12 +2,12 @@ package com.College.Vindhya_Group_Of_Institutions;
 
 public class Data_Model {
 
-String FirstName,LastName,Department,Year,Email,Phone,Father,Password,Role;
+String FirstName,LastName,Department,Year,Email,Phone,Father,Password,userId;
 
     public Data_Model() {
     }
 
-    public Data_Model(String firstName, String lastName, String department, String year, String email, String phone, String father, String password,String role) {
+    public Data_Model(String firstName, String lastName, String department, String year, String email, String phone, String father, String password,String userId) {
         FirstName = firstName;
         LastName = lastName;
         Department = department;
@@ -16,15 +16,16 @@ String FirstName,LastName,Department,Year,Email,Phone,Father,Password,Role;
         Phone = phone;
         Father = father;
         Password = password;
-        Role = role;
+        this.userId = userId;
+
     }
 
-    public String getRole() {
-        return Role;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setRole(String role) {
-        Role = role;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {

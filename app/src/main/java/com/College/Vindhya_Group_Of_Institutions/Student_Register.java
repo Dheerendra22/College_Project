@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Student_Register extends AppCompatActivity {
@@ -29,6 +30,7 @@ public class Student_Register extends AppCompatActivity {
     private Button register;
     private FirebaseAuth fAuth;
     private FirebaseFirestore fireStore;
+    String userId ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +175,7 @@ public class Student_Register extends AppCompatActivity {
         String mFather = getTextFromField(fatherName);
 
         fAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(task -> {
+            userId = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
             DocumentReference dataRef = fireStore.collection("Students").document(mEmail);
             Map<String, Object> user = new HashMap<>();
             user.put("FirstName", mFirstName);
@@ -185,6 +188,8 @@ public class Student_Register extends AppCompatActivity {
             user.put("FatherName", mFather);
             user.put("Password", mPassword);
             user.put("Role", "Student");
+            user.put("Email",mEmail);
+            user.put("UserId",userId);
 
             dataRef.set(user).addOnCompleteListener(task1 -> {
                 showToastAndDismiss("User Profile Created Successfully.", progressDialog);
