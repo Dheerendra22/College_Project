@@ -34,6 +34,7 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
     ArrayList<Data_Model> dataList ;
     private final StorageReference storageReference;
+    private DialogPlus dialogPlus;
 
     public Student_Adapter(ArrayList<Data_Model> dataList) {
         this.dataList = dataList;
@@ -60,120 +61,36 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         loadProfileImage(holder.profile,dataList.get(position).getUserId());
 
         holder.edit.setOnClickListener(v -> {
-            final DialogPlus dialogPlus = DialogPlus.newDialog(holder.profile.getContext())
-                    .setContentHolder(new ViewHolder(R.layout.edit_student))
-                    .setExpanded(true,1100)
-                    .create();
 
-            View myView = dialogPlus.getHolderView();
-            Spinner spinnerDepart = myView.findViewById(R.id.Department);
-            Spinner spinnerYear = myView.findViewById(R.id.Year);
-            Button save = myView.findViewById(R.id.btnSave);
-            EditText firstName = myView.findViewById(R.id.edtFirstName);
-            EditText lastName = myView.findViewById(R.id.edtLastName);
-            EditText phone = myView.findViewById(R.id.edtPhone);
-            EditText rollNumber = myView.findViewById(R.id.edtRoll);
-            EditText enrollNumber = myView.findViewById(R.id.edtEnroll);
-            EditText fatherName = myView.findViewById(R.id.edtFatherName);
-            EditText email = myView.findViewById(R.id.edtEmail);
-            EditText password = myView.findViewById(R.id.edtPassword);
-
-            setSpinnerData(spinnerDepart,spinnerYear,holder.profile.getContext());
-
-            // Get the department from dataList
-            String userDepartment = dataList.get(position).getDepartment();
-            String userYear = dataList.get(position).getYear();
-
-            // Set the default selection in spinnerDepart
-            if (userDepartment != null) {
-                int departmentIndex = getIndex(userDepartment, spinnerDepart);
-                if (departmentIndex != -1) {
-                    spinnerDepart.setSelection(departmentIndex);
-                }
-            }
-
-            // Set the default selection in spinnerYear
-            if (userYear != null) {
-                int yearIndex = getIndex(userYear, spinnerYear);
-                if (yearIndex != -1) {
-                    spinnerYear.setSelection(yearIndex);
-                }
-            }
 
             String role = dataList.get(position).getRole();
-            if(role.equals("Admin") || role.equals("Teacher")){
-                spinnerYear.setVisibility(View.GONE);
+
+            if(role.equals("Student")){
+
+                dialogPlus = DialogPlus.newDialog(holder.profile.getContext())
+                        .setContentHolder(new ViewHolder(R.layout.edit_student))
+                        .setExpanded(true,1100)
+                        .create();
+
+                View myView = dialogPlus.getHolderView();
+
+                setupStudentDialog(myView, dataList.get(position));
+
+            } else {
+
+                dialogPlus = DialogPlus.newDialog(holder.profile.getContext())
+                        .setContentHolder(new ViewHolder(R.layout.edit_faculty))
+                        .setExpanded(true,1100)
+                        .create();
+
+                View myView = dialogPlus.getHolderView();
+                setupFacultyDialog(myView, dataList.get(position));
+
+
             }
-
-            firstName.setText(dataList.get(position).getFirstName());
-            lastName.setText(dataList.get(position).getLastName());
-            phone.setText(dataList.get(position).getPhone());
-            rollNumber.setText(dataList.get(position).getRollNumber());
-            enrollNumber.setText(dataList.get(position).getEnrollmentNumber());
-            fatherName.setText(dataList.get(position).getFatherName());
-            email.setText(dataList.get(position).getEmail());
-            password.setText(dataList.get(position).getPassword());
-            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            email.setEnabled(false);
-            password.setEnabled(false);
-
-            dialogPlus.show();
-
-            save.setOnClickListener(v1 -> {
-                // Get the updated data from EditText fields
-                String updatedFirstName = firstName.getText().toString();
-                String updatedLastName = lastName.getText().toString();
-                String updatedPhone = phone.getText().toString();
-                String updatedRollNumber = rollNumber.getText().toString();
-                String updatedEnrollNumber = enrollNumber.getText().toString();
-                String updatedFatherName = fatherName.getText().toString();
-                String updatedDepartment = spinnerDepart.getSelectedItem().toString();
-                String updatedYear = spinnerYear.getSelectedItem().toString();
-
-                // Validate input (add more validation conditions as needed)
-                if (TextUtils.isEmpty(updatedFirstName) || TextUtils.isEmpty(updatedLastName) || TextUtils.isEmpty(updatedPhone)
-                        || TextUtils.isEmpty(updatedRollNumber) || TextUtils.isEmpty(updatedEnrollNumber) || TextUtils.isEmpty(updatedFatherName)) {
-                    // Display an error message or Toast indicating that all fields must be filled
-                    Toast.makeText(v1.getContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
-                    return; // Stop further processing if validation fails
-                }
-
-                // Create a Map with the updated data
-                Map<String,Object> updatedData = new HashMap<>();
-                updatedData.put("FirstName", updatedFirstName);
-                updatedData.put("LastName", updatedLastName);
-                updatedData.put("Phone", updatedPhone);
-                updatedData.put("RollNumber", updatedRollNumber);
-                updatedData.put("EnrollmentNumber", updatedEnrollNumber);
-                updatedData.put("FatherName", updatedFatherName);
-                updatedData.put("Department",updatedDepartment);
-                updatedData.put("Year",updatedYear);
-
-                // Validate input
-                String validationError = validateInput(updatedFirstName, updatedLastName, updatedPhone, updatedRollNumber, updatedEnrollNumber, updatedFatherName);
-                if (!TextUtils.isEmpty(validationError)) {
-                    // Display specific error message
-                    Toast.makeText(v1.getContext(), validationError, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Get a reference to the FireStore collection and the specific document
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                String CollectionName = dataList.get(position).getCollection();
-                DocumentReference userRef = db.collection(CollectionName).document(dataList.get(position).getEmail());
-
-                userRef.update(updatedData).addOnSuccessListener(unused -> {
-                    dialogPlus.dismiss();
-                    Toast.makeText(v1.getContext(), "Changes Updated Successfully.", Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(e -> Toast.makeText(v1.getContext(), "Error "+e.getMessage(), Toast.LENGTH_SHORT).show());
-
-            });
-
 
 
         });
-
-
 
 
     }
@@ -200,7 +117,6 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
             edit = itemView.findViewById(R.id.imgEdit);
             delete = itemView.findViewById(R.id.imgDelete);
 
-
         }
     }
 
@@ -215,7 +131,7 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         });
     }
 
-    private void setSpinnerData(Spinner spinnerDepart, Spinner spinnerYear, Context context) {
+    private void setDepartSpinnerData(Spinner spinnerDepart, Context context) {
 
         ArrayList<String> departments = new ArrayList<>();
         departments.add("BCA");
@@ -225,6 +141,11 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         ArrayAdapter<String> departmentAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, departments);
         departmentAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerDepart.setAdapter(departmentAdapter);
+
+    }
+
+    private void setYearSpinnerData( Spinner spinnerYear, Context context) {
+
 
         ArrayList<String> years = new ArrayList<>();
         years.add("1st_Year");
@@ -236,30 +157,6 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         spinnerYear.setAdapter(yearAdapter);
     }
 
-    private String validateInput(String firstName, String lastName, String phone, String rollNumber, String enrollNumber, String fatherName) {
-        if (TextUtils.isEmpty(firstName)) {
-            return "Please enter First Name.";
-        }
-        if (TextUtils.isEmpty(lastName)) {
-            return "Please enter Last Name.";
-        }
-        if (TextUtils.isEmpty(phone)) {
-            return "Please enter Phone Number.";
-        }
-        // Add similar conditions for other fields...
-        if (TextUtils.isEmpty(rollNumber)) {
-            return "Please enter Roll Number.";
-        }
-        if (TextUtils.isEmpty(enrollNumber)) {
-            return "Please enter Enrollment Number.";
-        }
-        if (TextUtils.isEmpty(fatherName)) {
-            return "Please enter Father's Name.";
-        }
-
-        // If all validations pass, return an empty string
-        return "";
-    }
 
     // Method to find the index of a department in the spinner
     private int getIndex(String department, Spinner spinner) {
@@ -270,5 +167,173 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         }
         return -1;
     }
+
+
+
+    private void setupStudentDialog(View myView, Data_Model dataModel) {
+        EditText rollNumber = myView.findViewById(R.id.edtRoll);
+        EditText enrollNumber = myView.findViewById(R.id.edtEnroll);
+        EditText fatherName = myView.findViewById(R.id.edtFatherName);
+        Spinner spinnerYear = myView.findViewById(R.id.Year);
+        Spinner spinnerDepart = myView.findViewById(R.id.Department);
+        setDepartSpinnerData(spinnerDepart, myView.getContext());
+        setYearSpinnerData(spinnerYear, myView.getContext());
+        Button save = myView.findViewById(R.id.btnSave);
+        EditText firstName = myView.findViewById(R.id.edtFirstName);
+        EditText lastName = myView.findViewById(R.id.edtLastName);
+        EditText phone = myView.findViewById(R.id.edtPhone);
+        EditText email = myView.findViewById(R.id.edtEmail);
+        EditText password = myView.findViewById(R.id.edtPassword);
+
+        // Get the department from dataModel
+        String userDepartment = dataModel.getDepartment();
+        String userYear = dataModel.getYear();
+
+        // Set the default selection in spinnerDepart
+        if (userDepartment != null) {
+            int departmentIndex = getIndex(userDepartment, spinnerDepart);
+            if (departmentIndex != -1) {
+                spinnerDepart.setSelection(departmentIndex);
+            }
+        }
+
+        // Set the default selection in spinnerYear
+        if (userYear != null) {
+            int yearIndex = getIndex(userYear, spinnerYear);
+            if (yearIndex != -1) {
+                spinnerYear.setSelection(yearIndex);
+            }
+        }
+
+        firstName.setText(dataModel.getFirstName());
+        lastName.setText(dataModel.getLastName());
+        phone.setText(dataModel.getPhone());
+        rollNumber.setText(dataModel.getRollNumber());
+        enrollNumber.setText(dataModel.getEnrollmentNumber());
+        fatherName.setText(dataModel.getFatherName());
+        email.setText(dataModel.getEmail());
+        password.setText(dataModel.getPassword());
+        password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        email.setEnabled(false);
+        password.setEnabled(false);
+
+
+
+
+        save.setOnClickListener(v1 -> {
+            // Get the updated data from EditText fields
+            String updatedFirstName = firstName.getText().toString();
+            String updatedLastName = lastName.getText().toString();
+            String updatedPhone = phone.getText().toString();
+            String updatedRollNumber = rollNumber.getText().toString();
+            String updatedEnrollNumber = enrollNumber.getText().toString();
+            String updatedFatherName = fatherName.getText().toString();
+            String updatedDepartment = spinnerDepart.getSelectedItem().toString();
+            String updatedYear = spinnerYear.getSelectedItem().toString();
+
+            // Validate input (add more validation conditions as needed)
+            if (TextUtils.isEmpty(updatedFirstName) || TextUtils.isEmpty(updatedLastName) || TextUtils.isEmpty(updatedPhone)
+                    || TextUtils.isEmpty(updatedRollNumber) || TextUtils.isEmpty(updatedEnrollNumber) || TextUtils.isEmpty(updatedFatherName)) {
+                // Display an error message or Toast indicating that all fields must be filled
+                Toast.makeText(v1.getContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                return; // Stop further processing if validation fails
+            }
+
+            // Create a Map with the updated data
+            Map<String, Object> updatedData = new HashMap<>();
+            updatedData.put("FirstName", updatedFirstName);
+            updatedData.put("LastName", updatedLastName);
+            updatedData.put("Phone", updatedPhone);
+            updatedData.put("RollNumber", updatedRollNumber);
+            updatedData.put("EnrollmentNumber", updatedEnrollNumber);
+            updatedData.put("FatherName", updatedFatherName);
+            updatedData.put("Department", updatedDepartment);
+            updatedData.put("Year", updatedYear);
+
+            // Get a reference to the FireStore collection and the specific document
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String collectionName = dataModel.getCollection();
+            DocumentReference userRef = db.collection(collectionName).document(dataModel.getEmail());
+
+            userRef.update(updatedData).addOnSuccessListener(unused -> {
+                Toast.makeText(v1.getContext(), "Changes Updated Successfully.", Toast.LENGTH_SHORT).show();
+                dialogPlus.dismiss();
+            }).addOnFailureListener(e -> Toast.makeText(v1.getContext(), "Error " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        });
+
+        dialogPlus.show();
+    }
+
+    private void setupFacultyDialog(View myView, Data_Model dataModel) {
+        Button save = myView.findViewById(R.id.btnSave);
+        EditText firstName = myView.findViewById(R.id.edtFirstName);
+        EditText lastName = myView.findViewById(R.id.edtLastName);
+        EditText phone = myView.findViewById(R.id.edtPhone);
+        EditText email = myView.findViewById(R.id.edtEmail);
+        EditText password = myView.findViewById(R.id.edtPassword);
+        Spinner spinnerDepart = myView.findViewById(R.id.Department);
+        setDepartSpinnerData(spinnerDepart,myView.getContext());
+
+        String userDepartment = dataModel.getDepartment();
+
+        if (userDepartment != null) {
+            int departmentIndex = getIndex(userDepartment, spinnerDepart);
+            if (departmentIndex != -1) {
+                spinnerDepart.setSelection(departmentIndex);
+            }
+        }
+
+
+
+        firstName.setText(dataModel.getFirstName());
+        lastName.setText(dataModel.getLastName());
+        phone.setText(dataModel.getPhone());
+        email.setText(dataModel.getEmail());
+        password.setText(dataModel.getPassword());
+        password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        email.setEnabled(false);
+        password.setEnabled(false);
+
+
+
+        save.setOnClickListener(v1 -> {
+            // Get the updated data from EditText fields
+            String updatedFirstName = firstName.getText().toString();
+            String updatedLastName = lastName.getText().toString();
+            String updatedPhone = phone.getText().toString();
+            String updatedDepartment = spinnerDepart.getSelectedItem().toString();
+
+
+            // Validate input (add more validation conditions as needed)
+            if (TextUtils.isEmpty(updatedFirstName) || TextUtils.isEmpty(updatedLastName) || TextUtils.isEmpty(updatedPhone)
+            ) {
+                // Display an error message or Toast indicating that all fields must be filled
+                Toast.makeText(v1.getContext(), "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+                return; // Stop further processing if validation fails
+            }
+
+            // Create a Map with the updated data
+            Map<String,Object> updatedData = new HashMap<>();
+            updatedData.put("FirstName", updatedFirstName);
+            updatedData.put("LastName", updatedLastName);
+            updatedData.put("Phone", updatedPhone);
+            updatedData.put("Department",updatedDepartment);
+
+
+            // Get a reference to the FireStore collection and the specific document
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String CollectionName = dataModel.getCollection();
+            DocumentReference userRef = db.collection(CollectionName).document(dataModel.getEmail());
+
+            userRef.update(updatedData).addOnSuccessListener(unused -> {
+                dialogPlus.dismiss();
+                Toast.makeText(v1.getContext(), "Changes Updated Successfully.", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> Toast.makeText(v1.getContext(), "Error "+e.getMessage(), Toast.LENGTH_SHORT).show());
+
+        });
+
+        dialogPlus.show();
+    }
+
 
 }
