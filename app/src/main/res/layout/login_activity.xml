@@ -88,6 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="User Name"
+
                     android:textColor="#581f5f"
                     android:textSize="@dimen/_14ssp" />
 
@@ -99,6 +100,7 @@
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Enter Your Username"
+                    android:drawableEnd="@drawable/done_icon"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_8sdp"
                     android:textAlignment="center"
@@ -123,6 +125,8 @@
                     android:textColor="#581f5f"
                     android:textSize="@dimen/_14ssp" />
 
+
+
                 <EditText
                     android:id="@+id/edtPassword"
                     android:layout_width="match_parent"
@@ -132,10 +136,10 @@
                     android:ems="10"
                     android:hint="Enter Your Password"
                     android:inputType="textPassword"
+                    android:drawableEnd="@drawable/hide_eye"
                     android:padding="@dimen/_8sdp"
                     android:textAlignment="center"
                     android:textColor="#717171"
-
                     android:textSize="@dimen/_13ssp"  />
 
             </LinearLayout>
