@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -108,9 +107,11 @@ public class Faculty_Register extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     userId = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
                     saveUserDataToFireStore(mEmail, mFirstName, mLastName, mDepartment, mPhone, mPassword, role);
-                } else {
-                    handleRegistrationFailure(task.toString());
                 }
+            }).addOnFailureListener(e -> {
+                Toast.makeText(Faculty_Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                clearTextFields();
             });
         } else {
             progressDialog.dismiss();
@@ -180,22 +181,11 @@ public class Faculty_Register extends AppCompatActivity {
         }).addOnFailureListener(e -> {
             progressDialog.dismiss();
             showToast("Error! " + e.getMessage());
-            handleRegistrationFailure(userEmail);
+
         });
     }
 
-    private void handleRegistrationFailure(String userEmail) {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            currentUser.delete().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    showToast("User deleted successfully.");
-                } else {
-                    showToast("Failed to delete user.");
-                }
-            });
-        }
-    }
+
 
     private void clearTextFields() {
         firstName.setText("");

@@ -17,8 +17,8 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 public class Profile_Image_Handler {
     private ActivityResultLauncher<Intent> galleryLauncher;
-    private StorageReference storageReference;
-    private String userId;
+    private final StorageReference storageReference;
+    private final String userId;
     public Profile_Image_Handler(AppCompatActivity activity, String userId) {
         this.userId = userId;
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -32,7 +32,7 @@ public class Profile_Image_Handler {
             profileImageView.setBackgroundColor(Color.TRANSPARENT);
             Picasso.get().load(uri).into(profileImageView);
         }).addOnFailureListener(e ->
-                Toast.makeText(profileImageView.getContext(), "Unable to load Profile Image!" + e.getMessage(), Toast.LENGTH_SHORT).show());
+                Toast.makeText(profileImageView.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     private void setupGalleryLauncher(AppCompatActivity activity) {

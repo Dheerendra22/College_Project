@@ -10,8 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,6 +29,7 @@ public class Login extends AppCompatActivity {
     Button login;
     SharedPreferences sharedPreferences;
     private Progress_Dialog progressDialog;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +78,17 @@ public class Login extends AppCompatActivity {
                         dismissProgressDialog();
                         Toast.makeText(Login.this, "Something Error!" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Toast.makeText(Login.this, "Please try again later!", Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
     private void checkUserRole(String userEmail) {
+
         DocumentReference userRef = fireStore.collection("Faculty").document(userEmail);
         userRef.get()
                 .addOnCompleteListener(this, task -> {
@@ -86,17 +96,12 @@ public class Login extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document != null && document.exists()) {
                             String role = document.getString("Role");
-                            saveToSharedPreferences("Role", role);
+                            saveToSharedPreferences("Email",document.getString("Email"));
+                            saveToSharedPreferences("Password",document.getString("Password"));
                             handleUserRole(role);
                         } else {
-                            dismissProgressDialog();
-                            saveToSharedPreferences("Role", "Student");
-                            redirectToDashboard();
-                            Toast.makeText(Login.this, "Logged in Successfully. ", Toast.LENGTH_SHORT).show();
+                            checkInStudent(userEmail);
                         }
-                    } else {
-                        dismissProgressDialog();
-                        Toast.makeText(Login.this, "Please Try Again Later! ", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(this, e -> {
@@ -105,9 +110,31 @@ public class Login extends AppCompatActivity {
                 });
     }
 
+
+    private  void checkInStudent(String email){
+        DocumentReference userRef1 = fireStore.collection("Students").document(email);
+        userRef1.get().addOnCompleteListener(task -> {
+            DocumentSnapshot document = task.getResult();
+            if (document != null && document.exists()) {
+                String role = document.getString("Role");
+                saveToSharedPreferences("Email",document.getString("Email"));
+                saveToSharedPreferences("Password",document.getString("Password"));
+                handleUserRole(role);
+            }else {
+                dismissProgressDialog();
+                Toast.makeText(Login.this, "You are not a valid User.", Toast.LENGTH_SHORT).show();
+
+            }
+
+        }).addOnFailureListener(e -> {
+            dismissProgressDialog();
+            Toast.makeText(Login.this, "Please Try Again Later! ", Toast.LENGTH_SHORT).show();
+        });
+    }
+
     private void handleUserRole(String role) {
         if ("Student".equals(role) || "Admin".equals(role) || "Teacher".equals(role)) {
-            saveToSharedPreferences("Role", role);
+            saveToSharedPreferences("Role",role);
             dismissProgressDialog();
             Toast.makeText(Login.this, "Logged in Successfully. ", Toast.LENGTH_SHORT).show();
             redirectToDashboard();
@@ -139,7 +166,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private void saveToSharedPreferences(String key, String value) {
+    private void saveToSharedPreferences(String key,String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();

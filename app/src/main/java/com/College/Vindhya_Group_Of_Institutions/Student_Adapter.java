@@ -1,5 +1,6 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.InputType;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentReference;
@@ -42,8 +44,6 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
     }
 
-
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,11 +54,11 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.fNAme.setText(dataList.get(position).getFirstName());
-        holder.lName.setText(dataList.get(position).getLastName());
-        holder.department.setText(dataList.get(position).getDepartment());
-        holder.year.setText(dataList.get(position).getYear());
-        loadProfileImage(holder.profile,dataList.get(position).getUserId());
+            holder.fNAme.setText(dataList.get(position).getFirstName());
+            holder.lName.setText(dataList.get(position).getLastName());
+            holder.department.setText(dataList.get(position).getDepartment());
+            holder.year.setText(dataList.get(position).getYear());
+            loadProfileImage(holder.profile,dataList.get(position).getUserId());
 
         holder.edit.setOnClickListener(v -> {
 
@@ -76,11 +76,13 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
                 setupStudentDialog(myView, dataList.get(position));
 
+
+
             } else {
 
                 dialogPlus = DialogPlus.newDialog(holder.profile.getContext())
                         .setContentHolder(new ViewHolder(R.layout.edit_faculty))
-                        .setExpanded(true,1100)
+                        .setExpanded(true,900)
                         .create();
 
                 View myView = dialogPlus.getHolderView();
@@ -92,14 +94,43 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
         });
 
+        holder.delete.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setTitle("Delete Confirmation")
+                    .setMessage("Are you sure you want to delete this user!")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+
+                        // Delete data from Firebase Storage
+                        deleteDataFromStorage(dataList.get(position).getUserId());
+                        // Delete data from FireStore
+                        deleteDataFromFireStore(dataList.get(position));
+
+                        dataList.remove(position);
+                        notifyItemRemoved(position);
+
+
+                    }).setNegativeButton("No", (dialog, which) -> {
+
+                    }).show();
+
+
+        });
 
     }
-
 
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setFilter(ArrayList<Data_Model> newList) {
+        dataList = new ArrayList<>();
+        dataList.addAll(newList);
+        notifyDataSetChanged();
+    }
+
+
 
     static class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -141,7 +172,6 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         ArrayAdapter<String> departmentAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, departments);
         departmentAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinnerDepart.setAdapter(departmentAdapter);
-
     }
 
     private void setYearSpinnerData( Spinner spinnerYear, Context context) {
@@ -167,7 +197,6 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         }
         return -1;
     }
-
 
 
     private void setupStudentDialog(View myView, Data_Model dataModel) {
@@ -217,9 +246,6 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
         email.setEnabled(false);
         password.setEnabled(false);
 
-
-
-
         save.setOnClickListener(v1 -> {
             // Get the updated data from EditText fields
             String updatedFirstName = firstName.getText().toString();
@@ -258,6 +284,7 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
             userRef.update(updatedData).addOnSuccessListener(unused -> {
                 Toast.makeText(v1.getContext(), "Changes Updated Successfully.", Toast.LENGTH_SHORT).show();
                 dialogPlus.dismiss();
+
             }).addOnFailureListener(e -> Toast.makeText(v1.getContext(), "Error " + e.getMessage(), Toast.LENGTH_SHORT).show());
         });
 
@@ -265,34 +292,35 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
     }
 
     private void setupFacultyDialog(View myView, Data_Model dataModel) {
-        Button save = myView.findViewById(R.id.btnSave);
-        EditText firstName = myView.findViewById(R.id.edtFirstName);
-        EditText lastName = myView.findViewById(R.id.edtLastName);
-        EditText phone = myView.findViewById(R.id.edtPhone);
-        EditText email = myView.findViewById(R.id.edtEmail);
-        EditText password = myView.findViewById(R.id.edtPassword);
-        Spinner spinnerDepart = myView.findViewById(R.id.Department);
-        setDepartSpinnerData(spinnerDepart,myView.getContext());
 
-        String userDepartment = dataModel.getDepartment();
+            Button save = myView.findViewById(R.id.btnSave);
+            EditText firstName = myView.findViewById(R.id.edtFirstName);
+            EditText lastName = myView.findViewById(R.id.edtLastName);
+            EditText phone = myView.findViewById(R.id.edtPhone);
+            EditText email = myView.findViewById(R.id.edtEmail);
+            EditText password = myView.findViewById(R.id.edtPassword);
+            Spinner spinnerDepart = myView.findViewById(R.id.Department);
+            setDepartSpinnerData(spinnerDepart,myView.getContext());
 
-        if (userDepartment != null) {
-            int departmentIndex = getIndex(userDepartment, spinnerDepart);
-            if (departmentIndex != -1) {
-                spinnerDepart.setSelection(departmentIndex);
-            }
-        }
+            String userDepartment = dataModel.getDepartment();
+
+                if (userDepartment != null) {
+                    int departmentIndex = getIndex(userDepartment, spinnerDepart);
+                    if (departmentIndex != -1) {
+                        spinnerDepart.setSelection(departmentIndex);
+                    }
+                }
 
 
 
-        firstName.setText(dataModel.getFirstName());
-        lastName.setText(dataModel.getLastName());
-        phone.setText(dataModel.getPhone());
-        email.setText(dataModel.getEmail());
-        password.setText(dataModel.getPassword());
-        password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        email.setEnabled(false);
-        password.setEnabled(false);
+            firstName.setText(dataModel.getFirstName());
+            lastName.setText(dataModel.getLastName());
+            phone.setText(dataModel.getPhone());
+            email.setText(dataModel.getEmail());
+            password.setText(dataModel.getPassword());
+            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            email.setEnabled(false);
+            password.setEnabled(false);
 
 
 
@@ -312,12 +340,12 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
                 return; // Stop further processing if validation fails
             }
 
-            // Create a Map with the updated data
-            Map<String,Object> updatedData = new HashMap<>();
-            updatedData.put("FirstName", updatedFirstName);
-            updatedData.put("LastName", updatedLastName);
-            updatedData.put("Phone", updatedPhone);
-            updatedData.put("Department",updatedDepartment);
+                // Create a Map with the updated data
+                Map<String,Object> updatedData = new HashMap<>();
+                updatedData.put("FirstName", updatedFirstName);
+                updatedData.put("LastName", updatedLastName);
+                updatedData.put("Phone", updatedPhone);
+                updatedData.put("Department",updatedDepartment);
 
 
             // Get a reference to the FireStore collection and the specific document
@@ -328,11 +356,49 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
             userRef.update(updatedData).addOnSuccessListener(unused -> {
                 dialogPlus.dismiss();
                 Toast.makeText(v1.getContext(), "Changes Updated Successfully.", Toast.LENGTH_SHORT).show();
+
+
             }).addOnFailureListener(e -> Toast.makeText(v1.getContext(), "Error "+e.getMessage(), Toast.LENGTH_SHORT).show());
 
         });
 
         dialogPlus.show();
+    }
+
+    // Function to delete data from Firebase Storage
+    private void deleteDataFromStorage(String userId) {
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        StorageReference userStorageRef = storageReference.child("Profile_Images/" + userId);
+
+        // Check if the file exists before attempting to delete
+        userStorageRef.getMetadata().addOnSuccessListener(metadata -> {
+            // File exists, proceed with deletion
+            userStorageRef.delete().addOnSuccessListener(aVoid -> {
+                // File deleted successfully
+                // You can perform additional actions after successful deletion if needed
+            }).addOnFailureListener(e -> {
+                // Handle the failure to delete the file
+            });
+        }).addOnFailureListener(e -> {
+
+        });
+    }
+
+
+    // Function to delete data from FireStore
+    private void deleteDataFromFireStore(Data_Model dataModel) {
+        // Get the reference to the FireStore instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Specify the path to the document based on the collection and email
+        DocumentReference documentReference = db.collection(dataModel.getCollection()).document(dataModel.getEmail());
+
+        // Delete the document
+        documentReference.delete().addOnSuccessListener(aVoid -> {
+            // Document deleted successfully
+        }).addOnFailureListener(e -> {
+            // Handle the failure to delete the document
+        });
     }
 
 

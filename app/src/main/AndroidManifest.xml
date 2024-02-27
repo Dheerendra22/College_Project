@@ -32,6 +32,7 @@
             android:exported="false" />
         <activity
             android:name=".Update_Student"
+            android:theme="@style/Theme.Search"
             android:exported="false" />
         <activity
             android:name=".Profile_Image_Handler"

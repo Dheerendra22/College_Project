@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -120,36 +119,36 @@ public class Student_Register extends AppCompatActivity {
         if (TextUtils.isEmpty(mFirstName) || TextUtils.isEmpty(mLastName) || TextUtils.isEmpty(mEmail) ||
                 TextUtils.isEmpty(mPassword) || TextUtils.isEmpty(conPassword) || TextUtils.isEmpty(mPhone) ||
                 TextUtils.isEmpty(mRollNumber) || TextUtils.isEmpty(mEnrollment)) {
-            showErrorAndDismiss("All fields are required!", progressDialog);
+            showErrorAndDismiss(progressDialog);
             return false;
         }
 
         if (mPassword.length() < 6) {
-            showErrorAndDismiss("Password must be 6 letters or more!", progressDialog);
+            progressDialog.dismiss();
             showError(password, "Password must be 6 letters or more!");
             return false;
         }
 
         if (!mPassword.equals(conPassword)) {
-            showErrorAndDismiss("Password does not match!", progressDialog);
+            progressDialog.dismiss();
             showError(con_password, "Password does not match!");
             return false;
         }
 
         if (!isValidIndianPhoneNumber(mPhone)) {
-            showErrorAndDismiss("Enter a valid 10-digit Indian phone number!", progressDialog);
+            progressDialog.dismiss();
             showError(phone, "Enter a valid 10-digit Indian phone number!");
             return false;
         }
 
         if (mRollNumber.length() != 10) {
-            showErrorAndDismiss("Enter Correct RollNumber!", progressDialog);
+            progressDialog.dismiss();
             showError(rollNumber, "Enter Correct RollNumber!");
             return false;
         }
 
         if (mEnrollment.length() != 12) {
-            showErrorAndDismiss("Enter Correct EnrollmentNumber!", progressDialog);
+            progressDialog.dismiss();
             showError(enrollNumber, "Enter Correct EnrollmentNumber!");
             return false;
         }
@@ -197,7 +196,7 @@ public class Student_Register extends AppCompatActivity {
                 clearTextFields();
             }).addOnFailureListener(e -> {
                 showToastAndDismiss("Error! " + e.getMessage(), progressDialog);
-                handleRegistrationFailure(mEmail);
+                clearTextFields();
             });
         }).addOnFailureListener(e -> showToastAndDismiss("Error! " + e.getMessage(), progressDialog));
     }
@@ -212,9 +211,10 @@ public class Student_Register extends AppCompatActivity {
 
     }
 
-    private void showErrorAndDismiss(String errorMessage, Progress_Dialog progressDialog) {
-        showToast(errorMessage);
+    private void showErrorAndDismiss(Progress_Dialog progressDialog) {
         progressDialog.dismiss();
+        showToast("All fields are required!");
+
     }
 
     private void showToast(String message) {
@@ -238,16 +238,4 @@ public class Student_Register extends AppCompatActivity {
         fatherName.setText("");
     }
 
-    private void handleRegistrationFailure(String email) {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
-            currentUser.delete().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    showToast("User deleted successfully.");
-                } else {
-                    showToast("Failed to delete user.");
-                }
-            });
-        }
-    }
 }
