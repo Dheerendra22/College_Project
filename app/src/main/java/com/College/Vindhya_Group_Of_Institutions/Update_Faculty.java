@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,8 +46,14 @@ public class Update_Faculty extends AppCompatActivity {
                         Data_Model obj = d.toObject(Data_Model.class);
                         dataList.add(obj);
                     }
+                    if (dataList.isEmpty()) {
+                        // Show a Toast message indicating that no data was retrieved
+                        Toast.makeText(Update_Faculty.this, "No data found", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Data is available, update the adapter
+                        adapter.notifyItemRangeInserted(startPosition, list.size());
 
-                    adapter.notifyItemRangeInserted(startPosition, list.size());
+                    }
                 });
 
     }

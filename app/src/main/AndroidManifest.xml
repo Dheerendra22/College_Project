@@ -29,6 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".Update_Faculty"
+            android:theme="@style/Theme.Search"
             android:exported="false" />
         <activity
             android:name=".Update_Student"
@@ -51,6 +52,7 @@
             android:exported="false" />
         <activity
             android:name=".Splash"
+            android:theme="@style/Base.Theme.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

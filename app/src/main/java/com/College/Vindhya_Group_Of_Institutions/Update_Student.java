@@ -3,6 +3,8 @@ package com.College.Vindhya_Group_Of_Institutions;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.SearchView;
 
 
@@ -55,8 +57,15 @@ public class Update_Student extends AppCompatActivity {
                         Data_Model obj = d.toObject(Data_Model.class);
                         dataList.add(obj);
                     }
+                    if (dataList.isEmpty()) {
+                        // Show a Toast message indicating that no data was retrieved
+                        Toast.makeText(Update_Student.this, "No data found", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Data is available, update the adapter
+                        adapter.notifyItemRangeInserted(startPosition, list.size());
 
-                    adapter.notifyItemRangeInserted(startPosition, list.size());
+                    }
+
                 });
 
     }
