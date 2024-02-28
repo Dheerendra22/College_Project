@@ -25,27 +25,16 @@
 
                 <ImageView
                     android:id="@+id/logout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="39dp"
+                    android:layout_height="36dp"
                     android:layout_margin="@dimen/_5sdp"
                     android:src="@drawable/log_out"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.981"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <!--            <TextView-->
-                <!--                android:id="@+id/logout"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:text="Logout"-->
-                <!--                android:textColor="#fedd06"-->
-                <!--                android:textSize="@dimen/_15ssp"-->
-                <!--                android:textStyle="bold"-->
-                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                app:layout_constraintHorizontal_bias="0.165"-->
-                <!--                app:layout_constraintStart_toStartOf="parent"-->
-                <!--                app:layout_constraintTop_toTopOf="parent"-->
-                <!--                app:layout_constraintVertical_bias="0.143"-->
-                <!--                tools:ignore="MissingConstraints" />-->
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.106" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgProfile"
@@ -57,10 +46,10 @@
                     app:civ_border_width="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.895"
+                    app:layout_constraintHorizontal_bias="0.052"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.293"
+                    app:layout_constraintVertical_bias="0.333"
                     tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
 
                 <TextView
@@ -73,26 +62,29 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.235"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.166"
+                    app:layout_constraintStart_toEndOf="@+id/imgProfile"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.409" />
+                    app:layout_constraintVertical_bias="0.326" />
 
                 <TextView
-                    android:id="@+id/textprofilename"
+                    android:id="@+id/txtName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:text="K.P.Tripathi"
                     android:textColor="#BA68C8"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/txtGreet"
-                    app:layout_constraintTop_toBottomOf="@+id/txtGreet"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.142"
+                    app:layout_constraintStart_toEndOf="@+id/imgProfile"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.583"
                     tools:ignore="MissingConstraints" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/txtRole"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Role"
@@ -101,26 +93,25 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.816"
+                    app:layout_constraintHorizontal_bias="0.14"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.895"
+                    app:layout_constraintVertical_bias="0.897"
                     tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_600sdp"
                 android:background="@drawable/botom_background"
                 android:orientation="vertical">
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/_24sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_580sdp"
+                    android:layout_margin="@dimen/_19sdp"
                     android:background="@drawable/banner_background"
                     android:orientation="horizontal">
 
@@ -128,7 +119,9 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_24sdp"
+                        android:layout_marginStart="@dimen/_36sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
                         android:orientation="vertical">
 
 
@@ -169,7 +162,7 @@
 
 
                         <ImageView
-                            android:id="@+id/subjectalot"
+                            android:id="@+id/subAllot"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_24sdp"
@@ -178,9 +171,9 @@
 
                         <TextView
                             android:id="@+id/textSubjectAlot"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Subject Alot "
+                            android:text="Subject Allot "
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"
@@ -227,7 +220,9 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_24sdp"
+                        android:layout_marginStart="@dimen/_44sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
                         android:orientation="vertical">
 
 
@@ -259,7 +254,7 @@
                             android:id="@+id/textEditFaculity"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Edit Faculity"
+                            android:text="Edit Faculty"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"
@@ -276,7 +271,7 @@
                             android:id="@+id/textEditSubject"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Edit Subject"
+                            android:text="Edit Allot"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"

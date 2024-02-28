@@ -5,7 +5,7 @@
     android:layout_width="350dp"
     android:layout_height="450dp"
     android:orientation="vertical"
-    android:background="@drawable/pop_bg_frnt"
+    android:background="@drawable/banner_background"
     android:padding="5dp"
     android:layout_gravity="center"
     tools:context=".Filter_Student">
@@ -20,22 +20,23 @@
         android:textStyle="bold"
         android:layout_gravity="end"
         android:gravity="center"
-        android:background="@drawable/circle_bg" />
+         />
 
     <TextView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_24sdp"
-        android:layout_marginRight="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:text="Choose Branch and Year"
         android:layout_gravity="center"
-        android:textAlignment="center"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_24sdp"
         android:background="@drawable/botom_background"
+        android:text="Choose Branch and Year"
+        android:textAlignment="center"
         android:textColor="#040404"
+        android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
-        android:textSize="@dimen/_14sdp"></TextView>
+        tools:ignore="TextSizeCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +44,6 @@
         android:layout_marginLeft="@dimen/_24sdp"
         android:layout_marginRight="@dimen/_24sdp"
         android:layout_marginBottom="@dimen/_24sdp"
-        android:background="@drawable/pop_bg"
         android:orientation="vertical">
 
 
@@ -109,7 +109,7 @@
                 android:layout_marginBottom="@dimen/_7sdp"
                 android:layout_weight="1"
                 tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
-        </LinearLayout>.
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnFetch"
@@ -129,6 +129,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.675" />
+
     </LinearLayout>
 
 

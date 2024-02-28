@@ -54,11 +54,11 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-            holder.fNAme.setText(dataList.get(position).getFirstName());
-            holder.lName.setText(dataList.get(position).getLastName());
-            holder.department.setText(dataList.get(position).getDepartment());
-            holder.year.setText(dataList.get(position).getYear());
-            loadProfileImage(holder.profile,dataList.get(position).getUserId());
+        holder.fNAme.setText(dataList.get(position).getFirstName());
+        holder.lName.setText(dataList.get(position).getLastName());
+        holder.department.setText(dataList.get(position).getDepartment());
+        holder.year.setText(dataList.get(position).getYear());
+        loadProfileImage(holder.profile,dataList.get(position).getUserId());
 
         holder.edit.setOnClickListener(v -> {
 
@@ -293,34 +293,34 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
     private void setupFacultyDialog(View myView, Data_Model dataModel) {
 
-            Button save = myView.findViewById(R.id.btnSave);
-            EditText firstName = myView.findViewById(R.id.edtFirstName);
-            EditText lastName = myView.findViewById(R.id.edtLastName);
-            EditText phone = myView.findViewById(R.id.edtPhone);
-            EditText email = myView.findViewById(R.id.edtEmail);
-            EditText password = myView.findViewById(R.id.edtPassword);
-            Spinner spinnerDepart = myView.findViewById(R.id.Department);
-            setDepartSpinnerData(spinnerDepart,myView.getContext());
+        Button save = myView.findViewById(R.id.btnSave);
+        EditText firstName = myView.findViewById(R.id.edtFirstName);
+        EditText lastName = myView.findViewById(R.id.edtLastName);
+        EditText phone = myView.findViewById(R.id.edtPhone);
+        EditText email = myView.findViewById(R.id.edtEmail);
+        EditText password = myView.findViewById(R.id.edtPassword);
+        Spinner spinnerDepart = myView.findViewById(R.id.Department);
+        setDepartSpinnerData(spinnerDepart,myView.getContext());
 
-            String userDepartment = dataModel.getDepartment();
+        String userDepartment = dataModel.getDepartment();
 
-                if (userDepartment != null) {
-                    int departmentIndex = getIndex(userDepartment, spinnerDepart);
-                    if (departmentIndex != -1) {
-                        spinnerDepart.setSelection(departmentIndex);
-                    }
-                }
+        if (userDepartment != null) {
+            int departmentIndex = getIndex(userDepartment, spinnerDepart);
+            if (departmentIndex != -1) {
+                spinnerDepart.setSelection(departmentIndex);
+            }
+        }
 
 
 
-            firstName.setText(dataModel.getFirstName());
-            lastName.setText(dataModel.getLastName());
-            phone.setText(dataModel.getPhone());
-            email.setText(dataModel.getEmail());
-            password.setText(dataModel.getPassword());
-            password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-            email.setEnabled(false);
-            password.setEnabled(false);
+        firstName.setText(dataModel.getFirstName());
+        lastName.setText(dataModel.getLastName());
+        phone.setText(dataModel.getPhone());
+        email.setText(dataModel.getEmail());
+        password.setText(dataModel.getPassword());
+        password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        email.setEnabled(false);
+        password.setEnabled(false);
 
 
 
@@ -340,12 +340,12 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
                 return; // Stop further processing if validation fails
             }
 
-                // Create a Map with the updated data
-                Map<String,Object> updatedData = new HashMap<>();
-                updatedData.put("FirstName", updatedFirstName);
-                updatedData.put("LastName", updatedLastName);
-                updatedData.put("Phone", updatedPhone);
-                updatedData.put("Department",updatedDepartment);
+            // Create a Map with the updated data
+            Map<String,Object> updatedData = new HashMap<>();
+            updatedData.put("FirstName", updatedFirstName);
+            updatedData.put("LastName", updatedLastName);
+            updatedData.put("Phone", updatedPhone);
+            updatedData.put("Department",updatedDepartment);
 
 
             // Get a reference to the FireStore collection and the specific document

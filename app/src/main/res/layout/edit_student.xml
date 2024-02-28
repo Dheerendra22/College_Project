@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ededf7"
-    >
+    android:background="#ededf7">
 
 
     <ScrollView
@@ -17,124 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/top_background"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/circle_bg"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
-                    app:layout_constraintVertical_bias="0.32999998" />.
-
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgProfile"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/baseline_user"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                    app:layout_constraintStart_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2"
-                    tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/aldrich"
-                    android:shadowColor="#E91E63"
-                    android:shadowRadius="10"
-                    android:text="Shanu"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/_17ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/imgProfile"
-                    app:layout_constraintHorizontal_bias="0.484"
-                    app:layout_constraintStart_toStartOf="@+id/imgProfile"
-                    app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-            <TextView
-                android:id="@+id/editTextText"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_39sdp"
-                android:layout_marginEnd="@dimen/_39sdp"
-                android:background="@drawable/existing_info"
-                android:text="Existing Information"
-                android:textAlignment="center"
-
-                android:elevation="3dp"
-                android:ems="10"
-
-                android:padding="@dimen/_7sdp"
-                android:textColor="#8d8d8d"
-                android:textStyle="bold|italic" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_132sdp"
-                android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_24sdp"
-                android:layout_marginBottom="@dimen/_24sdp"
-                android:background="@drawable/banner_background">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TUM INTIGRATE KRO"
-                    android:textAlignment="center"
-                    android:textColor="#ffffff"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                    app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/circle_white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
             <TextView
                 android:id="@+id/textView2"
@@ -142,26 +22,24 @@
                 android:layout_height="@dimen/_29sdp"
                 android:layout_marginStart="@dimen/_26sdp"
                 android:layout_marginEnd="@dimen/_26sdp"
+                android:background="@drawable/existing_info"
                 android:text="Update Information"
                 android:textAlignment="center"
-                android:background="@drawable/existing_info"
                 android:textColor="#581f5f"
                 android:textSize="@dimen/_20ssp"
-                android:textStyle="bold|italic" />
-
+                android:textStyle="bold|italic"
+                tools:ignore="TextSizeCheck" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_background"
+                android:layout_height="497dp"
                 android:layout_marginStart="@dimen/_14sdp"
                 android:layout_marginEnd="@dimen/_14sdp"
+                android:background="@drawable/edittext_background"
                 android:baselineAligned="false"
-                android:orientation="horizontal">
-
-
-
+                android:orientation="horizontal"
+                tools:ignore="TextSizeCheck">
 
 
                 <LinearLayout
@@ -199,7 +77,7 @@
                         android:id="@+id/textRollNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Roll Number"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
@@ -223,7 +101,7 @@
                         android:id="@+id/textPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Phone Number"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
@@ -242,14 +120,16 @@
                         android:textAlignment="center"
                         android:textColor="#717171"
                         android:textSize="@dimen/_12ssp" />
+
                     <TextView
                         android:id="@+id/txtEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Email"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
+
                     <EditText
                         android:id="@+id/edtEmail"
                         android:layout_width="match_parent"
@@ -270,31 +150,25 @@
                         android:id="@+id/textView15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_weight="1"
                         android:text="Depatment"
                         android:textColor="#581f5f"
-                        android:textSize="@dimen/_14ssp" />
-
+                        android:textSize="@dimen/_14ssp"
+                        tools:ignore="NestedWeights" />
 
                     <Spinner
                         android:id="@+id/Department"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="43dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:layout_marginBottom="@dimen/_7sdp"
-                        android:background="@drawable/edittext_background"
                         android:layout_weight="1"
+                        android:background="@drawable/edittext_background"
                         tools:ignore="TouchTargetSizeCheck" />
 
 
-
-
-
-
-
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -326,14 +200,15 @@
                         android:textAlignment="center"
 
                         android:textColor="#717171"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        tools:ignore="DuplicateSpeakableTextCheck" />
 
                     <TextView
                         android:id="@+id/textEnrollment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
-                        android:text="Enrollment Num"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="Enroll Number"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
 
@@ -357,7 +232,7 @@
                         android:id="@+id/textfather"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Father's Name"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
@@ -382,7 +257,7 @@
                         android:id="@+id/txtPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:text="Password"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
@@ -406,25 +281,23 @@
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_weight="1"
                         android:text="Year"
                         android:textColor="#581f5f"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_14ssp"
+                        tools:ignore="NestedWeights" />
 
                     <Spinner
                         android:id="@+id/Year"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="44dp"
                         android:layout_marginTop="@dimen/_7sdp"
                         android:layout_marginBottom="@dimen/_7sdp"
-                        android:background="@drawable/edittext_background"
                         android:layout_weight="1"
+                        android:background="@drawable/edittext_background"
                         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
                 </LinearLayout>
-
-
-
 
 
             </LinearLayout>
@@ -435,8 +308,7 @@
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_23sdp"
-                android:layout_marginBottom="@dimen/_23sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/button_background"
                 android:text="Save Changes"
                 android:textColor="#ffffff"

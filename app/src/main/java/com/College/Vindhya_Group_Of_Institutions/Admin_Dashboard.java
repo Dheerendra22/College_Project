@@ -89,9 +89,7 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         updateFaculty.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Update_Faculty.class)));
 
-        subjAllotment.setOnClickListener(v -> {
-            startActivity(new Intent(Admin_Dashboard.this, Update_Faculty.class));
-        });
+        subjAllotment.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Sub_Allot.class)));
 
         loadProfileImage();
 
@@ -99,11 +97,11 @@ public class Admin_Dashboard extends AppCompatActivity {
     }
 
     private void logout() {
-            FirebaseAuth.getInstance().signOut();
-            deleteSharedPreferences();
-            startActivity(new Intent(getApplicationContext(), Login.class));
-            finish();
-        }
+        FirebaseAuth.getInstance().signOut();
+        deleteSharedPreferences();
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
+    }
 
 
     private void loadProfileImage() {

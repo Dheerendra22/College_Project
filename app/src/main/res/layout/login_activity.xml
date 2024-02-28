@@ -101,7 +101,7 @@
                     android:hint="Enter Your Username"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_8sdp"
-                    android:drawableEnd="@drawable/done_icon"
+
                     android:textColor="#717171"
                     android:textSize="@dimen/_13ssp"
                     android:autofillHints="" />
@@ -109,8 +109,8 @@
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_marginTop="@dimen/_24sdp"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:layout_height="wrap_content"
                     android:text="Password"
                     android:textColor="#581f5f"
@@ -133,7 +133,7 @@
                         android:inputType="textPassword"
                         android:padding="@dimen/_8sdp"
                         android:hint="Enter Your Password"
-                         android:textColor="#717171"
+                        android:textColor="#717171"
                         android:textSize="@dimen/_13ssp"
                         tools:ignore="SpeakableTextPresentCheck" />
 

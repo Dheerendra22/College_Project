@@ -20,7 +20,7 @@ public class Filter_Student extends AppCompatActivity {
         setContentView(R.layout.filter_student);
 
         spinnerDepart = findViewById(R.id.Department);
-        spinnerYear = findViewById(R.id.year);
+        spinnerYear = findViewById(R.id.Year);
         fetch = findViewById(R.id.btnFetch);
 
         setSpinnerData();
