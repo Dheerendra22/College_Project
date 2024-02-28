@@ -88,9 +88,9 @@ public class Admin_Dashboard extends AppCompatActivity {
         updateStudent.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Filter_Student.class)));
 
         updateFaculty.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Update_Faculty.class)));
+
         subjAllotment.setOnClickListener(v -> {
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(Admin_Dashboard.this, Update_Faculty.class));
         });
 
         loadProfileImage();

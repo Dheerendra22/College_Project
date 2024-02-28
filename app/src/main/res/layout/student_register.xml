@@ -102,7 +102,7 @@
                         android:id="@+id/edtFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="@dimen/_7sdp"
+
                         android:background="@drawable/edittext_background"
                         android:ems="10"
                         android:hint="Your First Name"
@@ -111,13 +111,14 @@
                         android:textAlignment="center"
                         android:textColor="#717171"
 
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        android:autofillHints="" />
 
                     <TextView
                         android:id="@+id/textRollNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:text="Roll Number"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
@@ -126,7 +127,6 @@
                         android:id="@+id/edtRoll"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
                         android:hint="Your Roll Number"
@@ -134,13 +134,14 @@
                         android:padding="@dimen/_7sdp"
                         android:textAlignment="center"
                         android:textColor="#717171"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        android:autofillHints="" />
 
                     <TextView
                         android:id="@+id/textPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:text="Phone Number"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
@@ -149,7 +150,6 @@
                         android:id="@+id/edtPhone"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
                         android:hint="Your Phone Number"
@@ -157,7 +157,8 @@
                         android:padding="@dimen/_7sdp"
                         android:textAlignment="center"
                         android:textColor="#717171"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        android:autofillHints="" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -181,7 +182,6 @@
                         android:id="@+id/edtLastName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
                         android:hint="Your Last Name"
@@ -196,8 +196,8 @@
                         android:id="@+id/textEnrollment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:text="Enrollment Num"
-                        android:layout_marginTop="@dimen/_24sdp"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
 
@@ -205,22 +205,22 @@
                         android:id="@+id/edtEnroll"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="@dimen/_7sdp"
+                        android:autofillHints=""
                         android:background="@drawable/edittext_background"
                         android:ems="10"
                         android:hint="Your Enroll Number"
                         android:inputType="number"
                         android:padding="@dimen/_7sdp"
                         android:textAlignment="center"
-                        android:textColor="#717171"
 
+                        android:textColor="#717171"
                         android:textSize="@dimen/_12ssp" />
 
                     <TextView
                         android:id="@+id/textfather"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:text="Father's Name"
                         android:textColor="#581f5f"
                         android:textSize="@dimen/_14ssp" />
@@ -229,7 +229,6 @@
                         android:id="@+id/edtFatherName"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:layout_marginTop="@dimen/_7sdp"
                         android:background="@drawable/edittext_background"
                         android:ems="10"
                         android:hint="Your Last Name"
@@ -238,7 +237,8 @@
                         android:textAlignment="center"
                         android:textColor="#717171"
 
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        android:autofillHints="" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -264,59 +264,46 @@
                     android:id="@+id/edtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Enter Your Email"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_7sdp"
-                    android:textAlignment="center"
                     android:textColor="#717171"
+                    android:textSize="@dimen/_12ssp"
+                    android:autofillHints="" />
 
-                    android:textSize="@dimen/_12ssp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_23sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_23sdp"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Password"
+                    android:layout_marginTop="@dimen/_7sdp"
                     android:textColor="#581f5f"
                     android:textSize="@dimen/_14ssp" />
 
-                <EditText
-                    android:id="@+id/edtPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInput1"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:background="@drawable/edittext_background"
-                    android:ems="10"
-                    android:hint="Enter Your Password"
-                    android:drawableEnd="@drawable/hide_eye"
-                    android:inputType="textPassword"
-                    android:padding="@dimen/_7sdp"
-                    android:textAlignment="center"
-                    android:textColor="#717171"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
 
-                    android:textSize="@dimen/_12ssp" />
+                    <EditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:autofillHints=""
+                        android:background="@drawable/edittext_background"
+                        android:ems="10"
+                        android:hint="Enter Your Password"
+                        android:inputType="textPassword"
+                        android:padding="@dimen/_7sdp"
+                        android:textAlignment="center"
+                        android:textColor="#717171"
+                        android:textSize="@dimen/_12ssp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_23sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_23sdp"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -326,21 +313,27 @@
                     android:textColor="#581f5f"
                     android:textSize="@dimen/_14ssp" />
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
+
                 <EditText
                     android:id="@+id/edtConPassword"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_7sdp"
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Confirm Your Password"
-                    android:drawableEnd="@drawable/hide_eye"
                     android:inputType="textPassword"
                     android:padding="@dimen/_7sdp"
                     android:textAlignment="center"
                     android:textColor="#717171"
+                    android:textSize="@dimen/_12ssp"
+                    android:autofillHints="" />
 
-                    android:textSize="@dimen/_12ssp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -348,7 +341,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_24sdp"
-                android:layout_marginTop="@dimen/_24sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_24sdp"
                 android:orientation="horizontal">
 

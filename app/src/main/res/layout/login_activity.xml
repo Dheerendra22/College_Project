@@ -88,7 +88,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="User Name"
-
                     android:textColor="#581f5f"
                     android:textSize="@dimen/_14ssp" />
 
@@ -102,19 +101,11 @@
                     android:hint="Enter Your Username"
                     android:inputType="textEmailAddress"
                     android:padding="@dimen/_8sdp"
-                    android:textAlignment="center"
+
                     android:textColor="#717171"
+                    android:textSize="@dimen/_13ssp"
+                    android:autofillHints="" />
 
-                    android:textSize="@dimen/_13ssp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_23sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_26sdp"
-                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView3"
@@ -124,22 +115,28 @@
                     android:textColor="#581f5f"
                     android:textSize="@dimen/_14ssp" />
 
-
-
-                <EditText
-                    android:id="@+id/edtPassword"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/edittext_background"
-                    android:ems="10"
-                    android:hint="Enter Your Password"
-                    android:inputType="textPassword"
-                    android:drawableEnd="@drawable/hide_eye"
-                    android:padding="@dimen/_8sdp"
-                    android:textAlignment="center"
-                    android:textColor="#717171"
-                    android:textSize="@dimen/_13ssp"  />
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:autofillHints=""
+                        android:background="@drawable/edittext_background"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:padding="@dimen/_8sdp"
+                        android:hint="Enter Your Password"
+                        android:textColor="#717171"
+                        android:textSize="@dimen/_13ssp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

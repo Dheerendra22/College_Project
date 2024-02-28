@@ -16,11 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Sub_Allot"
+            android:exported="false" />
         <activity
             android:name=".Student_Adapter"
             android:exported="false" />
-
         <activity
             android:name=".Data_Model"
             android:exported="false" />
@@ -29,12 +30,12 @@
             android:exported="false" />
         <activity
             android:name=".Update_Faculty"
-            android:theme="@style/Theme.Search"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Search" />
         <activity
             android:name=".Update_Student"
-            android:theme="@style/Theme.Search"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Search" />
         <activity
             android:name=".Profile_Image_Handler"
             android:exported="false" />
@@ -52,8 +53,8 @@
             android:exported="false" />
         <activity
             android:name=".Splash"
-            android:theme="@style/Base.Theme.Splash"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Base.Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
