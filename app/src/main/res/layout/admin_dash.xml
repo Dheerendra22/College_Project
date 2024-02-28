@@ -164,7 +164,7 @@
 
 
                     <ImageView
-                        android:id="@+id/subjectalot"
+                        android:id="@+id/subAllot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_24sdp"
@@ -173,9 +173,9 @@
 
                     <TextView
                         android:id="@+id/textSubjectAlot"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Subject Alot "
+                        android:text="Subject Allot "
                         android:textAlignment="center"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"
@@ -256,7 +256,7 @@
                         android:id="@+id/textEditFaculity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Edit Faculity"
+                        android:text="Edit Faculty"
                         android:textAlignment="center"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"
@@ -273,7 +273,7 @@
                         android:id="@+id/textEditSubject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Edit Subject"
+                        android:text="Edit Allot"
                         android:textAlignment="center"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_14ssp"

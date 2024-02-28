@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 public class Admin_Dashboard extends AppCompatActivity {
 
-    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty;
+    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment;
     TextView greet,logout,name,role;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
@@ -39,9 +39,9 @@ public class Admin_Dashboard extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.admin_dash);
         addStudent = findViewById(R.id.imgStudent);
@@ -50,6 +50,7 @@ public class Admin_Dashboard extends AppCompatActivity {
         greet = findViewById(R.id.txtGreet);
         updateStudent = findViewById(R.id.imgUpdateStudent);
         updateFaculty = findViewById(R.id.imgUpdateFaculty);
+        subjAllotment = findViewById(R.id.subAllot);
         logout = findViewById(R.id.logout);
         name = findViewById(R.id.txtName);
         role = findViewById(R.id.txtRole);
@@ -87,6 +88,10 @@ public class Admin_Dashboard extends AppCompatActivity {
         updateStudent.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Filter_Student.class)));
 
         updateFaculty.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Update_Faculty.class)));
+        subjAllotment.setOnClickListener(v -> {
+            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
+        });
 
         loadProfileImage();
 
