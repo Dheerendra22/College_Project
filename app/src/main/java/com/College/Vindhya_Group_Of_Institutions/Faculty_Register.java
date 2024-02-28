@@ -31,6 +31,8 @@ public class Faculty_Register extends AppCompatActivity {
     private Progress_Dialog progressDialog;
     String userId ;
 
+    ArrayList<String> subjectsList = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,6 +175,7 @@ public class Faculty_Register extends AppCompatActivity {
         user.put("Email",userEmail);
         user.put("UserId",userId);
         user.put("Collection","Faculty");
+        user.put("SubjectList",subjectsList);
 
         dataRef.set(user).addOnCompleteListener(task -> {
             progressDialog.dismiss();

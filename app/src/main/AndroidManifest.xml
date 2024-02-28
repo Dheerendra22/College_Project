@@ -16,15 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Subject_List"
+            android:exported="false" />
         <activity
             android:name=".Allotment_Adapter"
             android:exported="false" />
-
         <activity
             android:name=".Sub_Allot"
-            android:theme="@style/Theme.Search"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Search" />
         <activity
             android:name=".Student_Adapter"
             android:exported="false" />

@@ -2,6 +2,8 @@ package com.College.Vindhya_Group_Of_Institutions;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +24,21 @@ public class Allotment_Adapter extends RecyclerView.Adapter<Allotment_Adapter.My
 
     ArrayList<Data_Model> dataList ;
     private final StorageReference storageReference;
+    private final View.OnClickListener allotClickListener;
+
 
 
     public Allotment_Adapter(ArrayList<Data_Model> dataList) {
         this.dataList = dataList;
         storageReference = FirebaseStorage.getInstance().getReference();
+        allotClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (int) v.getTag(); // Get the clicked position
+                openNewActivity(dataList.get(position), v.getContext());
+            }
+        };
+
 
     }
     @NonNull
@@ -38,11 +50,15 @@ public class Allotment_Adapter extends RecyclerView.Adapter<Allotment_Adapter.My
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.fNAme.setText(dataList.get(position).getFirstName());
         holder.lName.setText(dataList.get(position).getLastName());
         holder.department.setText(dataList.get(position).getDepartment());
         loadProfileImage(holder.profile,dataList.get(position).getUserId());
+
+        // Set the OnClickListener and tag the position
+        holder.allot.setOnClickListener(allotClickListener);
+        holder.allot.setTag(position);
     }
 
 
@@ -85,5 +101,20 @@ public class Allotment_Adapter extends RecyclerView.Adapter<Allotment_Adapter.My
         dataList = new ArrayList<>();
         dataList.addAll(newList);
         notifyDataSetChanged();
+    }
+
+    private void openNewActivity(Data_Model dataModel, Context context) {
+        // Assuming you have a context available, replace "YourNewActivity.class" with the actual class of your new activity
+        Intent intent = new Intent(context, Subject_List.class);
+
+        // Pass any necessary data to the new activity using Intent extras
+        intent.putExtra("firstName", dataModel.getFirstName());
+        intent.putExtra("lastName", dataModel.getLastName());
+        intent.putExtra("department", dataModel.getDepartment());
+        intent.putExtra("email", dataModel.getEmail());
+        intent.putExtra("SubjectList",dataModel.getSubjectList());
+
+        // Start the new activity
+        context.startActivity(intent);
     }
 }

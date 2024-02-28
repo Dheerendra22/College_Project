@@ -1,13 +1,20 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
+import java.util.ArrayList;
+
 public class Data_Model {
 
 String FirstName,LastName,Department,Year,Email,Phone,FatherName,Password,UserId,EnrollmentNumber,RollNumber,Collection,Role;
-
+    ArrayList<String> SubjectList = new ArrayList<>();
     public Data_Model() {
+
     }
 
-    public Data_Model(String firstName, String lastName, String department, String year, String email, String phone, String fatherName, String password, String userId, String enrollmentNumber, String rollNumber, String collection, String role) {
+    public Data_Model(String firstName, String lastName, String department, String year,
+                      String email, String phone, String fatherName, String password,
+                      String userId, String enrollmentNumber, String rollNumber,
+                      String collection, String role, ArrayList<String> subjectsList)
+    {
         FirstName = firstName;
         LastName = lastName;
         Department = department;
@@ -21,6 +28,15 @@ String FirstName,LastName,Department,Year,Email,Phone,FatherName,Password,UserId
         RollNumber = rollNumber;
         Collection = collection;
         Role = role;
+        this.SubjectList = subjectsList;
+    }
+
+    public ArrayList<String> getSubjectList() {
+        return SubjectList;
+    }
+
+    public void setSubjectList(ArrayList<String> subjectList) {
+        SubjectList = subjectList;
     }
 
     public String getRole() {
