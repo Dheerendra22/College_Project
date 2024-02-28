@@ -1,82 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="350dp"
+    android:layout_height="450dp"
     android:orientation="vertical"
-    android:background="#A0E0E8"
+    android:background="@drawable/pop_bg_frnt"
+    android:padding="5dp"
+    android:layout_gravity="center"
     tools:context=".Filter_Student">
 
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="X"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:background="@drawable/circle_bg" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="Choose Branch and Year"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:background="@drawable/botom_background"
+        android:textColor="#040404"
+        android:textStyle="bold"
+        android:textSize="@dimen/_14sdp"></TextView>
+
     <LinearLayout
-        android:layout_width="191dp"
-        android:layout_height="224dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_24sdp"
+        android:layout_marginRight="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:background="@drawable/pop_bg"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="141dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="Depatment"
-            android:textColor="#581f5f"
-            android:textSize="@dimen/_14ssp" />
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:background="@drawable/edittext_background"
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/Department"
-            android:layout_width="wrap_content"
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_weight="1"
+                android:text="Branch"
+                android:textAlignment="center"
+                android:textColor="#581f5f"
+                android:textSize="@dimen/_14ssp" />
+
+            <Spinner
+                android:id="@+id/Department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_weight="1"
+                tools:ignore="TouchTargetSizeCheck" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_7sdp"
-            android:layout_weight="1"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:layout_margin="@dimen/_15sdp"
+            android:background="@drawable/edittext_background"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="141dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="Year"
-            android:textColor="#581f5f"
-            android:textSize="@dimen/_14ssp" />
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_weight="1"
+                android:text="Year"
+                android:textAlignment="center"
+                android:textColor="#581f5f"
+                android:textSize="@dimen/_14ssp" />
 
-        <Spinner
-            android:id="@+id/year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_7sdp"
-            android:layout_weight="1"
-            tools:ignore="TouchTargetSizeCheck" />
+            <Spinner
+                android:id="@+id/Year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_7sdp"
+                android:layout_weight="1"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+        </LinearLayout>.
 
+        <Button
+            android:id="@+id/btnFetch"
+            style="@android:style/Widget.Button"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_37sdp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_background"
+            android:text="Fetch Student"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.675" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnFetch"
-        style="@android:style/Widget.Button"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_background"
-        android:text="Fetch Student"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/_13ssp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.675" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
