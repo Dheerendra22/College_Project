@@ -21,8 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 
 public class Student_Dash extends AppCompatActivity {
-    TextView greet,logout;
-    ImageView profile;
+    TextView greet,name,department,year,role;
+    ImageView profile,logout;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
     FirebaseAuth fAuth;
@@ -37,6 +37,10 @@ public class Student_Dash extends AppCompatActivity {
 
         greet = findViewById(R.id.txtGreet);
         logout = findViewById(R.id.logout);
+        name = findViewById(R.id.txtName);
+        department = findViewById(R.id.txtDepart);
+        year = findViewById(R.id.txtYear);
+        role = findViewById(R.id.txtRole);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
 
         //set Greeting
@@ -50,6 +54,7 @@ public class Student_Dash extends AppCompatActivity {
         }
 
         checkUserExist();
+        setData();
 
         if(userId!=null)
             profileImageHandler = new Profile_Image_Handler(this, userId);
@@ -62,6 +67,14 @@ public class Student_Dash extends AppCompatActivity {
 
 
 
+    }
+
+    private void setData() {
+        String FullName = sharedPreferences.getString("FirstName","")+" "+sharedPreferences.getString("LastName","");
+        name.setText(FullName);
+        department.setText(sharedPreferences.getString("Department",""));
+        year.setText(sharedPreferences.getString("Year",""));
+        role.setText(sharedPreferences.getString("Role",""));
     }
 
     private void logout() {

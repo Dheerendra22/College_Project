@@ -69,7 +69,7 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
                 dialogPlus = DialogPlus.newDialog(holder.profile.getContext())
                         .setContentHolder(new ViewHolder(R.layout.edit_student))
-                        .setExpanded(true,1100)
+                        .setExpanded(true,1200)
                         .create();
 
                 View myView = dialogPlus.getHolderView();
@@ -82,7 +82,7 @@ public class Student_Adapter extends RecyclerView.Adapter<Student_Adapter.MyView
 
                 dialogPlus = DialogPlus.newDialog(holder.profile.getContext())
                         .setContentHolder(new ViewHolder(R.layout.edit_faculty))
-                        .setExpanded(true,900)
+                        .setExpanded(true,1200)
                         .create();
 
                 View myView = dialogPlus.getHolderView();

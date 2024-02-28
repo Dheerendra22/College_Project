@@ -24,8 +24,8 @@ import java.util.Calendar;
 
 public class Admin_Dashboard extends AppCompatActivity {
 
-    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment;
-    TextView greet,logout,name,role;
+    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout;
+    TextView greet,name,role;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
 
@@ -159,7 +159,8 @@ public class Admin_Dashboard extends AppCompatActivity {
     }
 
     private void setData() {
-        name.setText(sharedPreferences.getString("FirstName",""));
+        String FullName = sharedPreferences.getString("FirstName","")+" "+sharedPreferences.getString("LastName","");
+        name.setText(FullName);
         role.setText(sharedPreferences.getString("Role",""));
     }
 

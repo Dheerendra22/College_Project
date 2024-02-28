@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,31 +24,16 @@
 
                 <ImageView
                     android:id="@+id/logout"
+                    android:layout_width="37dp"
+                    android:layout_height="39dp"
                     android:layout_margin="@dimen/_5sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:src="@drawable/log_out"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.997"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-
-<!--                <TextView-->
-<!--                    android:id="@+id/logout"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Logout"-->
-<!--                    android:textColor="#fedd06"-->
-<!--                    android:textSize="@dimen/_15ssp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0.165"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintVertical_bias="0.143"-->
-<!--                    tools:ignore="MissingConstraints" />-->
-
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgProfile"
@@ -60,10 +45,10 @@
                     app:civ_border_width="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.895"
+                    app:layout_constraintHorizontal_bias="0.052"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.487"
+                    app:layout_constraintVertical_bias="0.371"
                     tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
 
                 <TextView
@@ -75,11 +60,11 @@
                     android:textSize="@dimen/_20ssp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imgProfile"
-                    app:layout_constraintHorizontal_bias="0.245"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.134"
+                    app:layout_constraintStart_toEndOf="@+id/imgProfile"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.408" />
+                    app:layout_constraintVertical_bias="0.421" />
 
                 <TextView
                     android:id="@+id/txtName"
@@ -89,8 +74,27 @@
                     android:textColor="#fedd06"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/txtGreet"
-                    app:layout_constraintTop_toBottomOf="@+id/txtGreet" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtGreet"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/txtRole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Role"
+                    android:textColor="#fedd06"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.091"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.897"
+                    tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -121,46 +125,59 @@
                         android:id="@+id/imageView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_18sdp"
                         android:src="@drawable/human"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                         app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+                        app:layout_constraintHorizontal_bias="0.92"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/imageView4"
+                        app:layout_constraintVertical_bias="0.47" />
 
                     <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_12sdp"
-                        android:layout_marginTop="@dimen/_12sdp"
+                        android:id="@+id/txtDepart"
+                        android:layout_width="64dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="16dp"
                         android:text="BCA"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_22ssp"
                         android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.058"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TextSizeCheck" />
 
                     <TextView
-                        android:id="@+id/textView7"
+                        android:id="@+id/txtYear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="92dp"
                         android:text="1st_Year"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_11ssp"
-                        app:layout_constraintStart_toStartOf="@+id/textView6"
-                        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.054"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtDepart"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
                         android:id="@+id/textView8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_width="89dp"
+                        android:layout_height="52dp"
                         android:text="75%"
                         android:textColor="#fedd06"
-                        android:textSize="@dimen/_36ssp"
+                        android:textSize="@dimen/_30ssp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/textView7"
-                        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.061"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.697"
+                        tools:ignore="TextSizeCheck" />
 
                     <TextView
                         android:id="@+id/textView9"
@@ -192,7 +209,8 @@
                     android:inputType="text"
                     android:padding="@dimen/_7sdp"
                     android:textColor="#8d8d8d"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold|italic"
+                    android:autofillHints="" />
 
                 <TextView
                     android:id="@+id/textView10"

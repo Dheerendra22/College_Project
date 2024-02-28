@@ -23,36 +23,33 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <TextView
+            <ImageView
                 android:id="@+id/logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Logout"
-                android:textColor="#fedd06"
-                android:textSize="@dimen/_15ssp"
-                android:textStyle="bold"
+                android:layout_width="39dp"
+                android:layout_height="36dp"
+                android:layout_margin="@dimen/_5sdp"
+                android:src="@drawable/log_out"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.165"
+                app:layout_constraintHorizontal_bias="0.981"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.143"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintVertical_bias="0.106" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgProfile"
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_80sdp"
-                android:src="@drawable/baseline_user"
                 android:contentDescription="TODO"
+                android:src="@drawable/baseline_user"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.895"
+                app:layout_constraintHorizontal_bias="0.052"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.293"
+                app:layout_constraintVertical_bias="0.333"
                 tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
 
             <TextView
@@ -65,13 +62,13 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.235"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.166"
+                app:layout_constraintStart_toEndOf="@+id/imgProfile"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.409" />
+                app:layout_constraintVertical_bias="0.326" />
 
             <TextView
-                android:id="@+id/textprofilename"
+                android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="K.P.Tripathi"
@@ -80,14 +77,14 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.221"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.142"
+                app:layout_constraintStart_toEndOf="@+id/imgProfile"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.664"
+                app:layout_constraintVertical_bias="0.583"
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/txtRole"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Role"
@@ -96,10 +93,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.816"
+                app:layout_constraintHorizontal_bias="0.14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.895"
+                app:layout_constraintVertical_bias="0.897"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

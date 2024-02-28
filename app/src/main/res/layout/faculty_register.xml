@@ -203,7 +203,6 @@
                     android:ems="10"
                     android:hint="Enter Your Email"
                     android:inputType="textEmailAddress"
-                    android:drawableEnd="@drawable/done_icon"
                     android:padding="@dimen/_7sdp"
                     android:textAlignment="center"
                     android:textColor="#717171"
