@@ -100,6 +100,7 @@ public class Subject_List extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(Subject_List.this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
+                finish();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
