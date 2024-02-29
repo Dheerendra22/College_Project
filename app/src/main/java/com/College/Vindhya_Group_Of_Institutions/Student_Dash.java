@@ -22,7 +22,7 @@ import java.util.Calendar;
 
 public class Student_Dash extends AppCompatActivity {
     TextView greet,name,department,year,role;
-    ImageView profile,logout;
+    ImageView profile,logout,attendance;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
     FirebaseAuth fAuth;
@@ -41,6 +41,7 @@ public class Student_Dash extends AppCompatActivity {
         department = findViewById(R.id.txtDepart);
         year = findViewById(R.id.txtYear);
         role = findViewById(R.id.txtRole);
+        attendance = findViewById(R.id.imgAttendance);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
 
         //set Greeting
@@ -64,6 +65,8 @@ public class Student_Dash extends AppCompatActivity {
         profile.setOnClickListener(v -> profileImageHandler.openGallery());
 
         logout.setOnClickListener(v -> logout());
+
+        attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Attendance.class)));
 
 
 
