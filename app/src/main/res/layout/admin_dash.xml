@@ -180,16 +180,16 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:id="@+id/imageView6"
+                            android:id="@+id/imgAttendance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_24sdp"
-                            android:src="@drawable/attendend"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="TODO"
+                            android:src="@drawable/attendend" />
 
 
                         <TextView
-                            android:id="@+id/textAttendence"
+                            android:id="@+id/textAttendance"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Attendence"
@@ -278,8 +278,6 @@
                             android:textStyle="bold" />
 
 
-
-
                         <ImageView
                             android:id="@+id/imageView8"
                             android:layout_width="match_parent"
@@ -296,9 +294,6 @@
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"
                             android:textStyle="bold" />
-
-
-
 
 
                         <ImageView

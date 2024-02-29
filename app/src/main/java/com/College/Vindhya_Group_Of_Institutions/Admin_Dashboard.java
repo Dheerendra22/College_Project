@@ -24,7 +24,7 @@ import java.util.Calendar;
 
 public class Admin_Dashboard extends AppCompatActivity {
 
-    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout;
+    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout,attendance;
     TextView greet,name,role;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
@@ -54,6 +54,7 @@ public class Admin_Dashboard extends AppCompatActivity {
         logout = findViewById(R.id.logout);
         name = findViewById(R.id.txtName);
         role = findViewById(R.id.txtRole);
+        attendance = findViewById(R.id.imgAttendance);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
 
         //set Greeting
@@ -90,6 +91,8 @@ public class Admin_Dashboard extends AppCompatActivity {
         updateFaculty.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Update_Faculty.class)));
 
         subjAllotment.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Sub_Allot.class)));
+
+        attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Attendance.class)));
 
         loadProfileImage();
 
