@@ -55,7 +55,7 @@ public class Student_Dash extends AppCompatActivity {
         }
 
         checkUserExist();
-        setData();
+
 
         if(userId!=null)
             profileImageHandler = new Profile_Image_Handler(this, userId);
@@ -67,7 +67,7 @@ public class Student_Dash extends AppCompatActivity {
         logout.setOnClickListener(v -> logout());
 
         attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Attendance.class)));
-
+        setData();
 
 
     }
