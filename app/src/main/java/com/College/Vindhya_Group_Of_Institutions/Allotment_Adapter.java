@@ -31,12 +31,9 @@ public class Allotment_Adapter extends RecyclerView.Adapter<Allotment_Adapter.My
     public Allotment_Adapter(ArrayList<Data_Model> dataList) {
         this.dataList = dataList;
         storageReference = FirebaseStorage.getInstance().getReference();
-        allotClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = (int) v.getTag(); // Get the clicked position
-                openNewActivity(dataList.get(position), v.getContext());
-            }
+        allotClickListener = v -> {
+            int position = (int) v.getTag(); // Get the clicked position
+            openNewActivity(dataList.get(position), v.getContext());
         };
 
 

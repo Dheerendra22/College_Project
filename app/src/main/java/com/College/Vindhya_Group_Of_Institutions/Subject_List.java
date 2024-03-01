@@ -1,19 +1,16 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
 // Subject_List.java
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -57,19 +54,9 @@ public class Subject_List extends AppCompatActivity {
             }
         }
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addNewEditText("");
-            }
-        });
+        addButton.setOnClickListener(v -> addNewEditText(""));
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveEditTextContents();
-            }
-        });
+        saveButton.setOnClickListener(v -> saveEditTextContents());
     }
 
     private void saveEditTextContents() {
@@ -96,19 +83,11 @@ public class Subject_List extends AppCompatActivity {
         DocumentReference userRef = db.collection("Faculty").document(email);
         Map<String,Object> updatedData = new HashMap<>();
         updatedData.put("SubjectList", subjectList);
-        userRef.update(updatedData).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(Subject_List.this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
-                finish();
+        userRef.update(updatedData).addOnSuccessListener(unused -> {
+            Toast.makeText(Subject_List.this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
+            finish();
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Subject_List.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        }).addOnFailureListener(e -> Toast.makeText(Subject_List.this, e.getMessage(), Toast.LENGTH_SHORT).show());
 
     }
 
@@ -120,12 +99,7 @@ public class Subject_List extends AppCompatActivity {
         // Create a delete button for each EditText
         Button deleteButton = new Button(this);
         deleteButton.setText("Delete");
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeEditText(newEditText, deleteButton);
-            }
-        });
+        deleteButton.setOnClickListener(v -> removeEditText(newEditText, deleteButton));
 
         // Add both the EditText and the delete button to the container
         editTextContainer.addView(newEditText);

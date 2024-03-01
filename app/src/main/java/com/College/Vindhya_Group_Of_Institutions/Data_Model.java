@@ -23,7 +23,7 @@ String FirstName,LastName,Department,Year,Email,Phone,FatherName,Password,UserId
         Phone = phone;
         FatherName = fatherName;
         Password = password;
-        UserId = userId;
+        this.UserId = userId;
         EnrollmentNumber = enrollmentNumber;
         RollNumber = rollNumber;
         Collection = collection;

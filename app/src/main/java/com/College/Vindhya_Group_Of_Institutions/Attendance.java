@@ -12,20 +12,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Attendance extends AppCompatActivity {
     TextView name,depart,year;
@@ -36,8 +40,9 @@ public class Attendance extends AppCompatActivity {
 
     ArrayList<String> lectureList,teacherList,subjectList;
     SharedPreferences sharedPreferences;
-
+    private Progress_Dialog progressDialog;
     FirebaseFirestore fireStore;
+    String FullName;
 
 
     @Override
@@ -54,8 +59,15 @@ public class Attendance extends AppCompatActivity {
         depart = findViewById(R.id.department);
         year = findViewById(R.id.year);
         uniqueCode = findViewById(R.id.uniqueCode);
+        present = findViewById(R.id.btnPresent);
+        rb = findViewById(R.id.ratingBar);
 
-        String FullName = sharedPreferences.getString("FirstName","")+" "+sharedPreferences.getString("LastName","");
+        progressDialog = new Progress_Dialog(this);
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCancelable(false);
+
+
+        FullName = sharedPreferences.getString("FirstName","")+" "+sharedPreferences.getString("LastName","");
         name.setText(FullName);
         depart.setText(sharedPreferences.getString("Department",""));
         year.setText(sharedPreferences.getString("Year",""));
@@ -75,6 +87,66 @@ public class Attendance extends AppCompatActivity {
                 // Do nothing when nothing is selected
             }
         });
+
+        present.setOnClickListener(v -> sendAttendance());
+
+
+    }
+
+    private void sendAttendance() {
+
+        progressDialog.show();
+
+        String depart = sharedPreferences.getString("Department","");
+        String year = sharedPreferences.getString("Year","");
+        String selectedLecture = lecture.getSelectedItem().toString();
+        String selectedTeacher = teacher.getSelectedItem().toString();
+        String selectedSubject = subject.getSelectedItem().toString();
+        String uniqueCodeValue = uniqueCode.getText().toString();
+
+        float rating = rb.getRating(); // Retrieve rating from RatingBar
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://script.google.com/macros/s/AKfycbzFxPl9ioWCZVW6PiPdX6nbZkntGcGyV5PCpsO_YY3UEg9M-aLNG5QOBJ8DgDsIQR1dVQ/exec",
+                response -> {
+
+                    progressDialog.dismiss();
+                    Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                    finish();
+
+                },
+                error -> {
+
+                }
+        ) {
+            @Override
+            protected Map<String,String> getParams() {
+                Map<String, String> value = new HashMap<>();
+
+                //here we pass params
+                value.put("action","Student");
+                value.put("sheetName",depart);
+                value.put("Name",FullName);
+                value.put("Department",depart);
+                value.put("Year",year);
+                value.put("Lecture",selectedLecture);
+                value.put("Teacher",selectedTeacher);
+                value.put("Subject",selectedSubject);
+                value.put("Code",uniqueCodeValue);
+                value.put("Rating", String.valueOf(rating));
+                return value;
+            }
+        };
+
+        int socketTimeOut = 50000;// u can change this .. here it is 50 seconds
+
+        RetryPolicy retryPolicy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(retryPolicy);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        queue.add(stringRequest);
+
 
 
     }
@@ -136,43 +208,37 @@ public class Attendance extends AppCompatActivity {
             // Set a whereEqualTo condition for the faculty name
             Query query = facultyCollection.whereEqualTo("FirstName", fName).limit(1);
 
-            query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        // Get the reference to the first matching document
-                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+            query.get().addOnSuccessListener(queryDocumentSnapshots -> {
+                if (!queryDocumentSnapshots.isEmpty()) {
+                    // Get the reference to the first matching document
+                    DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
 
-                        List<?> subjects = (List<?>) documentSnapshot.get("SubjectList");
+                    List<?> subjects = (List<?>) documentSnapshot.get("SubjectList");
 
-                        if (subjects != null && !subjects.isEmpty()) {
-                            for (Object subjectObject : subjects) {
-                                // Check if each item in the list is a String
-                                if (subjectObject instanceof String) {
-                                    String subject = (String) subjectObject;
-                                    subjectList.add(subject);
-                                }
+                    if (subjects != null && !subjects.isEmpty()) {
+                        for (Object subjectObject : subjects) {
+                            // Check if each item in the list is a String
+                            if (subjectObject instanceof String) {
+                                String subject = (String) subjectObject;
+                                subjectList.add(subject);
                             }
-                            // Now, you can update your UI or perform any other actions
-                            ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(Attendance.this, android.R.layout.simple_spinner_item, subjectList);
-                            subjectAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                            subject.setAdapter(subjectAdapter);
-
-                        }else {
-                            // Handle the case where the "Subjects" field is null or not found
-                            Toast.makeText(Attendance.this, "Subjects list is null or not found", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        // Handle the case where no documents match the query
-                        Toast.makeText(Attendance.this, "No matching document found", Toast.LENGTH_SHORT).show();
+                        // Now, you can update your UI or perform any other actions
+                        ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(Attendance.this, android.R.layout.simple_spinner_item, subjectList);
+                        subjectAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+                        subject.setAdapter(subjectAdapter);
+
+                    }else {
+                        // Handle the case where the "Subjects" field is null or not found
+                        Toast.makeText(Attendance.this, "Subjects list is null or not found", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    // Handle the case where no documents match the query
+                    Toast.makeText(Attendance.this, "No matching document found", Toast.LENGTH_SHORT).show();
                 }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // Handle failures
-                    Toast.makeText(Attendance.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                }
+            }).addOnFailureListener(e -> {
+                // Handle failures
+                Toast.makeText(Attendance.this, e.getMessage(), Toast.LENGTH_LONG).show();
             });
         }
     }

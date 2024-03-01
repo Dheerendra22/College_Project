@@ -17,9 +17,7 @@
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
 
-        <activity
-            android:name=".Subject_Data"
-            android:exported="false" />
+
         <activity
             android:name=".Attendance"
             android:exported="false" />
