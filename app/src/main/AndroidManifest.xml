@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
+
+
+        <activity
+            android:name=".LectureTimeValidator"
+            android:exported="false" />
+
         <activity
             android:name=".Teacher_Attendance"
             android:exported="false" />

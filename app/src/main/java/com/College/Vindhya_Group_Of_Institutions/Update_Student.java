@@ -5,10 +5,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.SearchView;
-
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,9 +39,16 @@ public class Update_Student extends AppCompatActivity {
         adapter = new Student_Adapter(dataList);
         recyclerView.setAdapter(adapter);
 
+        fetchDataFromFireStore();
+
+
+
+    }
+
+    private void fetchDataFromFireStore() {
         // Retrieve values from the intent
-         departmentValue = getIntent().getStringExtra("Department");
-         yearValue = getIntent().getStringExtra("Year");
+        departmentValue = getIntent().getStringExtra("Department");
+        yearValue = getIntent().getStringExtra("Year");
 
         db.collection("Students")
                 .whereEqualTo("Department",departmentValue )
@@ -66,8 +71,7 @@ public class Update_Student extends AppCompatActivity {
 
                     }
 
-                });
-
+                }).addOnFailureListener(e -> Toast.makeText(Update_Student.this, "Error fetching data: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     @Override
