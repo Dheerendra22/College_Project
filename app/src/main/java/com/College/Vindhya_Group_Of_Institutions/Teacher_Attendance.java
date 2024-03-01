@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,24 +31,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Attendance extends AppCompatActivity {
-    TextView name,depart,year;
-    Spinner lecture,teacher,subject;
-    RatingBar rb;
-    EditText uniqueCode;
+public class Teacher_Attendance extends AppCompatActivity {
+    Spinner lecture,teacher,subject ,depart,year;
+    RatingBar rating;
+    EditText uniqueCode,name;
     Button present;
-
     ArrayList<String> lectureList,teacherList,subjectList;
     SharedPreferences sharedPreferences;
     private Progress_Dialog progressDialog;
     FirebaseFirestore fireStore;
-    String FullName;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_attendance);
+        setContentView(R.layout.activity_teacher_attendance);
 
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
         lecture = findViewById(R.id.lecture);
@@ -61,17 +55,11 @@ public class Attendance extends AppCompatActivity {
         year = findViewById(R.id.year);
         uniqueCode = findViewById(R.id.uniqueCode);
         present = findViewById(R.id.btnPresent);
-        rb = findViewById(R.id.ratingBar);
+        rating = findViewById(R.id.ratingBar);
 
         progressDialog = new Progress_Dialog(this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
-
-
-        FullName = sharedPreferences.getString("FirstName","")+" "+sharedPreferences.getString("LastName","");
-        name.setText(FullName);
-        depart.setText(sharedPreferences.getString("Department",""));
-        year.setText(sharedPreferences.getString("Year",""));
 
         setUpLecture();
         setUpTeacher();
@@ -89,25 +77,48 @@ public class Attendance extends AppCompatActivity {
             }
         });
 
+        setSpinnerData();
+
         present.setOnClickListener(v -> sendAttendance());
 
 
+
+    }
+
+    private void setSpinnerData() {
+        ArrayList<String> departments = new ArrayList<>();
+        departments.add("BCA");
+        departments.add("BCOM");
+        departments.add("BSC");
+
+        ArrayAdapter<String> departmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, departments);
+        departmentAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        depart.setAdapter(departmentAdapter);
+
+        ArrayList<String> years = new ArrayList<>();
+        years.add("1st_Year");
+        years.add("2nd_Year");
+        years.add("3rd_Year");
+
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
+        yearAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        year.setAdapter(yearAdapter);
     }
 
     private void sendAttendance() {
 
         progressDialog.show();
-
-        String depart = sharedPreferences.getString("Department","");
-        String year = sharedPreferences.getString("Year","");
+        String FullName = name.getText().toString();
+        String department = depart.getSelectedItem().toString();
+        String Year =  year.getSelectedItem().toString();
         String selectedLecture = lecture.getSelectedItem().toString();
         String selectedTeacher = teacher.getSelectedItem().toString();
         String selectedSubject = subject.getSelectedItem().toString();
         String uniqueCodeValue = uniqueCode.getText().toString();
 
-        String rating = String.valueOf(rb.getRating()); // Retrieve rating from RatingBar
+        String ratingValue = String.valueOf(rating.getRating()); // Retrieve rating from RatingBar
 
-        if (TextUtils.isEmpty(uniqueCodeValue) || rb.getRating() == 0.0) {
+        if (TextUtils.isEmpty(FullName) || TextUtils.isEmpty(uniqueCodeValue) || rating.getRating() == 0.0) {
 
             progressDialog.dismiss();
             Toast.makeText(getApplicationContext(), "Please fill in all the required fields", Toast.LENGTH_LONG).show();
@@ -135,15 +146,15 @@ public class Attendance extends AppCompatActivity {
 
                 //here we pass params
                 value.put("action","Student");
-                value.put("sheetName",depart);
+                value.put("sheetName",department);
                 value.put("Name",FullName);
-                value.put("Department",depart);
-                value.put("Year",year);
+                value.put("Department",department);
+                value.put("Year",Year);
                 value.put("Lecture",selectedLecture);
                 value.put("Teacher",selectedTeacher);
                 value.put("Subject",selectedSubject);
                 value.put("Code",uniqueCodeValue);
-                value.put("Rating", rating);
+                value.put("Rating", ratingValue);
                 return value;
             }
         };
@@ -234,24 +245,22 @@ public class Attendance extends AppCompatActivity {
                             }
                         }
                         // Now, you can update your UI or perform any other actions
-                        ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(Attendance.this, android.R.layout.simple_spinner_item, subjectList);
+                        ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(Teacher_Attendance.this, android.R.layout.simple_spinner_item, subjectList);
                         subjectAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
                         subject.setAdapter(subjectAdapter);
 
                     }else {
                         // Handle the case where the "Subjects" field is null or not found
-                        Toast.makeText(Attendance.this, "Subjects list is null or not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Teacher_Attendance.this, "Subjects list is null or not found", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     // Handle the case where no documents match the query
-                    Toast.makeText(Attendance.this, "No matching document found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Teacher_Attendance.this, "No matching document found", Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(e -> {
                 // Handle failures
-                Toast.makeText(Attendance.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Teacher_Attendance.this, e.getMessage(), Toast.LENGTH_LONG).show();
             });
         }
     }
-
-
 }

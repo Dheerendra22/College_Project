@@ -68,7 +68,7 @@ public class Admin_Dashboard extends AppCompatActivity {
         }
 
         checkUserExist();
-        setData();
+
 
 
         if(userId!=null)
@@ -92,7 +92,7 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         subjAllotment.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Sub_Allot.class)));
 
-        attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Attendance.class)));
+        attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Teacher_Attendance.class)));
 
         loadProfileImage();
 
@@ -117,7 +117,7 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         if (hourOfDay < 12) {
             return "Good Morning";
-        } else if (hourOfDay < 13) {
+        } else if (hourOfDay < 15) {
             return "Good Afternoon";
         } else {
             return "Good Evening";
@@ -147,6 +147,8 @@ public class Admin_Dashboard extends AppCompatActivity {
                 saveToSharedPreferences("LastName", document.getString("LastName"));
                 saveToSharedPreferences("Phone", document.getString("Phone"));
                 saveToSharedPreferences("Department", document.getString("Department"));
+
+                setData();
 
 
             }else {

@@ -67,7 +67,7 @@ public class Student_Dash extends AppCompatActivity {
         logout.setOnClickListener(v -> logout());
 
         attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Attendance.class)));
-        setData();
+
 
 
     }
@@ -97,7 +97,7 @@ public class Student_Dash extends AppCompatActivity {
 
         if (hourOfDay < 12) {
             return "Good Morning";
-        } else if (hourOfDay < 18) {
+        } else if (hourOfDay < 15) {
             return "Good Afternoon";
         } else {
             return "Good Evening";
@@ -120,6 +120,8 @@ public class Student_Dash extends AppCompatActivity {
                 saveToSharedPreferences("Phone", document.getString("Phone"));
                 saveToSharedPreferences("Department", document.getString("Department"));
                 saveToSharedPreferences("Year", document.getString("Year"));
+
+                setData();
 
             }else {
 
