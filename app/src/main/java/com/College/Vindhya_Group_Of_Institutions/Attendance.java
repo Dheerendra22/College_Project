@@ -114,7 +114,11 @@ public class Attendance extends AppCompatActivity {
             return; // Stop execution if any data is null or empty
         }
 
-
+        if (!LectureTimeValidator.isLectureTimeValid(selectedLecture)) {
+            progressDialog.dismiss();
+            Toast.makeText(getApplicationContext(), "Attendance can only be submitted during the lecture period", Toast.LENGTH_LONG).show();
+            return;
+        }
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://script.google.com/macros/s/AKfycbzFxPl9ioWCZVW6PiPdX6nbZkntGcGyV5PCpsO_YY3UEg9M-aLNG5QOBJ8DgDsIQR1dVQ/exec",
