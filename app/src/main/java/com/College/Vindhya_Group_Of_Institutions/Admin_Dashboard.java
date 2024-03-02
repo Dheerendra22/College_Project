@@ -3,6 +3,7 @@ package com.College.Vindhya_Group_Of_Institutions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ import java.util.Calendar;
 
 public class Admin_Dashboard extends AppCompatActivity {
 
-    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout,attendance;
+    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout,attendance,timeTable;
     TextView greet,name,role;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
@@ -55,6 +56,7 @@ public class Admin_Dashboard extends AppCompatActivity {
         name = findViewById(R.id.txtName);
         role = findViewById(R.id.txtRole);
         attendance = findViewById(R.id.imgAttendance);
+        timeTable = findViewById(R.id.timeTable);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
 
         //set Greeting
@@ -93,6 +95,12 @@ public class Admin_Dashboard extends AppCompatActivity {
         subjAllotment.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Sub_Allot.class)));
 
         attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Teacher_Attendance.class)));
+        timeTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Admin_Dashboard.this, TimeTable.class));
+            }
+        });
 
         loadProfileImage();
 
