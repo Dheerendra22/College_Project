@@ -33,15 +33,15 @@ public class Time_Table_Handler {
         progressDialog.setCancelable(false);
     }
 
-//    public void loadProfileImage(ImageView profileImageView) {
-//        StorageReference storeRef = storageReference.child("Profile_Images/" );
-//
-//        storeRef.getDownloadUrl().addOnSuccessListener(uri -> {
-//            profileImageView.setBackgroundColor(Color.TRANSPARENT);
-//            Picasso.get().load(uri).into(profileImageView);
-//        }).addOnFailureListener(e ->
-//                Toast.makeText(profileImageView.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
-//    }
+    public void loadProfileImage(ImageView profileImageView,String depart,String year) {
+        StorageReference storeRef = storageReference.child(depart+"/"+year);
+
+        storeRef.getDownloadUrl().addOnSuccessListener(uri -> {
+            profileImageView.setBackgroundColor(Color.TRANSPARENT);
+            Picasso.get().load(uri).into(profileImageView);
+        }).addOnFailureListener(e ->
+                Toast.makeText(profileImageView.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
 
     private void setupGalleryLauncher(AppCompatActivity activity) {
         galleryLauncher = activity.registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {

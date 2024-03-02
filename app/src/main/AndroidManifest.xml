@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
         <activity
+            android:name=".Student_TimeTable"
+            android:exported="false" />
+        <activity
             android:name=".TimeTable"
             android:exported="false" />
         <activity

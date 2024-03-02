@@ -16,7 +16,7 @@
         android:layout_marginTop="48dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624">
+        app:layout_constraintVertical_bias="0.66">
 
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_7sdp"
             android:layout_weight="1"
-            android:text="Branch"
+            android:text=" Select Branch"
             android:textAlignment="center"
             android:textColor="#581f5f"
             android:textSize="@dimen/_14ssp" />
@@ -68,9 +68,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.765">
+        app:layout_constraintVertical_bias="0.797">
 
         <TextView
             android:id="@+id/textView16"
@@ -79,7 +80,7 @@
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_7sdp"
             android:layout_weight="1"
-            android:text="Year"
+            android:text="Select Year"
             android:textAlignment="center"
             android:textColor="#581f5f"
             android:textSize="@dimen/_14ssp" />
@@ -103,8 +104,20 @@
         android:text="Upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.931" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="171dp"
+        android:layout_height="21dp"
+        android:text="Click on image to select!"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.554" />
 </androidx.constraintlayout.widget.ConstraintLayout>
