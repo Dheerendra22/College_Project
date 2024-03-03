@@ -25,7 +25,7 @@ import java.util.Calendar;
 
 public class Admin_Dashboard extends AppCompatActivity {
 
-    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout,attendance,timeTable;
+    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout,attendance,timeTable,percent;
     TextView greet,name,role;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
@@ -57,6 +57,7 @@ public class Admin_Dashboard extends AppCompatActivity {
         role = findViewById(R.id.txtRole);
         attendance = findViewById(R.id.imgAttendance);
         timeTable = findViewById(R.id.timeTable);
+        percent = findViewById(R.id.percent);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
 
         //set Greeting
@@ -95,10 +96,12 @@ public class Admin_Dashboard extends AppCompatActivity {
         subjAllotment.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Sub_Allot.class)));
 
         attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Teacher_Attendance.class)));
-        timeTable.setOnClickListener(new View.OnClickListener() {
+
+        timeTable.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, TimeTable.class)));
+        percent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Admin_Dashboard.this, TimeTable.class));
+                startActivity(new Intent(getApplicationContext(), ExcelFile.class));
             }
         });
 

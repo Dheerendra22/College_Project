@@ -261,7 +261,7 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:id="@+id/imageViewsubjectupdt"
+                            android:id="@+id/percent"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_24sdp"
@@ -271,7 +271,7 @@
                             android:id="@+id/textEditSubject"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Edit Allot"
+                            android:text="Attendance Percent"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"

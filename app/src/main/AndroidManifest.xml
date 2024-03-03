@@ -16,6 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
+
+        <activity
+            android:name=".PercentageModel"
+            android:exported="false" />
+
+        <activity
+            android:name=".ExcelFile"
+            android:exported="false" />
         <activity
             android:name=".Student_TimeTable"
             android:exported="false" />
