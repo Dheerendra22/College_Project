@@ -199,17 +199,17 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:id="@+id/imageView7"
+                            android:id="@+id/imgCode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_24sdp"
                             android:src="@drawable/notice" />
 
                         <TextView
-                            android:id="@+id/textNotice"
+                            android:id="@+id/txtCode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Notice"
+                            android:text="Put Code"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"
@@ -297,18 +297,17 @@
 
 
                         <ImageView
-                            android:id="@+id/imageView9"
+                            android:id="@+id/promote"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_24sdp"
                             android:src="@drawable/syllabus" />
 
-
                         <TextView
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Syllabus"
+                            android:text="Promote"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"

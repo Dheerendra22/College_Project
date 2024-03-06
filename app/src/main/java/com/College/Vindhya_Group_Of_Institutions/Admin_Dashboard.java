@@ -3,7 +3,6 @@ package com.College.Vindhya_Group_Of_Institutions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -25,7 +24,7 @@ import java.util.Calendar;
 
 public class Admin_Dashboard extends AppCompatActivity {
 
-    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout,attendance,timeTable,percent;
+    ImageView addStudent,addFaculty,profile,updateStudent,updateFaculty, subjAllotment,logout,attendance,timeTable,percent,code,promotion;
     TextView greet,name,role;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
@@ -45,20 +44,8 @@ public class Admin_Dashboard extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.admin_dash);
-        addStudent = findViewById(R.id.imgStudent);
-        addFaculty = findViewById(R.id.imgFaculty);
-        profile = findViewById(R.id.imgProfile);
-        greet = findViewById(R.id.txtGreet);
-        updateStudent = findViewById(R.id.imgUpdateStudent);
-        updateFaculty = findViewById(R.id.imgUpdateFaculty);
-        subjAllotment = findViewById(R.id.subAllot);
-        logout = findViewById(R.id.logout);
-        name = findViewById(R.id.txtName);
-        role = findViewById(R.id.txtRole);
-        attendance = findViewById(R.id.imgAttendance);
-        timeTable = findViewById(R.id.timeTable);
-        percent = findViewById(R.id.percent);
-        sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
+
+        initializeElement();
 
         //set Greeting
         greet.setText(getGreeting());
@@ -72,16 +59,40 @@ public class Admin_Dashboard extends AppCompatActivity {
 
         checkUserExist();
 
-
-
         if(userId!=null)
             profileImageHandler = new Profile_Image_Handler(this, userId);
 
 
+        setOnClick();
 
+        loadProfileImage();
+
+
+    }
+
+    private void initializeElement() {
+
+        addStudent = findViewById(R.id.imgStudent);
+        addFaculty = findViewById(R.id.imgFaculty);
+        profile = findViewById(R.id.imgProfile);
+        greet = findViewById(R.id.txtGreet);
+        updateStudent = findViewById(R.id.imgUpdateStudent);
+        updateFaculty = findViewById(R.id.imgUpdateFaculty);
+        subjAllotment = findViewById(R.id.subAllot);
+        logout = findViewById(R.id.logout);
+        name = findViewById(R.id.txtName);
+        role = findViewById(R.id.txtRole);
+        attendance = findViewById(R.id.imgAttendance);
+        timeTable = findViewById(R.id.timeTable);
+        percent = findViewById(R.id.percent);
+        code = findViewById(R.id.imgCode);
+        promotion = findViewById(R.id.promote);
+        sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
+    }
+
+    private void setOnClick() {
 
         logout.setOnClickListener(v -> logout());
-
 
         profile.setOnClickListener(v -> profileImageHandler.openGallery());
 
@@ -98,16 +109,12 @@ public class Admin_Dashboard extends AppCompatActivity {
         attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),Teacher_Attendance.class)));
 
         timeTable.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, TimeTable.class)));
-        percent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ExcelFile.class));
-            }
-        });
 
-        loadProfileImage();
+        code.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, PutCode.class)));
 
+        percent.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ExcelFile.class)));
 
+        promotion.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Promotion.class)));
     }
 
     private void logout() {

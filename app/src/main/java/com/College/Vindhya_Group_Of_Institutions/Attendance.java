@@ -38,12 +38,11 @@ public class Attendance extends AppCompatActivity {
     RatingBar rb;
     EditText uniqueCode;
     Button present;
-
     ArrayList<String> lectureList,teacherList,subjectList;
     SharedPreferences sharedPreferences;
     private Progress_Dialog progressDialog;
     FirebaseFirestore fireStore;
-    String FullName;
+    String FullName,code;
 
 
     @Override
@@ -103,7 +102,8 @@ public class Attendance extends AppCompatActivity {
         String selectedLecture = lecture.getSelectedItem().toString();
         String selectedTeacher = teacher.getSelectedItem().toString();
         String selectedSubject = subject.getSelectedItem().toString();
-        String uniqueCodeValue = uniqueCode.getText().toString();
+        String uniqueCodeValue = uniqueCode.getText().toString().trim();
+        String roll = sharedPreferences.getString("RollNumber","");
 
         String rating = String.valueOf(rb.getRating()); // Retrieve rating from RatingBar
 
@@ -115,13 +115,21 @@ public class Attendance extends AppCompatActivity {
         }
 
         if (!LectureTimeValidator.isLectureTimeValid(selectedLecture)) {
+            
             progressDialog.dismiss();
             Toast.makeText(getApplicationContext(), "Attendance can only be submitted during the lecture period", Toast.LENGTH_LONG).show();
             return;
         }
 
+        if(!uniqueCodeValue.equals(code))
+        {
+            progressDialog.dismiss();
+            Toast.makeText(this, "Code Not Match", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://script.google.com/macros/s/AKfycbyivh6UoHQM5aD9dwgGacKgjVYZLaykJcOCsh9QIFTw1I_Dhz4MslKN3h_LBxLoV__sNg/exec",
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://script.google.com/macros/s/AKfycbzcj5UYQyDgDD3o2pVHCHbOeF4o01k_BpMZ8QzPviW6eGSHzR6mLZUW2_cOo8xpR_iWVg/exec",
                 response -> {
 
                     progressDialog.dismiss();
@@ -148,6 +156,7 @@ public class Attendance extends AppCompatActivity {
                 value.put("Subject",selectedSubject);
                 value.put("Code",uniqueCodeValue);
                 value.put("Rating", rating);
+                value.put("RollNumber",roll);
                 return value;
             }
         };
@@ -192,7 +201,6 @@ public class Attendance extends AppCompatActivity {
             for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                 // Assuming the faculty names are stored in a field called "FirstName"
                 String firstName = documentSnapshot.getString("FirstName");
-//                String lastName = documentSnapshot.getString("LastName");
 
                 if (firstName != null) {
                     teacherList.add(firstName);
@@ -226,8 +234,9 @@ public class Attendance extends AppCompatActivity {
                 if (!queryDocumentSnapshots.isEmpty()) {
                     // Get the reference to the first matching document
                     DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-
+                    code = (String)documentSnapshot.get("Code");
                     List<?> subjects = (List<?>) documentSnapshot.get("SubjectList");
+
 
                     if (subjects != null && !subjects.isEmpty()) {
                         for (Object subjectObject : subjects) {

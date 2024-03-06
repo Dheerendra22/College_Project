@@ -16,11 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
-
         <activity
-            android:name=".PercentageModel"
+            android:name=".Promotion"
             android:exported="false" />
-
+        <activity
+            android:name=".PutCode"
+            android:exported="false" />
+        <activity
+            android:name=".FirestoreHelper"
+            android:exported="false" />
         <activity
             android:name=".ExcelFile"
             android:exported="false" />

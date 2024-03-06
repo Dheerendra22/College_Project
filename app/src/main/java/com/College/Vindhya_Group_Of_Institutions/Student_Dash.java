@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Calendar;
 
 public class Student_Dash extends AppCompatActivity {
-    TextView greet,name,department,year,role;
+    TextView greet,name,department,year,role, percent;
     ImageView profile,logout,attendance,timeTable;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
@@ -44,6 +44,7 @@ public class Student_Dash extends AppCompatActivity {
         role = findViewById(R.id.txtRole);
         attendance = findViewById(R.id.imgAttendance);
         timeTable = findViewById(R.id.imgTimeTable);
+        percent = findViewById(R.id.txtPercent);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
 
         //set Greeting
@@ -72,6 +73,32 @@ public class Student_Dash extends AppCompatActivity {
 
         timeTable.setOnClickListener(v -> startActivity(new Intent(Student_Dash.this,Student_TimeTable.class)));
 
+        fetchPercentage();
+
+
+
+    }
+
+    private void fetchPercentage() {
+
+        String depart = sharedPreferences.getString("Department","");
+        String year = sharedPreferences.getString("Year","");
+        DocumentReference userRef = fireStore.collection("Attendance").document(depart+"_"+year);
+        userRef.get().addOnCompleteListener(task -> {
+            DocumentSnapshot document = task.getResult();
+            if (document != null && document.exists()) {
+                String roll = sharedPreferences.getString("RollNumber","");
+                String percentage = document.getString(roll);
+                if (percentage!=null){
+                    percent.setText(percentage);
+                }
+            }else {
+                Toast.makeText(Student_Dash.this, "Percentage Not Uploaded.", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+        }).addOnFailureListener(e -> Toast.makeText(Student_Dash.this, "Percentage Fetching Error! "+e.getMessage(), Toast.LENGTH_SHORT).show());
 
 
     }

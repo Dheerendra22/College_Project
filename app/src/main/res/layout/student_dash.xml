@@ -148,6 +148,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TextSizeCheck" />
 
+
                     <TextView
                         android:id="@+id/txtYear"
                         android:layout_width="wrap_content"
@@ -158,38 +159,54 @@
                         android:textSize="@dimen/_11ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.054"
+                        app:layout_constraintHorizontal_bias="0.051"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtDepart"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="89dp"
-                        android:layout_height="52dp"
-                        android:text="75%"
-                        android:textColor="#fedd06"
-                        android:textSize="@dimen/_30ssp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.061"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.697"
-                        tools:ignore="TextSizeCheck" />
+                        app:layout_constraintVertical_bias="1.0" />
 
                     <TextView
                         android:id="@+id/textView9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_6sdp"
                         android:text="Attendence"
                         android:textColor="#ffffff"
                         android:textSize="@dimen/_13ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/textView8"
-                        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.06"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.892" />
+
+                    <TextView
+                        android:id="@+id/txtPercent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="51dp"
+                        android:text="75"
+                        android:textColor="#fedd06"
+                        android:textSize="@dimen/_30ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.065"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.663"
+                        tools:ignore="TextSizeCheck" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="#fedd06"
+                        android:textSize="@dimen/_30ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/txtPercent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.663" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -201,6 +218,7 @@
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:layout_marginBottom="@dimen/_24sdp"
+                    android:autofillHints=""
                     android:background="@drawable/search_edit_background"
                     android:drawableEnd="@drawable/search_icon"
                     android:elevation="3dp"
@@ -209,8 +227,7 @@
                     android:inputType="text"
                     android:padding="@dimen/_7sdp"
                     android:textColor="#8d8d8d"
-                    android:textStyle="bold|italic"
-                    android:autofillHints="" />
+                    android:textStyle="bold|italic" />
 
                 <TextView
                     android:id="@+id/textView10"

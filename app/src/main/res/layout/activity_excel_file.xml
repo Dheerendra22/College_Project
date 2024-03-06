@@ -2,10 +2,81 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/btnPromote"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ExcelFile">
+
+
+    <LinearLayout
+        android:layout_width="351dp"
+        android:layout_height="38dp"
+        android:background="@drawable/edittext_background"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256">
+
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_weight="1"
+            android:text="Branch"
+            android:textAlignment="center"
+            android:textColor="#581f5f"
+            android:textSize="@dimen/_14ssp" />
+
+        <Spinner
+            android:id="@+id/Department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_weight="1"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="337dp"
+        android:layout_height="41dp"
+        android:layout_margin="@dimen/_15sdp"
+        android:background="@drawable/edittext_background"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_weight="1"
+            android:text="Year"
+            android:textAlignment="center"
+            android:textColor="#581f5f"
+            android:textSize="@dimen/_14ssp" />
+
+        <Spinner
+            android:id="@+id/Year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_weight="1"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/fetch"
@@ -17,6 +88,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421" />
+        app:layout_constraintVertical_bias="0.657" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
