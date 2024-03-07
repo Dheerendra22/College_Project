@@ -33,28 +33,29 @@ import java.util.List;
 import java.util.Map;
 
 public class Attendance extends AppCompatActivity {
-    TextView name,depart,year;
-    Spinner lecture,teacher,subject;
+    TextView name, depart, year;
+    Spinner lecture, teacher, subject;
     RatingBar rb;
     EditText uniqueCode;
     Button present;
-    ArrayList<String> lectureList,teacherList,subjectList;
+    ArrayList<String> lectureList, teacherList, subjectList;
     SharedPreferences sharedPreferences;
     private Progress_Dialog progressDialog;
     FirebaseFirestore fireStore;
-    String FullName,code;
-
+    String FullName, code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance);
 
+        // Initialize shared preferences
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
+
+        // Initialize UI elements
         lecture = findViewById(R.id.lecture);
         teacher = findViewById(R.id.teacher);
         subject = findViewById(R.id.subject);
-
         name = findViewById(R.id.name);
         depart = findViewById(R.id.department);
         year = findViewById(R.id.year);
@@ -62,19 +63,24 @@ public class Attendance extends AppCompatActivity {
         present = findViewById(R.id.btnPresent);
         rb = findViewById(R.id.ratingBar);
 
+        // Initialize progress dialog
         progressDialog = new Progress_Dialog(this);
         progressDialog.setMessage("Please Wait...");
         progressDialog.setCancelable(false);
 
-
-        FullName = sharedPreferences.getString("FirstName","")+" "+sharedPreferences.getString("LastName","");
+        // Set user details
+        FullName = sharedPreferences.getString("FirstName", "") + " " + sharedPreferences.getString("LastName", "");
         name.setText(FullName);
-        depart.setText(sharedPreferences.getString("Department",""));
-        year.setText(sharedPreferences.getString("Year",""));
+        depart.setText(sharedPreferences.getString("Department", ""));
+        year.setText(sharedPreferences.getString("Year", ""));
 
+        // Set up lecture spinner
         setUpLecture();
+
+        // Set up teacher spinner
         setUpTeacher();
 
+        // Set up listener for teacher spinner item selection
         teacher.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -88,93 +94,86 @@ public class Attendance extends AppCompatActivity {
             }
         });
 
+        // Set up click listener for the present button
         present.setOnClickListener(v -> sendAttendance());
-
-
     }
 
     private void sendAttendance() {
-
         progressDialog.show();
 
-        String depart = sharedPreferences.getString("Department","");
-        String year = sharedPreferences.getString("Year","");
+        // Retrieve user details from shared preferences
+        String depart = sharedPreferences.getString("Department", "");
+        String year = sharedPreferences.getString("Year", "");
         String selectedLecture = lecture.getSelectedItem().toString();
         String selectedTeacher = teacher.getSelectedItem().toString();
         String selectedSubject = subject.getSelectedItem().toString();
         String uniqueCodeValue = uniqueCode.getText().toString().trim();
-        String roll = sharedPreferences.getString("RollNumber","");
-
+        String roll = sharedPreferences.getString("RollNumber", "");
         String rating = String.valueOf(rb.getRating()); // Retrieve rating from RatingBar
 
-        if (TextUtils.isEmpty(uniqueCodeValue) || rb.getRating() == 0.0) {
-
+        // Validate input
+        if (TextUtils.isEmpty(uniqueCodeValue) || rb.getRating() == 0.0 || TextUtils.isEmpty(uniqueCodeValue)) {
             progressDialog.dismiss();
             Toast.makeText(getApplicationContext(), "Please fill in all the required fields", Toast.LENGTH_LONG).show();
             return; // Stop execution if any data is null or empty
         }
 
+        // Check if it is lecture time
         if (!LectureTimeValidator.isLectureTimeValid(selectedLecture)) {
-            
             progressDialog.dismiss();
             Toast.makeText(getApplicationContext(), "Attendance can only be submitted during the lecture period", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(!uniqueCodeValue.equals(code))
-        {
+        // Check if the entered code matches the stored code
+        if (!uniqueCodeValue.equals(code)) {
             progressDialog.dismiss();
             Toast.makeText(this, "Code Not Match", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://script.google.com/macros/s/AKfycbzcj5UYQyDgDD3o2pVHCHbOeF4o01k_BpMZ8QzPviW6eGSHzR6mLZUW2_cOo8xpR_iWVg/exec",
+        // Make a network request to send attendance data
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "https://script.google.com/macros/s/AKfycbzcj5UYQyDgDD3o2pVHCHbOeF4o01k_BpMZ8QzPviW6eGSHzR6mLZUW2_cOo8xpR_iWVg/exec",
                 response -> {
-
                     progressDialog.dismiss();
-                    Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     finish();
-
                 },
                 error -> {
-
+                    // Handle errors
                 }
         ) {
             @Override
-            protected Map<String,String> getParams() {
+            protected Map<String, String> getParams() {
+                // Set parameters for the network request
                 Map<String, String> value = new HashMap<>();
-
-                //here we pass params
-                value.put("action","Student");
-                value.put("sheetName",depart);
-                value.put("Name",FullName);
-                value.put("Department",depart);
-                value.put("Year",year);
-                value.put("Lecture",selectedLecture);
-                value.put("Teacher",selectedTeacher);
-                value.put("Subject",selectedSubject);
-                value.put("Code",uniqueCodeValue);
+                value.put("action", "Student");
+                value.put("sheetName", depart);
+                value.put("Name", FullName);
+                value.put("Department", depart);
+                value.put("Year", year);
+                value.put("Lecture", selectedLecture);
+                value.put("Teacher", selectedTeacher);
+                value.put("Subject", selectedSubject);
+                value.put("Code", uniqueCodeValue);
                 value.put("Rating", rating);
-                value.put("RollNumber",roll);
+                value.put("RollNumber", roll);
                 return value;
             }
         };
 
-        int socketTimeOut = 50000;// u can change this .. here it is 50 seconds
-
+        // Set up retry policy and add the request to the queue
+        int socketTimeOut = 50000; // You can change this; here it is 50 seconds
         RetryPolicy retryPolicy = new DefaultRetryPolicy(socketTimeOut, 0, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(retryPolicy);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-
         queue.add(stringRequest);
-
-
-
     }
 
     private void setUpLecture() {
+        // Set up lecture spinner with default values
         lectureList = new ArrayList<>();
         lectureList.add("Lecture 1");
         lectureList.add("Lecture 2");
@@ -186,12 +185,11 @@ public class Attendance extends AppCompatActivity {
         ArrayAdapter<String> departmentAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lectureList);
         departmentAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         lecture.setAdapter(departmentAdapter);
-
     }
 
     private void setUpTeacher() {
+        // Set up teacher spinner with values from Firestore
         fireStore = FirebaseFirestore.getInstance();
-
         teacherList = new ArrayList<>();
 
         // Reference to the "Faculty" collection
@@ -210,17 +208,14 @@ public class Attendance extends AppCompatActivity {
             ArrayAdapter<String> teacherAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, teacherList);
             teacherAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
             teacher.setAdapter(teacherAdapter);
-
-
-
         }).addOnFailureListener(e -> {
             // Handle the failure (e.g., display an error message)
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         });
-
     }
 
     private void setUpSubject() {
+        // Set up subject spinner based on the selected teacher
         if (teacher != null && teacher.getSelectedItem() != null) {
             String fName = teacher.getSelectedItem().toString();
             subjectList = new ArrayList<>();
@@ -234,9 +229,8 @@ public class Attendance extends AppCompatActivity {
                 if (!queryDocumentSnapshots.isEmpty()) {
                     // Get the reference to the first matching document
                     DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                    code = (String)documentSnapshot.get("Code");
+                    code = (String) documentSnapshot.get("Code");
                     List<?> subjects = (List<?>) documentSnapshot.get("SubjectList");
-
 
                     if (subjects != null && !subjects.isEmpty()) {
                         for (Object subjectObject : subjects) {
@@ -250,8 +244,7 @@ public class Attendance extends AppCompatActivity {
                         ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(Attendance.this, android.R.layout.simple_spinner_item, subjectList);
                         subjectAdapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
                         subject.setAdapter(subjectAdapter);
-
-                    }else {
+                    } else {
                         // Handle the case where the "Subjects" field is null or not found
                         Toast.makeText(Attendance.this, "Subjects list is null or not found", Toast.LENGTH_SHORT).show();
                     }
@@ -265,6 +258,4 @@ public class Attendance extends AppCompatActivity {
             });
         }
     }
-
-
 }

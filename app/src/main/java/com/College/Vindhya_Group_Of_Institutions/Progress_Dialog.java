@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class Progress_Dialog extends Dialog {
 
-    private ProgressBar progressBar;
+    private final ProgressBar progressBar;
     private TextView messageText;
 
     public Progress_Dialog(Context context) {

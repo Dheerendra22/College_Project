@@ -2,11 +2,13 @@ package com.College.Vindhya_Group_Of_Institutions;
 
 // Subject_List.java
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,23 +93,32 @@ public class Subject_List extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void addNewEditText(String initialText) {
+
+        // Create a TextView with the text "Subject"
+        TextView subjectTextView = new TextView(this);
+        subjectTextView.setText("Subject");
+
+        // Create a new EditText and set its initial text
         EditText newEditText = new EditText(this);
         newEditText.setText(initialText);
         editTextList.add(newEditText);
 
         // Create a delete button for each EditText
         Button deleteButton = new Button(this);
-        deleteButton.setText("Delete");
-        deleteButton.setOnClickListener(v -> removeEditText(newEditText, deleteButton));
+        deleteButton.setText("Delete Subject");
+        deleteButton.setOnClickListener(v -> removeEditText(subjectTextView, newEditText, deleteButton));
 
-        // Add both the EditText and the delete button to the container
+        // Add the TextView, EditText, and delete button to the container
+        editTextContainer.addView(subjectTextView);
         editTextContainer.addView(newEditText);
         editTextContainer.addView(deleteButton);
     }
 
-    private void removeEditText(EditText editText, Button deleteButton) {
+    private void removeEditText(TextView subjectTextView, EditText editText, Button deleteButton) {
         editTextList.remove(editText);
+        editTextContainer.removeView(subjectTextView);
         editTextContainer.removeView(editText);
         editTextContainer.removeView(deleteButton);
     }

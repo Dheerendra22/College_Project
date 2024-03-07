@@ -20,6 +20,7 @@ public class Promotion extends AppCompatActivity {
     private Spinner Depart, FromYear,ToYear;
     Button promote;
     String department,fromYear , toYear;
+    private Progress_Dialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +30,14 @@ public class Promotion extends AppCompatActivity {
         FromYear = findViewById(R.id.fromYear);
         ToYear = findViewById(R.id.toYear);
         promote = findViewById(R.id.btnPromote);
+        progressDialog = new Progress_Dialog(Promotion.this);
+        progressDialog.setMessage("Please Wait...");
+
 
         setSpinnerData();
 
         promote.setOnClickListener(v -> {
+            progressDialog.show();
             department = Depart.getSelectedItem().toString();
             fromYear = FromYear.getSelectedItem().toString();
             toYear = ToYear.getSelectedItem().toString();
@@ -40,6 +45,7 @@ public class Promotion extends AppCompatActivity {
             if (!fromYear.equals(toYear)){
                 promoteStudent();
             }else {
+                progressDialog.dismiss();
                 Toast.makeText(Promotion.this, "Your Selection is wrong!", Toast.LENGTH_SHORT).show();
             }
 
@@ -63,8 +69,10 @@ public class Promotion extends AppCompatActivity {
                     document.getReference().update("Year", toYear);
                 }
                 if (task.getResult().isEmpty()) {
+                    progressDialog.dismiss();
                     Toast.makeText(Promotion.this, "No students found for the selected criteria.", Toast.LENGTH_SHORT).show();
                 } else {
+                    progressDialog.dismiss();
                     Toast.makeText(Promotion.this, "Students promoted successfully.", Toast.LENGTH_SHORT).show();
                 }
                 // Handle the completion here if needed
@@ -72,6 +80,7 @@ public class Promotion extends AppCompatActivity {
                 // Handle errors
                 Exception exception = task.getException();
                 if (exception != null) {
+                    progressDialog.dismiss();
                     Toast.makeText(Promotion.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

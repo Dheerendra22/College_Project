@@ -10,10 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,18 +27,19 @@ public class Login extends AppCompatActivity {
     Button login;
     SharedPreferences sharedPreferences;
     private Progress_Dialog progressDialog;
-    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Set full-screen mode
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.login_activity);
 
+        // Initialize UI elements and Firebase instances
         login = findViewById(R.id.btnLogin);
         email = findViewById(R.id.edtUser);
         password = findViewById(R.id.edtPassword);
@@ -49,10 +48,12 @@ public class Login extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
         progressDialog = new Progress_Dialog(Login.this);
 
+        // Redirect to the dashboard if the user is already logged in
         if (fAuth.getCurrentUser() != null) {
             redirectToDashboard();
         }
 
+        // Set up click listener for login button
         login.setOnClickListener(v -> loginUser());
     }
 
@@ -60,16 +61,18 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("Logging...");
         progressDialog.show();
 
+        // Retrieve email and password from the UI
         String mEmail = email.getText().toString().trim();
         String mPassword = password.getText().toString().trim();
 
+        // Validate email and password
         if (TextUtils.isEmpty(mEmail) || TextUtils.isEmpty(mPassword) || mPassword.length() < 6) {
             dismissProgressDialog();
             Toast.makeText(this, "Please enter valid credentials", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Authenticate the user!
+        // Authenticate the user
         fAuth.signInWithEmailAndPassword(mEmail, mPassword)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
@@ -78,12 +81,9 @@ public class Login extends AppCompatActivity {
                         dismissProgressDialog();
                         Toast.makeText(Login.this, "Something Error!" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressDialog.dismiss();
-                        Toast.makeText(Login.this, "Please try again later!", Toast.LENGTH_SHORT).show();
-                    }
+                }).addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(Login.this, "Please try again later!", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -95,11 +95,13 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document != null && document.exists()) {
+                            // User is a faculty
                             String role = document.getString("Role");
-                            saveToSharedPreferences("Email",document.getString("Email"));
-                            saveToSharedPreferences("Password",document.getString("Password"));
+                            saveToSharedPreferences("Email", document.getString("Email"));
+                            saveToSharedPreferences("Password", document.getString("Password"));
                             handleUserRole(role);
                         } else {
+                            // Check if the user is a student
                             checkInStudent(userEmail);
                         }
                     }
@@ -110,22 +112,21 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-
-    private  void checkInStudent(String email){
+    private void checkInStudent(String email) {
         DocumentReference userRef1 = fireStore.collection("Students").document(email);
         userRef1.get().addOnCompleteListener(task -> {
             DocumentSnapshot document = task.getResult();
             if (document != null && document.exists()) {
+                // User is a student
                 String role = document.getString("Role");
-                saveToSharedPreferences("Email",document.getString("Email"));
-                saveToSharedPreferences("Password",document.getString("Password"));
+                saveToSharedPreferences("Email", document.getString("Email"));
+                saveToSharedPreferences("Password", document.getString("Password"));
                 handleUserRole(role);
-            }else {
+            } else {
+                // Invalid user
                 dismissProgressDialog();
                 Toast.makeText(Login.this, "You are not a valid User.", Toast.LENGTH_SHORT).show();
-
             }
-
         }).addOnFailureListener(e -> {
             dismissProgressDialog();
             Toast.makeText(Login.this, "Please Try Again Later! ", Toast.LENGTH_SHORT).show();
@@ -134,11 +135,13 @@ public class Login extends AppCompatActivity {
 
     private void handleUserRole(String role) {
         if ("Student".equals(role) || "Admin".equals(role) || "Teacher".equals(role)) {
-            saveToSharedPreferences("Role",role);
+            // Valid user role
+            saveToSharedPreferences("Role", role);
             dismissProgressDialog();
             Toast.makeText(Login.this, "Logged in Successfully. ", Toast.LENGTH_SHORT).show();
             redirectToDashboard();
         } else {
+            // Invalid role
             dismissProgressDialog();
             Toast.makeText(Login.this, "Invalid Role", Toast.LENGTH_SHORT).show();
         }
@@ -166,7 +169,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private void saveToSharedPreferences(String key,String value) {
+    private void saveToSharedPreferences(String key, String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();

@@ -21,6 +21,7 @@ public class PutCode extends AppCompatActivity {
     FirebaseFirestore firestore;
     SharedPreferences sharedPreferences;
     String email;
+    private Progress_Dialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,8 @@ public class PutCode extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
 
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
+        progressDialog = new Progress_Dialog(PutCode.this);
+        progressDialog.setMessage("Please Wait...");
 
 
         setCode.setOnClickListener(v -> setCodeInFireStore());
@@ -39,6 +42,7 @@ public class PutCode extends AppCompatActivity {
     }
 
     private void deleteCode() {
+        progressDialog.show();
 
         Map<String, Object> data = new HashMap<>();
         data.put("Code", "");
@@ -46,10 +50,12 @@ public class PutCode extends AppCompatActivity {
         firestore.collection("Faculty").document(email)
                 .update(data)
                 .addOnSuccessListener(aVoid -> {
+                    progressDialog.dismiss();
                     // Update successful
                     Toast.makeText(this, "Code Deleted Successfully.", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
                     // Handle errors
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
@@ -57,6 +63,7 @@ public class PutCode extends AppCompatActivity {
     }
 
     private void setCodeInFireStore() {
+        progressDialog.show();
         email = sharedPreferences.getString("Email","");
         String uniqueCode = code.getText().toString().trim();
         // Create a Map with the new field
@@ -66,10 +73,12 @@ public class PutCode extends AppCompatActivity {
         firestore.collection("Faculty").document(email)
                 .update(data)
                 .addOnSuccessListener(aVoid -> {
+                    progressDialog.dismiss();
                     // Update successful
                     Toast.makeText(this, "Code Added Successfully.", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
                     // Handle errors
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
