@@ -317,7 +317,7 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:id="@+id/imageView9"
+                            android:id="@+id/Track"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_24sdp"
@@ -328,7 +328,7 @@
                             android:id="@+id/textView12"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Syllabus"
+                            android:text="Track Attendence"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_13ssp"

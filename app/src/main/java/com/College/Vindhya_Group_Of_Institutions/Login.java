@@ -12,7 +12,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -27,6 +30,8 @@ public class Login extends AppCompatActivity {
     Button login;
     SharedPreferences sharedPreferences;
     private Progress_Dialog progressDialog;
+
+    String mEmail , mPassword ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +67,8 @@ public class Login extends AppCompatActivity {
         progressDialog.show();
 
         // Retrieve email and password from the UI
-        String mEmail = email.getText().toString().trim();
-        String mPassword = password.getText().toString().trim();
+        mEmail = email.getText().toString().trim();
+        mPassword = password.getText().toString().trim();
 
         // Validate email and password
         if (TextUtils.isEmpty(mEmail) || TextUtils.isEmpty(mPassword) || mPassword.length() < 6) {
@@ -125,6 +130,7 @@ public class Login extends AppCompatActivity {
             } else {
                 // Invalid user
                 dismissProgressDialog();
+                deleteCurrentUser(mEmail,mPassword);
                 Toast.makeText(Login.this, "You are not a valid User.", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(e -> {
@@ -143,6 +149,7 @@ public class Login extends AppCompatActivity {
         } else {
             // Invalid role
             dismissProgressDialog();
+
             Toast.makeText(Login.this, "Invalid Role", Toast.LENGTH_SHORT).show();
         }
     }
@@ -173,5 +180,42 @@ public class Login extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();
+    }
+
+    private void deleteCurrentUser(String email,String password) {
+        // Get the current user
+        FirebaseUser currentUser = fAuth.getCurrentUser();
+
+        if (currentUser != null) {
+            // Re-authenticate the user before deleting the account
+            AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+
+            currentUser.reauthenticate(credential)
+                    .addOnSuccessListener(aVoid -> {
+                        // User re-authenticated successfully
+                        // Now proceed to delete the user
+                        currentUser.delete()
+                                .addOnSuccessListener(aVoid1 -> {
+                                    // User deleted successfully from Authentication
+                                    // Now, you may want to perform additional cleanup or actions
+                                    Toast.makeText(Login.this, "User deleted successfully", Toast.LENGTH_SHORT).show();
+                                    // Redirect to login or any other desired screen
+                                })
+                                .addOnFailureListener(e -> {
+                                    // Handle errors
+                                    // e.g., FirebaseAuthInvalidUserException, etc.
+                                    Toast.makeText(Login.this, "Error deleting user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                });
+                    })
+                    .addOnFailureListener(e -> {
+                        // Handle re-authentication failure
+                        Toast.makeText(Login.this, "Re-authentication failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    });
+        } else {
+            // No user is currently signed in
+            Toast.makeText(Login.this, "No user is currently signed in", Toast.LENGTH_SHORT).show();
+        }
     }
 }

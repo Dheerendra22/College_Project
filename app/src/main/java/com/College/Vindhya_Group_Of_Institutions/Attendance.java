@@ -22,7 +22,9 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -42,7 +44,7 @@ public class Attendance extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private Progress_Dialog progressDialog;
     FirebaseFirestore fireStore;
-    String FullName, code;
+    String FullName, code,email , selectedSubject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +108,9 @@ public class Attendance extends AppCompatActivity {
         String year = sharedPreferences.getString("Year", "");
         String selectedLecture = lecture.getSelectedItem().toString();
         String selectedTeacher = teacher.getSelectedItem().toString();
-        String selectedSubject = subject.getSelectedItem().toString();
+        selectedSubject = subject.getSelectedItem().toString();
         String uniqueCodeValue = uniqueCode.getText().toString().trim();
-        String roll = sharedPreferences.getString("RollNumber", "");
+        email = sharedPreferences.getString("Email","");
         String rating = String.valueOf(rb.getRating()); // Retrieve rating from RatingBar
 
         // Validate input
@@ -118,10 +120,9 @@ public class Attendance extends AppCompatActivity {
             return; // Stop execution if any data is null or empty
         }
 
-        // Check if it is lecture time
         if (!LectureTimeValidator.isLectureTimeValid(selectedLecture)) {
             progressDialog.dismiss();
-            Toast.makeText(getApplicationContext(), "Attendance can only be submitted during the lecture period", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Attendance can only be submitted during the lecture period or Only once in a day.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -134,8 +135,9 @@ public class Attendance extends AppCompatActivity {
 
         // Make a network request to send attendance data
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "https://script.google.com/macros/s/AKfycbzcj5UYQyDgDD3o2pVHCHbOeF4o01k_BpMZ8QzPviW6eGSHzR6mLZUW2_cOo8xpR_iWVg/exec",
+                "https://script.google.com/macros/s/AKfycbx3bs2Gt0ncDH6SatXpX3FOiqkDVn9dBfze2bR6JzsVaWhv2Mla4rw7aO1fpqRXQN4w/exec",
                 response -> {
+                    createNestedCollection();
                     progressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     finish();
@@ -158,7 +160,6 @@ public class Attendance extends AppCompatActivity {
                 value.put("Subject", selectedSubject);
                 value.put("Code", uniqueCodeValue);
                 value.put("Rating", rating);
-                value.put("RollNumber", roll);
                 return value;
             }
         };
@@ -258,4 +259,20 @@ public class Attendance extends AppCompatActivity {
             });
         }
     }
+
+    private void createNestedCollection() {
+
+        // Get a reference to the document in the "Students" collection based on the student's email
+        DocumentReference studentDocRef = fireStore.collection("Students").document(email);
+
+        // Create a nested collection inside the student document
+        DocumentReference nestedCollectionRef = studentDocRef.collection("Lectures").document("Attend");
+
+        // Update the numeric field by incrementing its value by 1
+        nestedCollectionRef.update(selectedSubject, FieldValue.increment(1))
+                .addOnSuccessListener(aVoid -> Toast.makeText(Attendance.this, "Updated Successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(Attendance.this, "Not Found Subject! "+ e.getMessage(), Toast.LENGTH_SHORT).show());
+
+    }
+
 }

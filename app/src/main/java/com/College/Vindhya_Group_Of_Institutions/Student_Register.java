@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -192,6 +193,7 @@ public class Student_Register extends AppCompatActivity {
             user.put("Collection","Students");
 
             dataRef.set(user).addOnCompleteListener(task1 -> {
+                createNestedCollection(dataRef);
                 showToastAndDismiss("User Profile Created Successfully.", progressDialog);
                 clearTextFields();
             }).addOnFailureListener(e -> {
@@ -237,5 +239,23 @@ public class Student_Register extends AppCompatActivity {
         enrollNumber.setText("");
         fatherName.setText("");
     }
+
+    private void createNestedCollection(DocumentReference dRef) {
+
+        // Create a nested collection inside the student document
+        CollectionReference nestedCollectionRef = dRef.collection("Lectures"); // Replace "NestedCollectionName" with the desired name of the nested collection
+
+        // Create an empty document named "Attend" inside the nested collection
+        nestedCollectionRef.document("Attend").set(new HashMap<>())
+                .addOnSuccessListener(aVoid -> {
+                    // Document created successfully
+                    Toast.makeText(Student_Register.this, "", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    // Error creating document
+                    Toast.makeText(Student_Register.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
 
 }

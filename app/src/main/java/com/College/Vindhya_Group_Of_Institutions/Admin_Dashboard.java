@@ -106,7 +106,7 @@ public class Admin_Dashboard extends AppCompatActivity {
             attendance.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Teacher_Attendance.class)));
             timeTable.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, TimeTable.class)));
             code.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, PutCode.class)));
-            percent.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ExcelFile.class)));
+            percent.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Attend_Lecture.class)));
             promotion.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Promotion.class)));
 
 

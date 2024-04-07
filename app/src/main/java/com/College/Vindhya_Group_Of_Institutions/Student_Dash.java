@@ -3,6 +3,7 @@ package com.College.Vindhya_Group_Of_Institutions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import java.util.Calendar;
 
 public class Student_Dash extends AppCompatActivity {
     TextView greet,name,department,year,role, percent;
-    ImageView profile,logout,attendance,timeTable;
+    ImageView profile,logout,attendance,timeTable, Track;
     private Profile_Image_Handler profileImageHandler;
     private String userId;
     FirebaseAuth fAuth;
@@ -45,6 +46,7 @@ public class Student_Dash extends AppCompatActivity {
         attendance = findViewById(R.id.imgAttendance);
         timeTable = findViewById(R.id.imgTimeTable);
         percent = findViewById(R.id.txtPercent);
+        Track = findViewById(R.id.Track);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
 
         //set Greeting
@@ -73,35 +75,17 @@ public class Student_Dash extends AppCompatActivity {
 
         timeTable.setOnClickListener(v -> startActivity(new Intent(Student_Dash.this,Student_TimeTable.class)));
 
-        fetchPercentage();
+        Track.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-
-    }
-
-    private void fetchPercentage() {
-
-        String depart = sharedPreferences.getString("Department","");
-        String year = sharedPreferences.getString("Year","");
-        DocumentReference userRef = fireStore.collection("Attendance").document(depart+"_"+year);
-        userRef.get().addOnCompleteListener(task -> {
-            DocumentSnapshot document = task.getResult();
-            if (document != null && document.exists()) {
-                String roll = sharedPreferences.getString("RollNumber","");
-                String percentage = document.getString(roll);
-                if (percentage!=null){
-                    percent.setText(percentage);
-                }
-            }else {
-                Toast.makeText(Student_Dash.this, "Percentage Not Uploaded.", Toast.LENGTH_SHORT).show();
             }
+        });
 
-
-
-        }).addOnFailureListener(e -> Toast.makeText(Student_Dash.this, "Percentage Fetching Error! "+e.getMessage(), Toast.LENGTH_SHORT).show());
 
 
     }
+
 
     private void setData() {
         String FullName = sharedPreferences.getString("FirstName","")+" "+sharedPreferences.getString("LastName","");

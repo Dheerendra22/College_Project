@@ -9,11 +9,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Promotion extends AppCompatActivity {
 
@@ -67,6 +71,25 @@ public class Promotion extends AppCompatActivity {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     // Update the "Year" field to "2nd year"
                     document.getReference().update("Year", toYear);
+
+                    CollectionReference lecturesCollection = document.getReference().collection("Lectures");
+
+                    lecturesCollection.document("Attend").get().addOnCompleteListener(attendTask -> {
+                        if (attendTask.isSuccessful()) {
+                            DocumentSnapshot attendDocument = attendTask.getResult();
+                            if (attendDocument.exists()) {
+                                Map<String, Object> fields = attendDocument.getData();
+                                // Update each field to null
+                                Map<String, Object> updateData = new HashMap<>();
+                                assert fields != null;
+                                for (String key : fields.keySet()) {
+                                    updateData.put(key, FieldValue.delete());
+                                }
+                                // Update the "Attend" document with the null values
+                                attendDocument.getReference().update(updateData);
+                            }
+                        }
+                    });
                 }
                 if (task.getResult().isEmpty()) {
                     progressDialog.dismiss();

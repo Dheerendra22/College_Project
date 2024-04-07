@@ -38,7 +38,11 @@ public class PutCode extends AppCompatActivity {
 
         setCode.setOnClickListener(v -> setCodeInFireStore());
 
-        DeleteCode.setOnClickListener(v -> deleteCode());
+        DeleteCode.setOnClickListener(v -> {
+            if(code!=null)
+                deleteCode();
+        });
+
     }
 
     private void deleteCode() {
@@ -53,6 +57,7 @@ public class PutCode extends AppCompatActivity {
                     progressDialog.dismiss();
                     // Update successful
                     Toast.makeText(this, "Code Deleted Successfully.", Toast.LENGTH_SHORT).show();
+                    code.setText("");
                 })
                 .addOnFailureListener(e -> {
                     progressDialog.dismiss();

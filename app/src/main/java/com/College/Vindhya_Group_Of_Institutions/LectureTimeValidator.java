@@ -1,14 +1,34 @@
 package com.College.Vindhya_Group_Of_Institutions;
 
-
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LectureTimeValidator {
+    private static Set<String> lecturesAttendedToday = new HashSet<>();
+    private static int lastDayOfMonth = -1;
+
     public static boolean isLectureTimeValid(String selectedLecture) {
         // Get the current time
         Calendar calendar = Calendar.getInstance();
+        int currentDayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        // Check if it's a new day
+        if (currentDayOfMonth != lastDayOfMonth) {
+            // Reset the set of attended lectures for the new day
+            lecturesAttendedToday.clear();
+            lastDayOfMonth = currentDayOfMonth;
+        }
+
+        // Get the current time
         int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+
+        // Check if the lecture has already been attended today
+        if (lecturesAttendedToday.contains(selectedLecture)) {
+            // Lecture already attended today
+            return false;
+        }
 
         // Define the time limits for each lecture based on the selected lecture number
         TimeRange lecture1Time = new TimeRange(9, 30, 10, 20);
@@ -18,26 +38,40 @@ public class LectureTimeValidator {
         TimeRange lecture5Time = new TimeRange(13, 31, 14, 20);
         TimeRange lecture6Time = new TimeRange(14, 21, 15, 10);
 
-
         // Check the selected lecture number and validate against its corresponding time range
+        boolean isTimeValid ;
         switch (selectedLecture) {
             case "Lecture 1":
-                return lecture1Time.isWithinRange(hourOfDay, minute);
+                isTimeValid = lecture1Time.isWithinRange(hourOfDay, minute);
+                break;
             case "Lecture 2":
-                return lecture2Time.isWithinRange(hourOfDay, minute);
+                isTimeValid = lecture2Time.isWithinRange(hourOfDay, minute);
+                break;
             case "Lecture 3":
-                return lecture3Time.isWithinRange(hourOfDay, minute);
+                isTimeValid = lecture3Time.isWithinRange(hourOfDay, minute);
+                break;
             case "Lecture 4":
-                return lecture4Time.isWithinRange(hourOfDay, minute);
+                isTimeValid = lecture4Time.isWithinRange(hourOfDay, minute);
+                break;
             case "Lecture 5":
-                return lecture5Time.isWithinRange(hourOfDay, minute);
+                isTimeValid = lecture5Time.isWithinRange(hourOfDay, minute);
+                break;
             case "Lecture 6":
-                return lecture6Time.isWithinRange(hourOfDay, minute);
+                isTimeValid = lecture6Time.isWithinRange(hourOfDay, minute);
+                break;
             // Add more cases for other lectures as needed
             default:
-                // Default to true if the selected lecture is not recognized
-                return true;
+                // Default to false if the selected lecture is not recognized
+                isTimeValid = false;
+                break;
         }
+
+        // If lecture time is valid, add it to the set of attended lectures for today
+        if (isTimeValid) {
+            lecturesAttendedToday.add(selectedLecture);
+        }
+
+        return isTimeValid;
     }
 
     // Helper class to represent a time range
@@ -63,4 +97,3 @@ public class LectureTimeValidator {
         }
     }
 }
-
