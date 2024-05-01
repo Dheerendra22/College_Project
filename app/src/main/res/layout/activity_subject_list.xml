@@ -45,7 +45,7 @@
             android:layout_below="@id/editTextContainer"
             android:layout_marginTop="28dp"
             android:background="@drawable/button_background"
-            android:text="New Subject"
+            android:text=" Add New Subject"
             app:layout_constraintBottom_toTopOf="@+id/saveButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

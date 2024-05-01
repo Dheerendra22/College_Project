@@ -25,7 +25,7 @@ import java.util.Calendar;
 public class Admin_Dashboard extends AppCompatActivity {
 
     // UI elements
-    ImageView addStudent, addFaculty, profile, updateStudent, updateFaculty, subjAllotment, logout, attendance, timeTable, percent, code, promotion;
+    ImageView addStudent, addFaculty, profile, updateStudent, updateFaculty, subjAllotment, logout, attendance, timeTable, percent, code, promotion,notice,deleteNotice;
     TextView greet, name, role;
 
     // Helper classes
@@ -90,6 +90,8 @@ public class Admin_Dashboard extends AppCompatActivity {
         percent = findViewById(R.id.percent);
         code = findViewById(R.id.imgCode);
         promotion = findViewById(R.id.promote);
+        notice = findViewById(R.id.notice);
+        deleteNotice = findViewById(R.id.delNotice);
         sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
     }
 
@@ -108,6 +110,8 @@ public class Admin_Dashboard extends AppCompatActivity {
             code.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, PutCode.class)));
             percent.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), Attend_Lecture.class)));
             promotion.setOnClickListener(v -> startActivity(new Intent(Admin_Dashboard.this, Promotion.class)));
+            notice.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), UploadNotice.class)));
+            deleteNotice.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), DeleteNotice.class)));
 
 
     }

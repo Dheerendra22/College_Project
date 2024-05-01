@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Experiment"
         tools:targetApi="31">
         <activity
+            android:name=".DeleteNotice"
+            android:exported="false" />
+        <activity
+            android:name=".UploadNotice"
+            android:exported="false" />
+        <activity
             android:name=".Track_Attendence"
             android:exported="false" />
         <activity

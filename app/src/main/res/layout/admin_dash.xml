@@ -6,111 +6,116 @@
     android:layout_height="match_parent"
     android:background="@drawable/menu_background">
 
-    <ScrollView
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:background="@drawable/menu_background"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/logout"
+                android:layout_width="39dp"
+                android:layout_height="36dp"
+                android:layout_margin="@dimen/_5sdp"
+                android:src="@drawable/log_out"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.981"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.106" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:contentDescription="TODO"
+                android:src="@drawable/baseline_user"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.052"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.333"
+                tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/txtGreet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good Morning"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.166"
+                app:layout_constraintStart_toEndOf="@+id/imgProfile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.326" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="K.P.Tripathi"
+                android:textColor="#BA68C8"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.142"
+                app:layout_constraintStart_toEndOf="@+id/imgProfile"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.583"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/txtRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Role"
+                android:textColor="#fedd06"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.897"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_600sdp"
+            android:background="@drawable/botom_background"
             android:orientation="vertical">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_140sdp"
-                android:background="@drawable/menu_background"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <ImageView
-                    android:id="@+id/logout"
-                    android:layout_width="39dp"
-                    android:layout_height="36dp"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:src="@drawable/log_out"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.981"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.106" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgProfile"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/baseline_user"
-                    app:civ_border_color="#FF000000"
-                    app:civ_border_width="2dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.052"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.333"
-                    tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
-
-                <TextView
-                    android:id="@+id/txtGreet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Good Morning"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/_20ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.166"
-                    app:layout_constraintStart_toEndOf="@+id/imgProfile"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.326" />
-
-                <TextView
-                    android:id="@+id/txtName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="K.P.Tripathi"
-                    android:textColor="#BA68C8"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.142"
-                    app:layout_constraintStart_toEndOf="@+id/imgProfile"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.583"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/txtRole"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Role"
-                    android:textColor="#fedd06"
-                    android:textSize="@dimen/_15ssp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.14"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.897"
-                    tools:ignore="MissingConstraints" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_600sdp"
-                android:background="@drawable/botom_background"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_580sdp"
+                    android:layout_height="match_parent"
+
                     android:layout_margin="@dimen/_19sdp"
                     android:background="@drawable/banner_background"
                     android:orientation="horizontal">
@@ -214,6 +219,23 @@
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"
                             android:textStyle="bold" />
+                        <ImageView
+                            android:id="@+id/notice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_24sdp"
+                            android:src="@drawable/notice" />
+
+                        <TextView
+                            android:id="@+id/txtCode2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_150sdp"
+                            android:text="Notice"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/_14ssp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
 
@@ -267,16 +289,16 @@
                             android:layout_marginTop="@dimen/_24sdp"
                             android:src="@drawable/subjectupdt" />
 
+
                         <TextView
                             android:id="@+id/textEditSubject"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Attendance Percent"
+                            android:text="Attend"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="@dimen/_14ssp"
                             android:textStyle="bold" />
-
 
                         <ImageView
                             android:id="@+id/timeTable"
@@ -313,16 +335,34 @@
                             android:textSize="@dimen/_14ssp"
                             android:textStyle="bold" />
 
+                        <ImageView
+                            android:id="@+id/delNotice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_24sdp"
+                            android:src="@drawable/syllabus" />
+
+                        <TextView
+                            android:id="@+id/textVifew12"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_150sdp"
+                            android:text="Delete Notice"
+                            android:textAlignment="center"
+                            android:textColor="#ffffff"
+                            android:textSize="@dimen/_14ssp"
+                            android:textStyle="bold" />
+
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-
-            </LinearLayout>
-
-
+            </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
-    </ScrollView>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

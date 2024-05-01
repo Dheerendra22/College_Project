@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splash_bg"
     tools:context=".Attend_Lecture">
 
 
     <LinearLayout
-        android:layout_width="351dp"
-        android:layout_height="38dp"
+        android:layout_width="355dp"
+        android:layout_height="63dp"
         android:background="@drawable/edittext_background"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.194">
+        app:layout_constraintVertical_bias="0.212">
 
 
         <TextView
             android:id="@+id/textView15"
+            android:textStyle="bold|italic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_7sdp"
@@ -37,29 +39,28 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_7sdp"
-            android:layout_weight="1"
-        />
+            android:layout_weight="1" />
 
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="337dp"
-        android:layout_height="41dp"
+        android:layout_width="345dp"
+        android:layout_height="58dp"
         android:layout_margin="@dimen/_15sdp"
         android:background="@drawable/edittext_background"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294">
+        app:layout_constraintVertical_bias="0.381">
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
+            android:textStyle="bold|italic"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_7sdp"
@@ -75,37 +76,57 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_7sdp"
-            android:layout_weight="1"
-           />
+            android:layout_weight="1" />
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/subject"
-        android:layout_width="368dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="345dp"
+        android:layout_height="58dp"
+        android:layout_margin="@dimen/_15sdp"
         android:background="@drawable/edittext_background"
-        android:textAlignment="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.697"
+        app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408"
-        tools:ignore="TouchTargetSizeCheck" />
+        app:layout_constraintVertical_bias="0.558">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_weight="1"
+            android:text="Subject"
+            android:textAlignment="center"
+            android:textColor="#581f5f"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold|italic" />
+
+        <Spinner
+            android:id="@+id/subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/Attend"
-        android:layout_width="124dp"
-        android:layout_height="48dp"
+        android:layout_width="172dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_background"
         android:text="Attend"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657" />
+        app:layout_constraintVertical_bias="0.776" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
